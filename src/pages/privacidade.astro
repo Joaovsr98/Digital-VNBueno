@@ -28,11 +28,18 @@ const contato = site.email || 'pelo Instagram @inv.devs';
           Apenas os dados que você informa no pedido de orçamento: nome, empresa (opcional), tipo de serviço, telefone ou
           e-mail, preferência de contato e a descrição do projeto.
         </p>
-        <p class="mt-2">
-          Para saber quantas pessoas visitam o site e quais páginas são mais vistas, usamos o Vercel Web Analytics. Ele
-          conta as visitas de forma agregada, não usa cookies e não identifica você. Este site não usa cookies de
-          publicidade. Se isso mudar, esta política será atualizada antes.
-        </p>
+        {site.analytics ? (
+          <p class="mt-2">
+            Para saber quantas pessoas visitam o site e quais páginas são mais vistas, usamos o Vercel Web Analytics. Ele
+            conta as visitas de forma agregada, não usa cookies e não identifica você. Este site não usa cookies de
+            publicidade. Se isso mudar, esta política será atualizada antes.
+          </p>
+        ) : (
+          <p class="mt-2">
+            Este site não usa cookies de publicidade nem ferramentas de rastreamento. Se isso mudar, esta política será
+            atualizada antes.
+          </p>
+        )}
       </section>
 
       <section>

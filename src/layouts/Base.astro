@@ -41,8 +41,8 @@ const ogImage = new URL('/og.png', site.url).href;
 
     {jsonLd.map((dados) => <script type="application/ld+json" set:html={JSON.stringify(dados)} />)}
 
-    {/* Vercel Web Analytics: contagem agregada, sem cookies. Só funciona com o Analytics ligado no painel da Vercel. */}
-    {import.meta.env.PROD && <script is:inline defer src="/_vercel/insights/script.js"></script>}
+    {/* Vercel Web Analytics: contagem agregada, sem cookies. Ligado por site.analytics. */}
+    {site.analytics && import.meta.env.PROD && <script is:inline defer src="/_vercel/insights/script.js"></script>}
   </head>
   <body class="min-h-screen">
     <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 btn-primary">

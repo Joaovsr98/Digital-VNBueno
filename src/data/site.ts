@@ -14,6 +14,10 @@ export const site = {
   // TODO: preencher quando o e-mail profissional existir (ex.: contato@invdevs.com.br)
   email: '',
 
+  // Vercel Web Analytics: ligar aqui SÓ depois de ativar na aba Analytics do projeto na Vercel.
+  // Liga o script no <head> e o parágrafo correspondente na política de privacidade.
+  analytics: false,
+
   instagram: 'https://www.instagram.com/inv.devs',
   tiktok: 'https://www.tiktok.com/@inv.devs',
 };
