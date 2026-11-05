@@ -45,6 +45,20 @@ export const projetos: Projeto[] = [
     demo: true,
   },
   {
+    // Produto próprio do fundador (pasta projetos/doce-gestao-financeira). Versão 1.0 local-first.
+    nome: 'Doce Gestão Financeira',
+    segmento: 'Finanças pessoais',
+    descricao:
+      'Aplicativo para organizar dívidas, priorizar pagamentos e montar um plano de quitação possível, com o Índice de Liberdade e a previsão de quando a pessoa fica livre das dívidas.',
+    destaques: ['Plano de quitação', 'Índice de Liberdade', 'Funciona sem internet', '~800 testes automatizados'],
+    stack: ['React', 'TypeScript', 'IndexedDB', 'Recharts'],
+    url: 'https://finrotiva.vercel.app',
+    imagem: '/portfolio/doce-gestao-financeira.webp',
+    tipo: 'pessoal',
+    publicar: true,
+    demo: true,
+  },
+  {
     nome: 'Bueno Imóveis',
     segmento: 'Mercado imobiliário',
     descricao:
