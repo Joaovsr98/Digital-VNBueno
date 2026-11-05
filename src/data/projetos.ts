@@ -75,7 +75,7 @@ export const projetos: Projeto[] = [
       'Interface comercial com identidade visual própria, pensada para funcionar bem no celular e no computador.',
     destaques: ['Identidade visual personalizada', 'Interface responsiva'],
     stack: ['React', 'Vite'],
-    url: 'https://paddock22.vercel.app',
+    url: 'https://invdevs-kart.vercel.app',
     tipo: 'a-confirmar',
     publicar: false,
     demo: true,
