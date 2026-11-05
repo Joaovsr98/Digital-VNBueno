@@ -31,6 +31,20 @@ export const rotuloTipo: Record<TipoProjeto, string | null> = {
 
 export const projetos: Projeto[] = [
   {
+    // Marca fictícia (antes Paddock 22, que não fechou). Repo: Joaovsr98/invdevs-kart
+    nome: 'INV Racing',
+    segmento: 'Esportes e eventos',
+    descricao:
+      'Site de campeonato de sim racing com visual de transmissão ao vivo: mapa animado do circuito, telemetria em tempo real, contagem regressiva para a próxima etapa e inscrição pelo WhatsApp.',
+    destaques: ['Mapa interativo do circuito', 'Telemetria animada', 'Contagem regressiva', 'Inscrição pelo WhatsApp'],
+    stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    url: 'https://invdevs-kart.vercel.app',
+    imagem: '/portfolio/inv-racing.webp',
+    tipo: 'demonstracao',
+    publicar: true,
+    demo: true,
+  },
+  {
     nome: 'Bueno Imóveis',
     segmento: 'Mercado imobiliário',
     descricao:
@@ -64,18 +78,6 @@ export const projetos: Projeto[] = [
     destaques: ['Site institucional', 'Informações de serviços', 'Contato rápido'],
     stack: [],
     url: 'https://posto22.vercel.app',
-    tipo: 'a-confirmar',
-    publicar: false,
-    demo: true,
-  },
-  {
-    nome: 'Paddock 22',
-    segmento: 'Comércio',
-    descricao:
-      'Interface comercial com identidade visual própria, pensada para funcionar bem no celular e no computador.',
-    destaques: ['Identidade visual personalizada', 'Interface responsiva'],
-    stack: ['React', 'Vite'],
-    url: 'https://invdevs-kart.vercel.app',
     tipo: 'a-confirmar',
     publicar: false,
     demo: true,
