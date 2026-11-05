@@ -38,6 +38,7 @@ export const projetos: Projeto[] = [
     destaques: ['Vitrine de imóveis', 'Captação de leads', 'Integração com WhatsApp', 'Otimizado para SEO'],
     stack: ['React'],
     url: 'https://corretorbr.vercel.app',
+    imagem: '/portfolio/bueno-imoveis.webp',
     tipo: 'academico', // o próprio site declara: "projeto de caráter acadêmico e curricular"
     publicar: true,
     demo: true,
@@ -47,9 +48,10 @@ export const projetos: Projeto[] = [
     segmento: 'Logística internacional',
     descricao:
       'Site institucional para empresa de logística, com apresentação clara de serviços e canais de contato.',
-    destaques: ['Site institucional', 'Layout responsivo', 'Apresentação de serviços'],
-    stack: ['React', 'Tailwind CSS'],
+    destaques: ['Site institucional', 'Português, espanhol e inglês', 'Pedido de cotação', 'WhatsApp'],
+    stack: ['React', 'Vite'],
     url: 'https://mondel-group.vercel.app',
+    imagem: '/portfolio/mondel-group.webp',
     tipo: 'a-confirmar',
     publicar: true,
     demo: true,
