@@ -11,8 +11,10 @@ export const site = {
 
   // Número com DDI e DDD, só dígitos.
   whatsapp: '5511925272694',
-  // TODO: preencher quando o e-mail profissional existir (ex.: contato@invdevs.com.br)
-  email: '',
+  // Trocar por contato@invdevs.com.br quando o domínio e o e-mail profissional existirem.
+  email: 'contato.invdevs@gmail.com',
+  // Responsável pelos dados (LGPD). Pessoa física por enquanto; trocar pelo CNPJ quando houver.
+  responsavel: 'João Victor dos Santos Rodrigues',
 
   // Vercel Web Analytics: ligar aqui SÓ depois de ativar na aba Analytics do projeto na Vercel.
   // Liga o script no <head> e o parágrafo correspondente na política de privacidade.

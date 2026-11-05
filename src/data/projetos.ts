@@ -8,7 +8,7 @@
 // - `resultado` fala com o dono do negócio (o que ele ganha), sem termo técnico.
 //   A parte técnica fica em `stack`, pequena, no fim do card.
 
-export type TipoProjeto = 'contratado' | 'pessoal' | 'academico' | 'demonstracao' | 'a-confirmar';
+export type TipoProjeto = 'contratado' | 'em-andamento' | 'pessoal' | 'academico' | 'demonstracao' | 'a-confirmar';
 
 // 'sistemas' = produtos próprios (SaaS): vão para a seção "Produtos INV Devs", fora da grade de sites.
 export type Categoria = 'imobiliario' | 'servicos' | 'empresas' | 'eventos' | 'sistemas';
@@ -40,6 +40,7 @@ export interface Projeto {
 
 export const rotuloTipo: Record<TipoProjeto, string | null> = {
   contratado: 'Projeto para cliente',
+  'em-andamento': 'Projeto em andamento',
   pessoal: 'Projeto autoral',
   academico: 'Projeto acadêmico',
   demonstracao: 'Projeto demonstrativo',
@@ -70,7 +71,7 @@ export const projetos: Projeto[] = [
     demo: true,
   },
   {
-    // Proposta para empresa real (repo Joaovsr98/garagemnotredame). Mesmo status do Mondel.
+    // Pedido de um amigo, dono da oficina; ainda em ajustes e sem fechamento (05/11/2026). Repo: Joaovsr98/garagemnotredame
     nome: 'Garagem NotreDame',
     categoria: 'servicos',
     segmento: 'Oficina mecânica · Taboão da Serra',
@@ -81,7 +82,7 @@ export const projetos: Projeto[] = [
     stack: ['React', 'TypeScript', 'Tailwind CSS'],
     url: 'https://garagemnotredame.vercel.app',
     imagem: '/portfolio/garagem-notredame.webp',
-    tipo: 'demonstracao',
+    tipo: 'em-andamento',
     publicar: true,
     demo: true,
   },
