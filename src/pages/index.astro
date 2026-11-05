@@ -1,8 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Orcamento from '../components/Orcamento.astro';
-import { site } from '../data/site';
-import { projetos, rotuloTipo } from '../data/projetos';
+import { site, linkWhatsApp } from '../data/site';
+import { projetos, rotuloTipo, categorias, mensagemInteresse, type Categoria } from '../data/projetos';
 
 const servicos = [
   {
@@ -64,7 +64,7 @@ const etapas = [
 const duvidas = [
   {
     p: 'Quanto custa um site ou sistema?',
-    r: 'Depende do tamanho do projeto, das funcionalidades e das integrações. Depois de entender a sua necessidade, enviamos uma proposta com valor fechado e tudo o que está incluído.',
+    r: 'Landing pages começam em R$ 800 e sites institucionais em R$ 1.500. Sistemas e aplicativos são orçados conforme o projeto. Depois de entender a sua necessidade, enviamos uma proposta com valor fechado e tudo o que está incluído.',
   },
   {
     p: 'Preciso já ter domínio e hospedagem?',
@@ -85,6 +85,55 @@ const duvidas = [
 ];
 
 const visiveis = projetos.filter((p) => p.publicar);
+const sites = visiveis.filter((p) => p.categoria !== 'sistemas');
+const produtos = visiveis.filter((p) => p.categoria === 'sistemas');
+const categoriasSites = (Object.keys(categorias) as Categoria[]).filter(
+  (c) => c !== 'sistemas' && sites.some((p) => p.categoria === c),
+);
+
+// Preços de referência (CLAUDE.md §8). "A partir de" = piso; o valor final sai na proposta.
+const planos = [
+  {
+    titulo: 'Landing page',
+    para: 'Uma página focada em um objetivo: lançamento, serviço ou anúncio.',
+    prefixo: 'a partir de',
+    preco: 'R$ 800',
+    itens: ['Visual alinhado à sua marca', 'Botão de WhatsApp e formulário', 'Feita para celular e computador', 'Pronta para anúncios', 'Configuração de domínio e hospedagem'],
+    cta: 'Quero uma landing page',
+    mensagem: 'Olá! Vi os preços no site da INV Devs e quero uma landing page.',
+    destaque: false,
+  },
+  {
+    titulo: 'Site institucional',
+    para: 'O site completo do seu negócio, para aparecer no Google e receber contatos.',
+    prefixo: 'a partir de',
+    preco: 'R$ 1.500',
+    itens: ['Páginas sob medida (início, serviços, sobre, contato)', 'WhatsApp, formulário e mapa', 'Feito para celular e computador', 'Preparado para o Google', 'Configuração de domínio e hospedagem'],
+    cta: 'Quero um site',
+    mensagem: 'Olá! Vi os preços no site da INV Devs e quero um site institucional.',
+    destaque: true,
+  },
+  {
+    titulo: 'Sistemas e aplicativos',
+    para: 'Pedidos, agendamentos, clientes, estoque ou finanças, do jeito que a sua empresa trabalha.',
+    prefixo: 'valor conforme o projeto',
+    preco: 'Sob orçamento',
+    itens: ['Levantamento do que você precisa', 'Telas para cada tipo de usuário', 'Acesso pelo navegador ou celular', 'Entrega em etapas'],
+    cta: 'Quero um sistema',
+    mensagem: 'Olá! Vi o site da INV Devs e quero conversar sobre um sistema para o meu negócio.',
+    destaque: false,
+  },
+  {
+    titulo: 'Manutenção',
+    para: 'Para o seu site ou sistema continuar no ar, atualizado e seguro.',
+    prefixo: 'valor conforme o escopo',
+    preco: 'Plano mensal',
+    itens: ['Pequenas alterações', 'Correções e atualizações', 'Acompanhamento da hospedagem', 'Escopo definido em contrato'],
+    cta: 'Saber mais',
+    mensagem: 'Olá! Vi o site da INV Devs e quero saber sobre o plano de manutenção.',
+    destaque: false,
+  },
+];
 
 const jsonLd = [
   {
@@ -189,18 +238,26 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- Portfólio -->
+  <!-- Portfólio (sites) -->
   <section id="portfolio" class="border-t border-line/60 py-20 sm:py-24">
     <div class="container-site">
       <p class="eyebrow">Portfólio</p>
-      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Projetos desenvolvidos</h2>
-      <p class="mt-4 max-w-2xl text-slate-400">Alguns trabalhos que mostram o que conseguimos construir.</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Sites que já construímos</h2>
+      <p class="mt-4 max-w-2xl text-slate-400">Veja o que um site parecido pode fazer pelo seu negócio. Gostou de algum? É só pedir um assim.</p>
 
-      <div class="mt-12 grid gap-6 md:grid-cols-2">
-        {visiveis.map((p) => {
+      <!-- Filtros: só aparecem com JavaScript; sem ele, todos os projetos ficam visíveis. -->
+      <div id="filtros" class="mt-8 hidden flex-wrap gap-2" role="group" aria-label="Filtrar por tipo de negócio">
+        <button type="button" data-filtro="todos" aria-pressed="true" class="filtro">Todos</button>
+        {categoriasSites.map((c) => (
+          <button type="button" data-filtro={c} aria-pressed="false" class="filtro">{categorias[c]}</button>
+        ))}
+      </div>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        {sites.map((p) => {
           const rotulo = rotuloTipo[p.tipo];
           return (
-            <article class="card flex flex-col overflow-hidden">
+            <article class="card flex flex-col overflow-hidden" data-categoria={p.categoria}>
               <div class="relative aspect-[16/9] overflow-hidden border-b border-line bg-ink-800">
                 {p.imagem ? (
                   <img src={p.imagem} alt={`Tela do projeto ${p.nome}`} loading="lazy" decoding="async" class="h-full w-full object-cover object-top" />
@@ -216,23 +273,111 @@ const jsonLd = [
               <div class="flex flex-1 flex-col p-6">
                 <p class="text-xs font-medium text-violet-300">{p.segmento}</p>
                 <h3 class="mt-1 text-xl font-semibold">{p.nome}</h3>
-                <p class="mt-3 text-sm leading-relaxed text-slate-400">{p.descricao}</p>
+                <p class="mt-3 font-medium leading-snug text-white">{p.resultado}</p>
+                <p class="mt-2 text-sm leading-relaxed text-slate-400">{p.descricao}</p>
                 <ul class="mt-4 flex flex-wrap gap-2">
                   {p.destaques.map((d) => <li class="rounded-lg bg-ink-800 px-2.5 py-1 text-xs text-slate-300">{d}</li>)}
                 </ul>
-                <div class="mt-auto flex items-center justify-between gap-4 pt-6">
-                  <p class="text-xs text-slate-500">{p.stack.join(' · ')}</p>
-                  {p.demo && (
-                    <a href={p.url} target="_blank" rel="noopener" class="shrink-0 text-sm font-semibold text-white hover:text-violet-300">
-                      Ver projeto <span aria-hidden="true">↗</span><span class="sr-only">(abre em nova aba)</span>
+                <div class="mt-auto pt-6">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <a href={linkWhatsApp(mensagemInteresse(p))} target="_blank" rel="noopener" class="btn-primary !px-4 !py-2.5">
+                      Quero um site assim
                     </a>
-                  )}
+                    {p.demo && (
+                      <a href={p.url} target="_blank" rel="noopener" class="btn-ghost !px-4 !py-2.5">
+                        Ver projeto <span aria-hidden="true">↗</span><span class="sr-only">(abre em nova aba)</span>
+                      </a>
+                    )}
+                  </div>
+                  <p class="mt-4 text-xs text-slate-500">{p.stack.join(' · ')}</p>
                 </div>
               </div>
             </article>
           );
         })}
       </div>
+    </div>
+  </section>
+
+  <!-- Produtos próprios -->
+  <section id="produtos" class="border-t border-line/60 bg-ink-900/40 py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">Produtos INV Devs</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Sistemas que criamos do zero</h2>
+      <p class="mt-4 max-w-2xl text-slate-400">
+        Além de sites, desenvolvemos nossos próprios produtos, com regras de negócio, cálculos e telas para cada tipo de usuário.
+        É o mesmo cuidado que levamos para o sistema da sua empresa.
+      </p>
+
+      <div class="mt-12 space-y-6">
+        {produtos.map((p) => (
+          <article class="card grid overflow-hidden lg:grid-cols-[1.15fr_1fr]">
+            <div class="relative aspect-[16/9] overflow-hidden border-b border-line bg-ink-800 lg:aspect-auto lg:border-b-0 lg:border-r">
+              {p.imagem && (
+                <img src={p.imagem} alt={`Tela do ${p.nome}`} loading="lazy" decoding="async" class="h-full w-full object-cover object-left-top" />
+              )}
+              {p.status && (
+                <span class="absolute bottom-3 left-3 rounded-full border border-white/10 bg-ink-950/80 px-3 py-1 text-xs text-slate-200 backdrop-blur">{p.status}</span>
+              )}
+            </div>
+            <div class="flex flex-col p-6 sm:p-8">
+              <p class="text-xs font-medium text-violet-300">{p.segmento}</p>
+              <h3 class="mt-1 text-2xl font-semibold">{p.nome}</h3>
+              <p class="mt-3 font-medium leading-snug text-white">{p.resultado}</p>
+              <p class="mt-2 text-sm leading-relaxed text-slate-400">{p.descricao}</p>
+              <ul class="mt-4 flex flex-wrap gap-2">
+                {p.destaques.map((d) => <li class="rounded-lg bg-ink-800 px-2.5 py-1 text-xs text-slate-300">{d}</li>)}
+              </ul>
+              <div class="mt-auto pt-6">
+                <div class="flex flex-wrap items-center gap-3">
+                  <a href={linkWhatsApp(mensagemInteresse(p))} target="_blank" rel="noopener" class="btn-primary !px-4 !py-2.5">
+                    Quero um sistema assim
+                  </a>
+                  {p.demo && (
+                    <a href={p.url} target="_blank" rel="noopener" class="btn-ghost !px-4 !py-2.5">
+                      Testar agora <span aria-hidden="true">↗</span><span class="sr-only">(abre em nova aba)</span>
+                    </a>
+                  )}
+                </div>
+                <p class="mt-4 text-xs text-slate-500">{p.stack.join(' · ')}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Preços -->
+  <section id="precos" class="border-t border-line/60 py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">Investimento</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Quanto custa</h2>
+      <p class="mt-4 max-w-2xl text-slate-400">Valores de referência para você se planejar. O preço final depende do que o seu projeto precisa e fica fechado na proposta, sem surpresas.</p>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {planos.map((pl) => (
+          <article class={`card flex flex-col p-6 ${pl.destaque ? 'border-violet-500/50 bg-gradient-to-b from-violet-600/10 to-transparent' : ''}`}>
+            <h3 class="text-lg font-semibold">{pl.titulo}</h3>
+            <p class="mt-1 text-sm text-slate-400">{pl.para}</p>
+            <p class="mt-5">
+              {pl.prefixo && <span class="block text-xs text-slate-400">{pl.prefixo}</span>}
+              <span class={`font-display font-bold text-white ${pl.preco.startsWith('R$') ? 'text-3xl' : 'text-2xl'}`}>{pl.preco}</span>
+            </p>
+            <ul class="mt-5 space-y-2 text-sm text-slate-300">
+              {pl.itens.map((i) => (
+                <li class="flex gap-2"><span class="text-violet-400" aria-hidden="true">✓</span>{i}</li>
+              ))}
+            </ul>
+            <div class="mt-auto pt-6">
+              <a href={linkWhatsApp(pl.mensagem)} target="_blank" rel="noopener" class={`${pl.destaque ? 'btn-primary' : 'btn-ghost'} w-full`}>
+                {pl.cta}
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="mt-6 text-xs text-slate-500">Domínio e serviços de terceiros, quando houver, são informados à parte na proposta.</p>
     </div>
   </section>
 
@@ -293,3 +438,23 @@ const jsonLd = [
     </div>
   </section>
 </Base>
+
+<script>
+  // Filtro do portfólio por tipo de negócio. Sem JS, os botões ficam escondidos e tudo aparece.
+  const filtros = document.getElementById('filtros');
+  if (filtros) {
+    filtros.classList.remove('hidden');
+    filtros.classList.add('flex');
+    const botoes = filtros.querySelectorAll<HTMLButtonElement>('[data-filtro]');
+    const cards = document.querySelectorAll<HTMLElement>('#portfolio [data-categoria]');
+    botoes.forEach((botao) =>
+      botao.addEventListener('click', () => {
+        const filtro = botao.dataset.filtro;
+        botoes.forEach((b) => b.setAttribute('aria-pressed', String(b === botao)));
+        cards.forEach((card) => {
+          card.hidden = filtro !== 'todos' && card.dataset.categoria !== filtro;
+        });
+      }),
+    );
+  }
+</script>

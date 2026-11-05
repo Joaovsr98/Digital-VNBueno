@@ -5,12 +5,27 @@
 // - `publicar: false` esconde o projeto até ele ser revisado.
 // - `demo: false` esconde o link quando o projeto não está 100% funcional para demonstração.
 // - Imagens: salve capturas reais em public/portfolio/<arquivo> e preencha `imagem`.
+// - `resultado` fala com o dono do negócio (o que ele ganha), sem termo técnico.
+//   A parte técnica fica em `stack`, pequena, no fim do card.
 
 export type TipoProjeto = 'contratado' | 'pessoal' | 'academico' | 'demonstracao' | 'a-confirmar';
 
+// 'sistemas' = produtos próprios (SaaS): vão para a seção "Produtos INV Devs", fora da grade de sites.
+export type Categoria = 'imobiliario' | 'servicos' | 'empresas' | 'eventos' | 'sistemas';
+
+export const categorias: Record<Categoria, string> = {
+  imobiliario: 'Imobiliário',
+  servicos: 'Oficinas e serviços',
+  empresas: 'Empresas',
+  eventos: 'Eventos',
+  sistemas: 'Sistemas e apps',
+};
+
 export interface Projeto {
   nome: string;
+  categoria: Categoria;
   segmento: string;
+  resultado: string;
   descricao: string;
   destaques: string[];
   stack: string[];
@@ -19,6 +34,8 @@ export interface Projeto {
   publicar: boolean;
   demo: boolean;
   imagem?: string;
+  /** Só para produtos (categoria 'sistemas'): situação atual, mostrada no lugar do tipo. */
+  status?: string;
 }
 
 export const rotuloTipo: Record<TipoProjeto, string | null> = {
@@ -29,14 +46,22 @@ export const rotuloTipo: Record<TipoProjeto, string | null> = {
   'a-confirmar': null, // TODO: definir o tipo de cada projeto antes de publicar
 };
 
+/** Mensagem pronta do botão "Quero um site assim". */
+export function mensagemInteresse(p: Projeto) {
+  const oQue = p.categoria === 'sistemas' ? 'um sistema' : 'um site';
+  return `Olá! Vi o projeto ${p.nome} no portfólio da INV Devs e quero ${oQue} parecido para o meu negócio.`;
+}
+
 export const projetos: Projeto[] = [
   {
     // Marca fictícia (antes Paddock 22, que não fechou). Repo: Joaovsr98/invdevs-kart
     nome: 'INV Racing',
-    segmento: 'Esportes e eventos',
+    categoria: 'eventos',
+    segmento: 'Campeonatos e eventos',
+    resultado: 'Site para campeonato ou evento com inscrição direto pelo WhatsApp.',
     descricao:
-      'Site de campeonato de sim racing com visual de transmissão ao vivo: mapa animado do circuito, telemetria em tempo real, contagem regressiva para a próxima etapa e inscrição pelo WhatsApp.',
-    destaques: ['Mapa interativo do circuito', 'Telemetria animada', 'Contagem regressiva', 'Inscrição pelo WhatsApp'],
+      'Visual de transmissão ao vivo, com mapa animado do circuito, telemetria e contagem regressiva para a próxima etapa.',
+    destaques: ['Inscrição pelo WhatsApp', 'Contagem regressiva', 'Mapa animado', 'Calendário e ranking'],
     stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     url: 'https://invdevs-kart.vercel.app',
     imagem: '/portfolio/inv-racing.webp',
@@ -45,26 +70,30 @@ export const projetos: Projeto[] = [
     demo: true,
   },
   {
-    // Produto próprio do fundador (pasta projetos/doce-gestao-financeira). Versão 1.0 local-first.
-    nome: 'Doce Gestão Financeira',
-    segmento: 'Finanças pessoais',
+    // Proposta para empresa real (repo Joaovsr98/garagemnotredame). Mesmo status do Mondel.
+    nome: 'Garagem NotreDame',
+    categoria: 'servicos',
+    segmento: 'Oficina mecânica · Taboão da Serra',
+    resultado: 'Site para oficina que transforma quem pesquisa no Google em agendamento pelo WhatsApp.',
     descricao:
-      'Aplicativo para organizar dívidas, priorizar pagamentos e montar um plano de quitação possível, com o Índice de Liberdade e a previsão de quando a pessoa fica livre das dívidas.',
-    destaques: ['Plano de quitação', 'Índice de Liberdade', 'Funciona sem internet', '~800 testes automatizados'],
-    stack: ['React', 'TypeScript', 'IndexedDB', 'Recharts'],
-    url: 'https://finrotiva.vercel.app',
-    imagem: '/portfolio/doce-gestao-financeira.webp',
-    tipo: 'pessoal',
+      'Serviços, fotos reais da oficina, horário de funcionamento e mapa de como chegar, tudo pensado para o celular.',
+    destaques: ['Agendamento pelo WhatsApp', 'Fotos reais', 'Mapa e horários', 'Perguntas frequentes'],
+    stack: ['React', 'TypeScript', 'Tailwind CSS'],
+    url: 'https://garagemnotredame.vercel.app',
+    imagem: '/portfolio/garagem-notredame.webp',
+    tipo: 'demonstracao',
     publicar: true,
     demo: true,
   },
   {
     nome: 'Bueno Imóveis',
-    segmento: 'Mercado imobiliário',
+    categoria: 'imobiliario',
+    segmento: 'Corretor de imóveis · São Paulo',
+    resultado: 'Site para corretor que recebe contatos de compradores direto no WhatsApp.',
     descricao:
-      'Site imobiliário com vitrine de apartamentos e lançamentos em São Paulo, captação de interessados e contato direto pelo WhatsApp. Conteúdo pré-renderizado para ser encontrado no Google.',
-    destaques: ['Vitrine de imóveis', 'Captação de leads', 'Integração com WhatsApp', 'Otimizado para SEO'],
-    stack: ['React'],
+      'Vitrine de apartamentos e lançamentos, páginas de bairro e um diagnóstico que entende o perfil de quem quer comprar.',
+    destaques: ['Vitrine de imóveis', 'Contatos no WhatsApp', 'Aparece no Google', 'Páginas por bairro'],
+    stack: ['React', 'TypeScript'],
     url: 'https://corretorbr.vercel.app',
     imagem: '/portfolio/bueno-imoveis.webp',
     tipo: 'academico', // o próprio site declara: "projeto de caráter acadêmico e curricular"
@@ -73,10 +102,12 @@ export const projetos: Projeto[] = [
   },
   {
     nome: 'Mondel Group',
+    categoria: 'empresas',
     segmento: 'Logística internacional',
+    resultado: 'Site institucional que recebe pedidos de cotação de clientes de vários países.',
     descricao:
-      'Conceito de site institucional para uma empresa de logística, com apresentação clara de serviços, pedido de cotação e canais de contato.',
-    destaques: ['Site institucional', 'Português, espanhol e inglês', 'Pedido de cotação', 'WhatsApp'],
+      'Apresenta serviços, frota e unidades com clareza, em português, espanhol e inglês.',
+    destaques: ['Pedido de cotação', '3 idiomas', 'WhatsApp', 'Site institucional'],
     stack: ['React', 'Vite'],
     url: 'https://mondel-group.vercel.app',
     imagem: '/portfolio/mondel-group.webp',
@@ -85,39 +116,65 @@ export const projetos: Projeto[] = [
     demo: true,
   },
   {
-    nome: 'Posto 22',
-    segmento: 'Postos e serviços rodoviários',
+    // Produto próprio do fundador. Código fica fora desta pasta (o fundador mexe nele em outro lugar).
+    nome: 'Doce Gestão Financeira',
+    categoria: 'sistemas',
+    segmento: 'App de finanças pessoais',
+    resultado: 'Aplicativo que organiza dívidas e mostra um plano possível para quitar cada uma.',
     descricao:
-      'Presença digital para empresa do segmento rodoviário, reunindo serviços, localização e contato em um só lugar.',
+      'Prioriza pagamentos, calcula o Índice de Liberdade e prevê quando a pessoa fica livre das dívidas. Funciona até sem internet.',
+    destaques: ['Plano de quitação', 'Índice de Liberdade', 'Funciona sem internet', '~800 testes automatizados'],
+    stack: ['React', 'TypeScript', 'IndexedDB', 'Recharts'],
+    url: 'https://finrotiva.vercel.app',
+    imagem: '/portfolio/doce-gestao-financeira.webp',
+    tipo: 'pessoal',
+    status: 'Versão 1.0 no ar',
+    publicar: true,
+    demo: true,
+  },
+  {
+    nome: 'Posto 22',
+    categoria: 'servicos',
+    segmento: 'Postos e serviços rodoviários',
+    resultado: 'Presença digital para posto de estrada.',
+    descricao:
+      'Reúne serviços, localização e contato em um só lugar.',
     destaques: ['Site institucional', 'Informações de serviços', 'Contato rápido'],
     stack: [],
     url: 'https://posto22.vercel.app',
     tipo: 'a-confirmar',
-    publicar: false,
+    publicar: false, // fundador: manter guardado, fora do portfólio
     demo: true,
   },
   {
     nome: 'Rota Financeira',
+    categoria: 'sistemas',
     segmento: 'Finanças pessoais',
+    resultado: 'Versão antiga do Doce Gestão Financeira.',
     descricao:
-      'Aplicação para organizar dívidas e planejar as finanças, com regras de negócio e telas interativas.',
-    destaques: ['Organização de dívidas', 'Planejamento financeiro', 'Interface interativa'],
+      'Aplicação para organizar dívidas e planejar as finanças.',
+    destaques: ['Organização de dívidas', 'Planejamento financeiro'],
     stack: ['React', 'TypeScript'],
     url: 'https://rotafin.vercel.app',
     tipo: 'a-confirmar',
-    publicar: false,
+    publicar: false, // versão antiga do Doce Gestão
     demo: true,
   },
   {
     nome: "Bueno's House",
-    segmento: 'Restaurantes',
+    categoria: 'sistemas',
+    segmento: 'SaaS para restaurantes',
+    // SaaS próprio do fundador, em desenvolvimento (começou como projeto acadêmico).
+    resultado: 'Sistema para restaurante: cardápio, pedidos, cozinha, caixa e entregas no mesmo lugar.',
     descricao:
-      'Sistema para restaurante com gestão de pedidos, perfis de usuário e integração entre frontend e backend. Em desenvolvimento.',
-    destaques: ['Gestão de pedidos', 'Perfis de usuário', 'Frontend + API'],
+      'O cliente pede pelo cardápio digital e acompanha o pedido; a equipe trabalha com telas próprias para garçom, cozinha, caixa e motoboy, além de estoque e ficha técnica.',
+    destaques: ['Cardápio digital', 'Pedido em tempo real', 'Telas por função', 'Estoque e ficha técnica'],
     stack: ['Angular', 'TypeScript', 'Java', 'Spring Boot', 'MySQL'],
     url: 'https://bueno-s-house.vercel.app',
-    tipo: 'academico',
-    publicar: false,
-    demo: false, // backend precisa ser verificado antes de liberar a demonstração
+    imagem: '/portfolio/bueno-s-house.webp',
+    tipo: 'pessoal',
+    status: 'Em desenvolvimento',
+    publicar: true,
+    demo: false, // backend (Render) demora a acordar: cardápio ficou carregando >8s em 05/11/2026
   },
 ];
