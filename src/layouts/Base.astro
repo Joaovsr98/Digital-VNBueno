@@ -1,0 +1,54 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props {
+  titulo?: string;
+  descricao?: string;
+  indexar?: boolean;
+  jsonLd?: object[];
+}
+
+const { titulo, descricao = site.descricao, indexar = true, jsonLd = [] } = Astro.props;
+const tituloCompleto = titulo ? `${titulo} | ${site.nome}` : `${site.nome} | Sites, sistemas e aplicativos sob medida`;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL('/og.png', site.url).href;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descricao} />
+    <link rel="canonical" href={canonical} />
+    {!indexar && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#05070f" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={site.nome} />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descricao} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {jsonLd.map((dados) => <script type="application/ld+json" set:html={JSON.stringify(dados)} />)}
+  </head>
+  <body class="min-h-screen">
+    <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 btn-primary">
+      Pular para o conteúdo
+    </a>
+    <Header />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

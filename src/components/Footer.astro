@@ -1,0 +1,44 @@
+---
+import Logo from './Logo.astro';
+import { site, linkWhatsApp } from '../data/site';
+
+const ano = new Date().getFullYear();
+---
+
+<footer class="border-t border-line/60 bg-ink-950">
+  <div class="container-site grid gap-10 py-12 md:grid-cols-[1.5fr_1fr_1fr]">
+    <div class="max-w-sm">
+      <Logo />
+      <p class="mt-4 text-sm leading-relaxed text-slate-400">{site.slogan}</p>
+      <p class="mt-2 text-sm text-slate-500">{site.cidade}</p>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-semibold text-white">Navegação</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a href="/#servicos" class="text-slate-400 hover:text-white">Serviços</a></li>
+        <li><a href="/#portfolio" class="text-slate-400 hover:text-white">Portfólio</a></li>
+        <li><a href="/#como-trabalhamos" class="text-slate-400 hover:text-white">Como trabalhamos</a></li>
+        <li><a href="/#orcamento" class="text-slate-400 hover:text-white">Orçamento</a></li>
+        <li><a href="/privacidade" class="text-slate-400 hover:text-white">Política de privacidade</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-semibold text-white">Fale com a INV Devs</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        {site.whatsapp && (
+          <li><a href={linkWhatsApp()} target="_blank" rel="noopener" class="text-slate-400 hover:text-white">WhatsApp</a></li>
+        )}
+        {site.email && (
+          <li><a href={`mailto:${site.email}`} class="text-slate-400 hover:text-white">{site.email}</a></li>
+        )}
+        <li><a href={site.instagram} target="_blank" rel="noopener" class="text-slate-400 hover:text-white">Instagram @inv.devs</a></li>
+        <li><a href={site.tiktok} target="_blank" rel="noopener" class="text-slate-400 hover:text-white">TikTok @inv.devs</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-line/60">
+    <p class="container-site py-6 text-xs text-slate-500">© {ano} {site.nome}. Todos os direitos reservados.</p>
+  </div>
+</footer>

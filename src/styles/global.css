@@ -1,0 +1,92 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/space-grotesk";
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", "Inter Variable", ui-sans-serif, sans-serif;
+
+  --color-ink-950: #05070f;
+  --color-ink-900: #0a0f1f;
+  --color-ink-800: #111832;
+  --color-ink-700: #1b2447;
+  --color-line: #232c52;
+
+  --color-brand-blue: #3b82f6;
+  --color-brand-violet: #8b5cf6;
+  --color-brand-cyan: #22d3ee;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-ink-950 text-slate-300 font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-white tracking-tight;
+  }
+  ::selection {
+    background: rgb(139 92 246 / 0.4);
+    color: white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-violet);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(100deg, var(--color-brand-cyan), var(--color-brand-blue) 45%, var(--color-brand-violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gradient-brand {
+  background-image: linear-gradient(110deg, var(--color-brand-blue), var(--color-brand-violet));
+}
+
+@utility card {
+  @apply rounded-2xl border border-line bg-ink-900/70;
+}
+
+@utility container-site {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition;
+}
+
+@utility btn-primary {
+  @apply btn bg-gradient-brand text-white shadow-lg shadow-violet-900/30 hover:brightness-110;
+}
+
+@utility btn-ghost {
+  @apply btn border border-line text-slate-200 hover:border-slate-500 hover:text-white;
+}
+
+@utility eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.2em] text-violet-300;
+}
+
+/* Grade sutil usada no fundo do hero */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
+}
