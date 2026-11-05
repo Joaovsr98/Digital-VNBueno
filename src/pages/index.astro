@@ -77,12 +77,23 @@ const duvidas = [
   },
   {
     p: 'Consigo alterar o site depois da entrega?',
-    r: 'Sim. Você pode contratar um plano de manutenção para alterações e atualizações, ou combinar ajustes pontuais quando precisar.',
+    r: 'Sim. Todo site tem 30 dias de ajustes depois da entrega. Depois disso, você pode contratar o plano de manutenção (R$ 179,99 por mês, com 2 alterações básicas por mês) ou pedir alterações avulsas quando precisar.',
+  },
+  {
+    p: 'O que é uma alteração básica?',
+    r: 'Trocar textos, fotos, telefone, endereço ou horários, ou incluir um item numa lista que já existe (como um novo serviço). Página nova, seção nova ou mudança de layout são orçadas à parte. As alterações do plano não acumulam para o mês seguinte.',
   },
   {
     p: 'Como começa um projeto?',
     r: 'Basta preencher o pedido de orçamento ou chamar no WhatsApp. Marcamos uma conversa rápida para entender o que você precisa, sem compromisso.',
   },
+];
+
+// Prints pequenos (640px) para o mosaico do topo.
+const mosaico = [
+  { src: '/portfolio/mini/bueno-imoveis.webp', pos: 'left-0 top-0 -rotate-3' },
+  { src: '/portfolio/mini/garagem-notredame.webp', pos: 'right-0 top-24 rotate-2' },
+  { src: '/portfolio/mini/inv-racing.webp', pos: 'left-6 bottom-0 -rotate-1' },
 ];
 
 const visiveis = projetos.filter((p) => p.publicar);
@@ -126,10 +137,10 @@ const planos = [
   },
   {
     titulo: 'Manutenção',
-    para: 'Para o seu site ou sistema continuar no ar, atualizado e seguro.',
-    prefixo: 'valor conforme o escopo',
-    preco: 'Plano mensal',
-    itens: ['Pequenas alterações', 'Correções e atualizações', 'Acompanhamento da hospedagem', 'Escopo definido em contrato'],
+    para: 'Para o seu site continuar no ar, atualizado e com alguém cuidando dele.',
+    prefixo: 'plano mensal',
+    preco: 'R$ 179,99',
+    itens: ['2 alterações básicas por mês', 'Correções e atualizações', 'Acompanhamento da hospedagem', 'Suporte pelo WhatsApp'],
     cta: 'Saber mais',
     mensagem: 'Olá! Vi o site da INV Devs e quero saber sobre o plano de manutenção.',
     destaque: false,
@@ -167,8 +178,10 @@ const jsonLd = [
     <div class="pointer-events-none absolute -top-20 left-[15%] h-[300px] w-[420px] rounded-full bg-blue-600/15 blur-3xl" aria-hidden="true"></div>
 
     <div class="container-site relative py-20 sm:py-28">
+      <div class="grid items-center gap-12 lg:grid-cols-[1.35fr_1fr]">
+      <div>
       <p class="eyebrow">Desenvolvimento de software · {site.cidade}</p>
-      <h1 class="mt-5 max-w-3xl text-4xl font-bold leading-[1.08] sm:text-6xl">
+      <h1 class="mt-5 max-w-3xl text-4xl font-bold leading-[1.08] sm:text-6xl lg:text-5xl xl:text-6xl">
         Transformamos ideias em <span class="text-gradient">soluções digitais</span> para o seu negócio.
       </h1>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-400">
@@ -178,6 +191,26 @@ const jsonLd = [
       <div class="mt-9 flex flex-col gap-3 sm:flex-row">
         <a href="#orcamento" class="btn-primary !px-6 !py-3.5 text-base">Solicite seu orçamento</a>
         <a href="#portfolio" class="btn-ghost !px-6 !py-3.5 text-base">Conheça nossos projetos</a>
+      </div>
+      </div>
+
+      <!-- Mosaico de projetos (só no computador). <picture> com media: abaixo de 1024px o navegador
+           usa o GIF vazio do <img> e não baixa os prints (só esconder com CSS não evita o download). -->
+      <a href="#portfolio" class="relative hidden h-[420px] lg:block" aria-label="Ver projetos do portfólio">
+        {mosaico.map((m) => (
+          <picture>
+            <source media="(min-width: 1024px)" srcset={m.src} type="image/webp" />
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+              alt=""
+              width="640"
+              height="360"
+              decoding="async"
+              class={`absolute w-[78%] rounded-xl border border-line shadow-2xl shadow-black/60 transition duration-300 hover:z-10 hover:scale-[1.03] ${m.pos}`}
+            />
+          </picture>
+        ))}
+      </a>
       </div>
 
       <ul class="mt-14 flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-400">
