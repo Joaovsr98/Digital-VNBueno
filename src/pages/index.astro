@@ -42,6 +42,7 @@ const segmentos = [
     titulo: 'Corretores e imobiliárias',
     texto: 'Sites com vitrine de imóveis, landing pages de lançamentos, captação de interessados e atendimento pelo WhatsApp.',
     destaque: true,
+    link: { href: '/corretores', rotulo: 'Ver o site para corretores' },
   },
   {
     titulo: 'Restaurantes e delivery',
@@ -232,6 +233,11 @@ const jsonLd = [
             {s.destaque && <p class="mb-3 text-xs font-semibold text-violet-300">Experiência no setor</p>}
             <h3 class="text-lg font-semibold">{s.titulo}</h3>
             <p class="mt-2 text-sm leading-relaxed text-slate-400">{s.texto}</p>
+            {s.link && (
+              <a href={s.link.href} class="mt-4 inline-block text-sm font-semibold text-white hover:text-violet-300">
+                {s.link.rotulo} <span aria-hidden="true">→</span>
+              </a>
+            )}
           </article>
         ))}
       </div>
