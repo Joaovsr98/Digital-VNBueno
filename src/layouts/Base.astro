@@ -9,12 +9,22 @@ interface Props {
   descricao?: string;
   indexar?: boolean;
   jsonLd?: object[];
+  /** Imagem de compartilhamento (WhatsApp, redes): caminho em /public, 1200x630, JPG leve. */
+  imagem?: string;
+  imagemAlt?: string;
 }
 
-const { titulo, descricao = site.descricao, indexar = true, jsonLd = [] } = Astro.props;
+const {
+  titulo,
+  descricao = site.descricao,
+  indexar = true,
+  jsonLd = [],
+  imagem = '/og.jpg',
+  imagemAlt = 'INV Devs — sites, sistemas e aplicativos sob medida',
+} = Astro.props;
 const tituloCompleto = titulo ? `${titulo} | ${site.nome}` : `${site.nome} | Sites, sistemas e aplicativos sob medida`;
 const canonical = new URL(Astro.url.pathname, site.url).href;
-const ogImage = new URL('/og.png', site.url).href;
+const ogImage = new URL(imagem, site.url).href;
 ---
 
 <!doctype html>
@@ -37,7 +47,13 @@ const ogImage = new URL('/og.png', site.url).href;
     <meta property="og:description" content={descricao} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imagemAlt} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
 
     {jsonLd.map((dados) => <script type="application/ld+json" set:html={JSON.stringify(dados)} />)}
 

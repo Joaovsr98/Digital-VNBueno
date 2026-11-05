@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://invdevs.com.br/sitemap-index.xml
+Sitemap: https://invdevs.vercel.app/sitemap-index.xml

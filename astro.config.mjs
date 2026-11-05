@@ -4,7 +4,8 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://invdevs.com.br',
+  // Trocar para https://invdevs.com.br quando o domínio estiver ativo (ver src/data/site.ts).
+  site: 'https://invdevs.vercel.app',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
