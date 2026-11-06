@@ -502,14 +502,28 @@ const jsonLd = [
         <p class="eyebrow">Orçamento</p>
         <h2 class="mt-3 text-3xl font-bold sm:text-4xl">Vamos desenvolver seu projeto?</h2>
         <p class="mt-4 text-slate-400">
-          Conte um pouco sobre o que você precisa. Respondemos com as próximas etapas e, se fizer sentido,
-          marcamos uma conversa para entender os detalhes. Sem compromisso.
+          Leva menos de um minuto. Você escolhe o que precisa, a mensagem vai pronta para o nosso WhatsApp
+          e a gente responde com as próximas etapas. Sem compromisso.
         </p>
-        <ul class="mt-8 space-y-4 text-sm text-slate-300">
-          <li class="flex gap-3"><span class="text-violet-400" aria-hidden="true">01</span>Você envia o pedido</li>
-          <li class="flex gap-3"><span class="text-violet-400" aria-hidden="true">02</span>Conversamos sobre o projeto</li>
-          <li class="flex gap-3"><span class="text-violet-400" aria-hidden="true">03</span>Você recebe uma proposta com escopo, prazo e valor</li>
-        </ul>
+
+        <!-- Prévia ao vivo da mensagem (atualiza enquanto a pessoa preenche) -->
+        <div class="mt-8 hidden rounded-2xl border border-line bg-[#0b141a] p-4 shadow-xl shadow-black/40 lg:block" aria-hidden="true">
+          <div class="flex items-center gap-3 border-b border-white/5 pb-3">
+            <img src="/logo-simbolo.png" alt="" width="36" height="36" class="h-9 w-9 rounded-full bg-ink-900 object-contain p-1" />
+            <div class="leading-tight">
+              <p class="text-sm font-semibold text-white">INV Devs</p>
+              <p class="text-xs text-emerald-400">prévia da sua mensagem</p>
+            </div>
+          </div>
+          <div class="mt-4 flex justify-end">
+            <div id="previa-mensagem" class="max-w-[90%] rounded-2xl rounded-tr-sm bg-[#005c4b] px-3.5 py-2.5 text-sm leading-snug text-white/95 [overflow-wrap:anywhere]"></div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <a href={linkWhatsApp('Olá, INV Devs! Quero conversar sobre um projeto.')} target="_blank" rel="noopener" class="font-semibold text-white hover:text-violet-300">Prefere falar direto? Chame no WhatsApp →</a>
+          <a href="#precos" class="text-slate-400 hover:text-white">Ver valores de referência</a>
+        </div>
       </div>
       <Orcamento />
     </div>
