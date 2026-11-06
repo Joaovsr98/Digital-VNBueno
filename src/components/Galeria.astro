@@ -1,0 +1,109 @@
+---
+// Galeria em tela cheia (padrão INV Devs): qualquer elemento com data-abrir-galeria="<índice>"
+// abre esta galeria. As telas deslizam para o lado (scroll-snap nativo), com setas, teclado e miniaturas.
+export interface ItemGaleria { src: string; alt: string; legenda: string; celular?: boolean }
+interface Props { itens: ItemGaleria[] }
+const { itens } = Astro.props;
+---
+
+<div id="galeria" class="fixed inset-0 z-[100] hidden flex-col bg-ink-950/95 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Telas dos projetos">
+  <div class="flex items-center justify-between px-4 py-3 text-sm text-slate-300 sm:px-6">
+    <span id="galeria-contador" class="font-display tracking-wider">1 / {itens.length}</span>
+    <button type="button" id="galeria-fechar" class="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+    </button>
+  </div>
+
+  <div class="relative min-h-0 flex-1">
+    <div id="galeria-trilho" class="flex h-full snap-x snap-mandatory overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      {itens.map((it) => (
+        <figure class="flex h-full w-full shrink-0 snap-center flex-col items-center justify-center px-3 sm:px-20">
+          <img data-src={it.src} alt={it.alt} class={`max-h-[calc(100%-3rem)] max-w-full rounded-xl border border-white/10 object-contain shadow-2xl shadow-black/60 ${it.celular ? 'w-auto' : ''}`} draggable="false" />
+          <figcaption class="mt-3 text-center text-sm text-slate-300">
+            {it.legenda}
+            <span class="ml-2 rounded-full bg-white/10 px-2 py-0.5 text-xs text-slate-200">{it.celular ? 'Celular' : 'Computador'}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+    <button type="button" id="galeria-ant" class="absolute left-2 top-1/2 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-violet-600 sm:left-5 sm:flex" aria-label="Tela anterior">
+      <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+    </button>
+    <button type="button" id="galeria-prox" class="absolute right-2 top-1/2 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-violet-600 sm:right-5 sm:flex" aria-label="Próxima tela">
+      <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+    </button>
+  </div>
+
+  <div id="galeria-miniaturas" class="flex justify-start gap-2 overflow-x-auto px-4 py-3 [scrollbar-width:none] sm:justify-center [&::-webkit-scrollbar]:hidden">
+    {itens.map((it, i) => (
+      <button type="button" data-ir={i} class="h-12 shrink-0 overflow-hidden rounded-md opacity-50 ring-2 ring-transparent transition hover:opacity-80 sm:h-14" aria-label={`Ver ${it.alt}`}>
+        <img data-src={it.src} alt="" class={`h-full object-cover object-top ${it.celular ? 'w-7 sm:w-8' : 'w-20 sm:w-24'}`} />
+      </button>
+    ))}
+  </div>
+  <p class="pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-center text-xs text-slate-500 sm:hidden">Deslize para o lado</p>
+</div>
+
+<script>
+  const g = document.getElementById('galeria')!;
+  const trilho = document.getElementById('galeria-trilho')!;
+  const contador = document.getElementById('galeria-contador')!;
+  const minis = [...document.querySelectorAll<HTMLButtonElement>('#galeria-miniaturas [data-ir]')];
+  const total = minis.length;
+  let atual = 0;
+  let quemAbriu: HTMLElement | null = null;
+
+  // As imagens só carregam quando a galeria abre pela primeira vez.
+  const carregar = () => g.querySelectorAll<HTMLImageElement>('img[data-src]').forEach((im) => { im.src = im.dataset.src!; im.removeAttribute('data-src'); });
+
+  const marcar = (i: number) => {
+    atual = i;
+    contador.textContent = `${i + 1} / ${total}`;
+    minis.forEach((m, k) => {
+      const ativo = k === i;
+      m.classList.toggle('opacity-100', ativo); m.classList.toggle('!ring-violet-500', ativo); m.classList.toggle('opacity-50', !ativo);
+      m.setAttribute('aria-current', String(ativo));
+      if (ativo) m.scrollIntoView({ block: 'nearest', inline: 'center' });
+    });
+  };
+  const irPara = (i: number, suave = true) => {
+    const alvo = (i + total) % total;
+    trilho.scrollTo({ left: alvo * trilho.clientWidth, behavior: suave ? 'smooth' : 'auto' });
+    marcar(alvo);
+  };
+  const abrir = (i: number) => {
+    quemAbriu = document.activeElement as HTMLElement;
+    carregar();
+    g.classList.remove('hidden'); g.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => irPara(i, false));
+    document.getElementById('galeria-fechar')!.focus();
+  };
+  const fechar = () => {
+    g.classList.add('hidden'); g.classList.remove('flex');
+    document.body.style.overflow = '';
+    quemAbriu?.focus();
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-abrir-galeria]').forEach((el) =>
+    el.addEventListener('click', () => abrir(Number(el.dataset.abrirGaleria))),
+  );
+  document.getElementById('galeria-fechar')!.addEventListener('click', fechar);
+  document.getElementById('galeria-ant')!.addEventListener('click', () => irPara(atual - 1));
+  document.getElementById('galeria-prox')!.addEventListener('click', () => irPara(atual + 1));
+  minis.forEach((m) => m.addEventListener('click', () => irPara(Number(m.dataset.ir))));
+  let espera: number | undefined;
+  trilho.addEventListener('scroll', () => {
+    clearTimeout(espera);
+    espera = window.setTimeout(() => {
+      const i = Math.round(trilho.scrollLeft / trilho.clientWidth);
+      if (i !== atual) marcar(i);
+    }, 80);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (g.classList.contains('hidden')) return;
+    if (e.key === 'Escape') fechar();
+    if (e.key === 'ArrowRight') irPara(atual + 1);
+    if (e.key === 'ArrowLeft') irPara(atual - 1);
+  });
+</script>

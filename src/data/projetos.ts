@@ -77,8 +77,8 @@ export const projetos: Projeto[] = [
     segmento: 'Oficina mecânica · Taboão da Serra',
     resultado: 'Site para oficina que transforma quem pesquisa no Google em agendamento pelo WhatsApp.',
     descricao:
-      'Serviços, fotos reais da oficina, horário de funcionamento e mapa de como chegar, tudo pensado para o celular.',
-    destaques: ['Agendamento pelo WhatsApp', 'Fotos reais', 'Mapa e horários', 'Perguntas frequentes'],
+      'Fotos e vídeo reais da equipe, selo de "aberto agora" pelo horário da oficina e orçamento de cada serviço com a mensagem pronta no WhatsApp.',
+    destaques: ['Orçamento por serviço no WhatsApp', 'Fotos e vídeo reais', 'Aberto agora', 'Galeria que desliza'],
     stack: ['React', 'TypeScript', 'Tailwind CSS'],
     url: 'https://garagemnotredame.vercel.app',
     imagem: '/portfolio/garagem-notredame.webp',

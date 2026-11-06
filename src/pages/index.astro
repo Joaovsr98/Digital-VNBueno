@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Orcamento from '../components/Orcamento.astro';
+import Galeria, { type ItemGaleria } from '../components/Galeria.astro';
+import fs from 'node:fs';
 import { site, linkWhatsApp } from '../data/site';
 import { projetos, rotuloTipo, categorias, mensagemInteresse, type Categoria } from '../data/projetos';
 
@@ -99,6 +101,28 @@ const mosaico = [
 const visiveis = projetos.filter((p) => p.publicar);
 const sites = visiveis.filter((p) => p.categoria !== 'sistemas');
 const produtos = visiveis.filter((p) => p.categoria === 'sistemas');
+// Galeria em tela cheia: tela do computador + tela do celular de cada projeto (quando existir o print).
+const temArquivo = (src: string) => fs.existsSync(process.cwd() + '/public' + src);
+const galeria: ItemGaleria[] = [];
+const indiceGaleria = new Map<string, number>();
+for (const p of [...sites, ...produtos]) {
+  if (!p.imagem) continue;
+  indiceGaleria.set(p.nome, galeria.length);
+  galeria.push({ src: p.imagem, alt: p.nome + ' no computador', legenda: p.nome });
+  const cel = p.imagem.replace('.webp', '-celular.webp');
+  if (temArquivo(cel)) galeria.push({ src: cel, alt: p.nome + ' no celular', legenda: p.nome, celular: true });
+}
+
+// "Padrão INV Devs": só o que já entregamos de verdade nos projetos.
+const padrao = [
+  { titulo: 'WhatsApp que já chega com o pedido', texto: 'Cada botão envia uma mensagem pronta dizendo o que o cliente quer: o serviço, o produto ou o orçamento.', icone: 'M21 12a9 9 0 0 1-13.4 7.9L3 21l1.1-4.6A9 9 0 1 1 21 12zM8 10h8M8 14h5' },
+  { titulo: 'Pensado primeiro para o celular', texto: 'A maioria dos seus clientes chega pelo celular. Botões grandes, leitura fácil e nada saindo da tela.', icone: 'M7 2h10v20H7zM11 18h2' },
+  { titulo: 'Nota máxima no Google Lighthouse', texto: 'Nossos sites mais recentes tiram 100 em acessibilidade, boas práticas e SEO na ferramenta de avaliação do Google.', icone: 'M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z' },
+  { titulo: 'Fotos que ampliam e deslizam', texto: 'Galeria em tela cheia: o cliente toca na foto e passa para as próximas com o dedo, como num aplicativo.', icone: 'M3 5h18v14H3zM3 15l5-5 4 4 3-3 6 6M15.5 9.5h.01' },
+  { titulo: 'LGPD em dia', texto: 'Formulário com consentimento e página de privacidade explicando o que é feito com os dados.', icone: 'M12 3l7 4v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V7zM9 12l2 2 4-4' },
+  { titulo: '30 dias de ajustes', texto: 'Depois da entrega, você usa o site no dia a dia e a gente ajusta o que for preciso, sem custo extra.', icone: 'M4 4h16v16H4zM4 9h16M9 4v5M15 4v5M8 14l2.5 2.5L16 12' },
+];
+
 const categoriasSites = (Object.keys(categorias) as Categoria[]).filter(
   (c) => c !== 'sistemas' && sites.some((p) => p.categoria === c),
 );
@@ -299,7 +323,13 @@ const jsonLd = [
             <article class="card flex flex-col overflow-hidden" data-categoria={p.categoria}>
               <div class="relative aspect-[16/9] overflow-hidden border-b border-line bg-ink-800">
                 {p.imagem ? (
-                  <img src={p.imagem} alt={`Tela do projeto ${p.nome}`} loading="lazy" decoding="async" class="h-full w-full object-cover object-top" />
+                  <button type="button" data-abrir-galeria={indiceGaleria.get(p.nome)} class="group/img block h-full w-full cursor-zoom-in">
+                    <img src={p.imagem} alt={`Ampliar as telas do projeto ${p.nome}, no computador e no celular`} loading="lazy" decoding="async" class="h-full w-full object-cover object-top transition duration-500 group-hover/img:scale-[1.03]" />
+                    <span class="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-ink-950/80 px-3 py-1 text-xs text-slate-200 backdrop-blur transition group-hover/img:border-violet-400/60" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+                      Computador e celular
+                    </span>
+                  </button>
                 ) : (
                   <div class="flex h-full items-center justify-center bg-gradient-to-br from-blue-600/20 via-ink-800 to-violet-600/25">
                     <span class="font-display text-2xl font-semibold text-white/80">{p.nome}</span>
@@ -338,6 +368,27 @@ const jsonLd = [
     </div>
   </section>
 
+  <!-- Padrão INV Devs -->
+  <section id="padrao" class="relative overflow-hidden border-t border-line/60 py-20 sm:py-24">
+    <div class="pointer-events-none absolute -right-40 top-10 h-[360px] w-[520px] rounded-full bg-blue-600/10 blur-3xl" aria-hidden="true"></div>
+    <div class="container-site relative">
+      <p class="eyebrow">Padrão INV Devs</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">O que vem em <span class="text-gradient">todo site</span> que entregamos</h2>
+      <p class="mt-4 max-w-2xl text-slate-400">Não é promessa: é o que você encontra nos projetos acima. Abra qualquer um no celular e confira.</p>
+      <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {padrao.map((it) => (
+          <li class="card p-6 transition hover:border-violet-500/50">
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600/30 to-violet-600/30 text-violet-200">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={it.icone} /></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold">{it.titulo}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">{it.texto}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
   <!-- Produtos próprios -->
   <section id="produtos" class="border-t border-line/60 bg-ink-900/40 py-20 sm:py-24">
     <div class="container-site">
@@ -353,7 +404,13 @@ const jsonLd = [
           <article class="card grid overflow-hidden lg:grid-cols-[1.15fr_1fr]">
             <div class="relative aspect-[16/9] overflow-hidden border-b border-line bg-ink-800 lg:aspect-auto lg:border-b-0 lg:border-r">
               {p.imagem && (
-                <img src={p.imagem} alt={`Tela do ${p.nome}`} loading="lazy" decoding="async" class="h-full w-full object-cover object-left-top" />
+                <button type="button" data-abrir-galeria={indiceGaleria.get(p.nome)} class="group/img block h-full w-full cursor-zoom-in">
+                  <img src={p.imagem} alt={`Ampliar as telas do ${p.nome}, no computador e no celular`} loading="lazy" decoding="async" class="h-full w-full object-cover object-left-top transition duration-500 group-hover/img:scale-[1.03]" />
+                  <span class="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-ink-950/80 px-3 py-1 text-xs text-slate-200 backdrop-blur" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+                    Ver telas
+                  </span>
+                </button>
               )}
               {p.status && (
                 <span class="absolute bottom-3 left-3 rounded-full border border-white/10 bg-ink-950/80 px-3 py-1 text-xs text-slate-200 backdrop-blur">{p.status}</span>
@@ -476,6 +533,7 @@ const jsonLd = [
       </div>
     </div>
   </section>
+  <Galeria itens={galeria} />
 </Base>
 
 <script>
