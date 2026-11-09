@@ -57,7 +57,7 @@ const passo = 'flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg
   <label class="mt-6 flex items-start gap-3 text-sm text-slate-400">
     <input type="checkbox" name="consentimento" required class="mt-0.5 h-4 w-4 shrink-0 accent-violet-500" />
     <span>
-      Concordo que a INV Devs use estes dados apenas para responder ao meu pedido, conforme a{' '}
+      Concordo que a VN Bueno Digital use estes dados apenas para responder ao meu pedido, conforme a{' '}
       <a href="/privacidade" class="text-violet-300 underline underline-offset-2 hover:text-white">política de privacidade</a>.
     </span>
   </label>
@@ -88,7 +88,7 @@ const passo = 'flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg
     const dados = new FormData(form);
     const valor = (k: string) => String(dados.get(k) ?? '').trim();
     return [
-      'Olá, INV Devs! Gostaria de um orçamento.',
+      'Olá, VN Bueno Digital! Gostaria de um orçamento.',
       '',
       `*Nome:* ${valor('nome') || '…'}`,
       valor('empresa') ? `*Negócio:* ${valor('empresa')}` : null,

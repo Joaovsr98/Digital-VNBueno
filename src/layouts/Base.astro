@@ -20,7 +20,7 @@ const {
   indexar = true,
   jsonLd = [],
   imagem = '/og.jpg',
-  imagemAlt = 'INV Devs — sites, sistemas e aplicativos sob medida',
+  imagemAlt = 'VN Bueno Digital — sites, sistemas e aplicativos sob medida',
 } = Astro.props;
 const tituloCompleto = titulo ? `${titulo} | ${site.nome}` : `${site.nome} | Sites, sistemas e aplicativos sob medida`;
 const canonical = new URL(Astro.url.pathname, site.url).href;
@@ -37,8 +37,8 @@ const ogImage = new URL(imagem, site.url).href;
     <link rel="canonical" href={canonical} />
     {!indexar && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#05070f" />
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/vn-bueno-digital.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/vn-bueno-digital.png" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />

@@ -1,5 +1,5 @@
 ---
-// Símbolo extraído da logo oficial ("Logo futurista INV Devs em neon.png") com fundo transparente.
+// Logo fornecida em LOGO VN.rev1.ai.
 // O nome é texto para ficar nítido e legível por buscadores e leitores de tela.
 interface Props {
   class?: string;
@@ -9,10 +9,10 @@ const { class: className = '', mostrarNome = true } = Astro.props;
 ---
 
 <span class={`inline-flex items-center gap-2.5 ${className}`}>
-  <img src="/logo-simbolo.png" alt="" width="240" height="87" class="h-7 w-auto shrink-0" />
+  <img src="/vn-bueno-digital.png" alt="" width="36" height="36" class="h-9 w-9 shrink-0 object-contain" />
   {mostrarNome && (
     <span class="font-display text-lg font-bold tracking-tight text-white">
-      INV <span class="text-gradient">Devs</span>
+      VN Bueno <span class="text-gradient">Digital</span>
     </span>
   )}
 </span>

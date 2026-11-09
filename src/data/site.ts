@@ -2,14 +2,14 @@
 // Preencha antes de publicar: o formulário de orçamento só envia com o WhatsApp configurado.
 
 export const site = {
-  nome: 'INV Devs',
+  nome: 'VN Bueno Digital',
   // Endereço que existe HOJE. Usado no canonical, no sitemap e na imagem de compartilhamento
   // (WhatsApp busca a imagem neste endereço). Quando invdevs.com.br estiver registrado e ligado
   // na Vercel, trocar aqui, em astro.config.mjs e em public/robots.txt.
   url: 'https://invdevs.vercel.app',
   slogan: 'Transformamos ideias em soluções digitais para o seu negócio.',
   descricao:
-    'A INV Devs desenvolve sites, landing pages, sistemas web e aplicativos sob medida para empresas e profissionais. Solicite seu orçamento.',
+    'A VN Bueno Digital desenvolve sites, landing pages, sistemas web e aplicativos sob medida para empresas e profissionais. Solicite seu orçamento.',
   cidade: 'São Paulo, SP',
 
   // Número com DDI e DDD, só dígitos.
@@ -27,7 +27,7 @@ export const site = {
   tiktok: 'https://www.tiktok.com/@inv.devs',
 };
 
-export function linkWhatsApp(mensagem = 'Olá! Vim pelo site da INV Devs e gostaria de um orçamento.') {
+export function linkWhatsApp(mensagem = 'Olá! Vim pelo site da VN Bueno Digital e gostaria de um orçamento.') {
   if (!site.whatsapp) return '#orcamento';
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(mensagem)}`;
 }

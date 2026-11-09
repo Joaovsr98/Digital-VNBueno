@@ -10,7 +10,7 @@
 
 export type TipoProjeto = 'contratado' | 'em-andamento' | 'pessoal' | 'academico' | 'demonstracao' | 'a-confirmar';
 
-// 'sistemas' = produtos próprios (SaaS): vão para a seção "Produtos INV Devs", fora da grade de sites.
+// 'sistemas' = produtos próprios (SaaS): vão para a seção "Produtos VN Bueno Digital", fora da grade de sites.
 export type Categoria = 'imobiliario' | 'servicos' | 'empresas' | 'eventos' | 'sistemas';
 
 export const categorias: Record<Categoria, string> = {
@@ -50,7 +50,7 @@ export const rotuloTipo: Record<TipoProjeto, string | null> = {
 /** Mensagem pronta do botão "Quero um site assim". */
 export function mensagemInteresse(p: Projeto) {
   const oQue = p.categoria === 'sistemas' ? 'um sistema' : 'um site';
-  return `Olá! Vi o projeto ${p.nome} no portfólio da INV Devs e quero ${oQue} parecido para o meu negócio.`;
+  return `Olá! Vi o projeto ${p.nome} no portfólio da VN Bueno Digital e quero ${oQue} parecido para o meu negócio.`;
 }
 
 export const projetos: Projeto[] = [
