@@ -23,7 +23,7 @@ export const site = {
   // Liga o script no <head> e o parágrafo correspondente na política de privacidade.
   analytics: false,
 
-  instagram: 'https://www.instagram.com/inv.devs',
+  instagram: 'https://www.instagram.com/vnbuenodigital/',
   tiktok: 'https://www.tiktok.com/@inv.devs',
 };
 
