@@ -180,7 +180,7 @@ const jsonLd = [
     description: site.descricao,
     areaServed: 'BR',
     address: { '@type': 'PostalAddress', addressLocality: 'São Paulo', addressRegion: 'SP', addressCountry: 'BR' },
-    sameAs: [site.instagram, site.tiktok],
+    sameAs: [site.instagram, site.tiktok].filter(Boolean),
   },
   {
     '@context': 'https://schema.org',

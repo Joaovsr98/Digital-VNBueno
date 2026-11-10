@@ -24,7 +24,8 @@ export const site = {
   analytics: false,
 
   instagram: 'https://www.instagram.com/vnbuenodigital/',
-  tiktok: 'https://www.tiktok.com/@inv.devs',
+  // TikTok da VN Bueno Digital ainda não criado. Com a URL aqui, o link volta a aparecer no rodapé.
+  tiktok: '',
 };
 
 export function linkWhatsApp(mensagem = 'Olá! Vim pelo site da VN Bueno Digital e gostaria de um orçamento.') {
