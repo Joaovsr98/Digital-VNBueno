@@ -1,6 +1,7 @@
 ---
 // Oferta para corretores: o modelo do Bueno Imóveis como serviço (implantação + mensalidade).
-// Valores definidos pelo fundador em 05/11/2026 — ver CLAUDE.md §8. Mudou? Atualizar `oferta` abaixo.
+// Valores definidos pelo fundador em 05/11/2026; à vista por modelo em 11/11/2026 — ver CLAUDE.md §8.
+// Mudou? Atualizar `oferta` e o campo `aVista` de cada exemplo abaixo.
 import Base from '../layouts/Base.astro';
 import { linkWhatsApp } from '../data/site';
 
@@ -33,6 +34,7 @@ const exemplos = [
     imagem: '/portfolio/bueno-imoveis.webp',
     url: 'https://corretorbr.vercel.app',
     rotulo: 'Projeto acadêmico',
+    aVista: 'R$ 4.500',
   },
   {
     nome: 'Britto',
@@ -40,6 +42,7 @@ const exemplos = [
     imagem: '/portfolio/britto.webp',
     url: 'https://consultoriabritto.vercel.app',
     rotulo: 'Projeto em andamento', // corretor amigo, ainda sem fechamento (05/11/2026)
+    aVista: 'R$ 2.500',
   },
   {
     nome: 'Shelby House',
@@ -47,14 +50,24 @@ const exemplos = [
     imagem: '/portfolio/shelby-house.webp',
     url: 'https://corretor-shelby.vercel.app',
     rotulo: 'Projeto acadêmico',
+    aVista: 'R$ 3.200',
   },
 ];
+
+const aVistaOrdenado = [...exemplos].sort((a, b) => parseInt(a.aVista.replace(/\D/g, '')) - parseInt(b.aVista.replace(/\D/g, '')));
 
 const passos = [
   { titulo: 'Conversa rápida', texto: 'Você conta como trabalha, em que região atua e quais imóveis quer mostrar.' },
   { titulo: 'Envio do material', texto: 'Você manda logo, fotos e informações dos imóveis. Se não tiver logo, a gente conversa.' },
   { titulo: 'Site no ar', texto: 'Montamos, você revisa e aprova, e o site vai para o ar com os seus contatos.' },
 ];
+
+function aVistaTexto() {
+  return [...exemplos]
+    .sort((a, b) => parseInt(a.aVista.replace(/\D/g, '')) - parseInt(b.aVista.replace(/\D/g, '')))
+    .map((e) => `modelo ${e.nome}, ${e.aVista}`)
+    .join('; ');
+}
 
 const duvidas = [
   {
@@ -68,6 +81,10 @@ const duvidas = [
   {
     p: 'O que a mensalidade cobre?',
     r: 'Manter o seu site no ar (hospedagem) e o suporte pelo WhatsApp. O detalhe do que está incluído fica no contrato.',
+  },
+  {
+    p: 'Posso pagar à vista, sem mensalidade?',
+    r: `Sim. O valor depende do modelo: ${aVistaTexto()}. Inclui 30 dias de ajustes depois da entrega.`,
   },
   {
     p: 'Preciso ter domínio próprio (.com.br)?',
@@ -164,6 +181,7 @@ const jsonLd = [
             <div class="flex flex-1 flex-col p-6">
               <h3 class="text-lg font-semibold">{e.nome}</h3>
               <p class="mt-1 text-sm text-slate-400">{e.estilo}</p>
+              <p class="mt-3 text-sm text-slate-300">Modelo à vista: <strong class="text-white">{e.aVista}</strong></p>
               <a href={e.url} target="_blank" rel="noopener" class="mt-auto pt-5 text-sm font-semibold text-white hover:text-violet-300">
                 Ver o site <span aria-hidden="true">↗</span><span class="sr-only">(abre em nova aba)</span>
               </a>
@@ -213,6 +231,20 @@ const jsonLd = [
           <p class="mt-6 text-xs text-slate-400">Valores por imóvel. Domínio próprio (.com.br), se quiser, é pago à parte.</p>
         </article>
       </div>
+
+      <article class="card mt-5 p-6 sm:p-8">
+        <h3 class="text-lg font-semibold">Prefere pagar à vista, sem mensalidade?</h3>
+        <p class="mt-2 text-sm text-slate-400">O valor depende do modelo de site. Veja cada um na seção de exemplos acima.</p>
+        <dl class="mt-6 grid gap-4 sm:grid-cols-3">
+          {aVistaOrdenado.map((e) => (
+            <div class="rounded-xl border border-line p-5">
+              <dt class="text-sm text-slate-300">Modelo {e.nome}</dt>
+              <dd class="mt-1 font-display text-3xl font-bold text-white">{e.aVista}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="mt-6 text-xs text-slate-400">Pagamento único. Inclui 30 dias de ajustes após a entrega; depois disso, imóveis novos e alterações são cobrados à parte. Domínio próprio, se quiser, é pago à parte.</p>
+      </article>
     </div>
   </section>
 
