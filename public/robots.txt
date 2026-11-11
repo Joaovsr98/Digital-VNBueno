@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vnbuenodigital.vercel.app/sitemap-index.xml
+Sitemap: https://digital.vnbueno.com.br/sitemap-index.xml

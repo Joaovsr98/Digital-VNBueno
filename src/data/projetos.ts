@@ -126,7 +126,7 @@ export const projetos: Projeto[] = [
       'Prioriza pagamentos, calcula o Índice de Liberdade e prevê quando a pessoa fica livre das dívidas. Funciona até sem internet.',
     destaques: ['Plano de quitação', 'Índice de Liberdade', 'Funciona sem internet', '~800 testes automatizados'],
     stack: ['React', 'TypeScript', 'IndexedDB', 'Recharts'],
-    url: 'https://docegestaofinanceira.vercel.app', // finrotiva.vercel.app redireciona para cá
+    url: 'https://dgfinanceira.vnbueno.com.br', // domínio próprio desde 11/11/2026 (docegestaofinanceira.vercel.app e finrotiva redirecionam)
     imagem: '/portfolio/doce-gestao-financeira.webp',
     tipo: 'pessoal',
     status: 'Versão 1.0 no ar',

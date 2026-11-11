@@ -3,11 +3,10 @@
 
 export const site = {
   nome: 'VN Bueno Digital',
-  // Endereço que existe HOJE. Usado no canonical, no sitemap e na imagem de compartilhamento
-  // (WhatsApp busca a imagem neste endereço). O projeto na Vercel foi renomeado no rebrand:
-  // invdevs.vercel.app deixou de existir. Quando o domínio próprio estiver registrado e ligado
-  // na Vercel, trocar aqui, em astro.config.mjs e em public/robots.txt.
-  url: 'https://vnbuenodigital.vercel.app',
+  // Domínio oficial desde 11/11/2026 (subdomínio de vnbueno.com.br, CNAME no Registro.br).
+  // Usado no canonical, no sitemap e na imagem de compartilhamento. vnbuenodigital.vercel.app redireciona.
+  // Mudou? Trocar aqui, em astro.config.mjs e em public/robots.txt.
+  url: 'https://digital.vnbueno.com.br',
   slogan: 'Transformamos ideias em soluções digitais para o seu negócio.',
   descricao:
     'A VN Bueno Digital desenvolve sites, landing pages, sistemas web e aplicativos sob medida para empresas e profissionais. Solicite seu orçamento.',
