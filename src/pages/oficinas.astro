@@ -1,7 +1,7 @@
 ---
 // Página para oficinas mecânicas. Caso real: Garagem NotreDame (projeto em andamento, sem fechamento —
-// ver CLAUDE.md §5; não chamar de cliente). Preços = os já publicados na home (CLAUDE.md §8).
-// Quando existir uma oferta própria para oficinas (como a de corretores), atualizar `precos` abaixo.
+// ver CLAUDE.md §5; não chamar de cliente).
+// Oferta para oficinas aprovada pelo fundador em 11/11/2026 — ver CLAUDE.md §8. Mudou? Atualizar `oferta` abaixo.
 import Base from '../layouts/Base.astro';
 import { linkWhatsApp } from '../data/site';
 
@@ -26,11 +26,14 @@ const caso = {
   destaques: ['Orçamento por serviço no WhatsApp', 'Fotos e vídeo reais da equipe', 'Selo "aberto agora"', 'Mapa e horários'],
 };
 
-const precos = [
-  { titulo: 'Página única', valor: 'R$ 800', prefixo: 'a partir de', texto: 'Uma página com serviços, fotos, horários, mapa e botão de WhatsApp.' },
-  { titulo: 'Site completo', valor: 'R$ 1.500', prefixo: 'a partir de', texto: 'Como o da Garagem: orçamento por serviço, galeria, selo de aberto agora e perguntas frequentes.', destaque: true },
-  { titulo: 'Manutenção (opcional)', valor: 'R$ 179,99', prefixo: 'por mês', texto: '2 alterações por mês (preços, fotos, horários, serviços) e suporte pelo WhatsApp.' },
-];
+const oferta = {
+  implantacao: 'R$ 500',
+  servicosInclusos: 10,
+  mensalidade: 'R$ 150',
+  alteracoesMes: 2,
+  aVista: 'R$ 1.200',
+  avulsa: 'R$ 80',
+};
 
 const passos = [
   { titulo: 'Conversa rápida', texto: 'Você conta quais serviços faz, em que região atende e o horário da oficina.' },
@@ -48,8 +51,16 @@ const duvidas = [
     r: 'O site leva o cliente direto para o seu WhatsApp, já dizendo qual serviço ele quer. Aí vocês combinam o horário na conversa, do jeito que você já atende hoje.',
   },
   {
-    p: 'Consigo mudar serviços, preços e horários depois?',
-    r: 'Sim. Todo site tem 30 dias de ajustes depois da entrega. Depois, você pode contratar a manutenção (R$ 179,99 por mês, com 2 alterações) ou pedir alterações avulsas quando precisar.',
+    p: 'O que a mensalidade cobre?',
+    r: `Manter o site no ar (hospedagem), o suporte pelo WhatsApp e até ${oferta.alteracoesMes} alterações por mês, como trocar preços, fotos e horários ou incluir um serviço. As alterações não acumulam para o mês seguinte. O detalhe fica no contrato.`,
+  },
+  {
+    p: 'Posso pagar à vista, sem mensalidade?',
+    r: `Sim: ${oferta.aVista} em pagamento único. Você tem 30 dias de ajustes depois da entrega e, depois disso, cada alteração custa ${oferta.avulsa}.`,
+  },
+  {
+    p: `E se eu tiver mais de ${oferta.servicosInclusos} serviços?`,
+    r: 'A gente conversa: dá para agrupar serviços parecidos ou incluir mais itens no orçamento da implantação.',
   },
   {
     p: 'Preciso ter domínio próprio (.com.br)?',
@@ -68,7 +79,7 @@ const jsonLd = [
 
 <Base
   titulo="Site para oficina mecânica"
-  descricao="Site para oficina mecânica com orçamento de cada serviço direto no WhatsApp, fotos reais da equipe, horários e mapa. Feito para o celular."
+  descricao={`Site para oficina mecânica com orçamento de cada serviço direto no WhatsApp, fotos reais da equipe, horários e mapa. Implantação ${oferta.implantacao} e mensalidade ${oferta.mensalidade}.`}
   jsonLd={jsonLd}
 >
   <!-- Topo -->
@@ -92,7 +103,7 @@ const jsonLd = [
           </a>
         </div>
         <p class="mt-6 text-sm text-slate-400">
-          Site completo a partir de <strong class="text-white">R$ 1.500</strong> · página única a partir de <strong class="text-white">R$ 800</strong>
+          Implantação <strong class="text-white">{oferta.implantacao}</strong> · mensalidade <strong class="text-white">{oferta.mensalidade}</strong>
         </p>
       </div>
 
@@ -161,20 +172,33 @@ const jsonLd = [
     <div class="container-site">
       <p class="eyebrow">Investimento</p>
       <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Quanto custa</h2>
-      <p class="mt-4 max-w-2xl text-slate-400">Valores de referência. O preço final depende do que a sua oficina precisa e fica fechado na proposta, sem surpresas.</p>
-      <div class="mt-12 grid gap-5 md:grid-cols-3">
-        {precos.map((p) => (
-          <article class={`card flex flex-col p-6 ${p.destaque ? 'border-violet-500/50 bg-gradient-to-b from-violet-600/10 to-transparent' : ''}`}>
-            <h3 class="text-lg font-semibold">{p.titulo}</h3>
-            <p class="mt-4">
-              <span class="block text-xs text-slate-400">{p.prefixo}</span>
-              <span class="font-display text-3xl font-bold text-white">{p.valor}</span>
-            </p>
-            <p class="mt-3 text-sm leading-relaxed text-slate-400">{p.texto}</p>
-          </article>
-        ))}
+
+      <div class="mt-12 grid gap-5 lg:grid-cols-[1.3fr_1fr]">
+        <article class="card border-violet-500/50 bg-gradient-to-b from-violet-600/10 to-transparent p-6 sm:p-8">
+          <div class="grid gap-8 sm:grid-cols-2">
+            <div>
+              <p class="text-sm text-slate-400">Implantação</p>
+              <p class="mt-1 font-display text-4xl font-bold text-white">{oferta.implantacao}</p>
+              <p class="mt-2 text-sm text-slate-300">pagamento único · até {oferta.servicosInclusos} serviços, galeria de fotos e vídeo, horários e mapa</p>
+            </div>
+            <div>
+              <p class="text-sm text-slate-400">Mensalidade</p>
+              <p class="mt-1 font-display text-4xl font-bold text-white">{oferta.mensalidade}<span class="text-lg font-semibold text-slate-400">/mês</span></p>
+              <p class="mt-2 text-sm text-slate-300">site no ar, suporte pelo WhatsApp e {oferta.alteracoesMes} alterações por mês</p>
+            </div>
+          </div>
+          <a href={linkWhatsApp(mensagem)} target="_blank" rel="noopener" class="btn-primary mt-8 w-full sm:w-auto">Quero o site da minha oficina</a>
+        </article>
+
+        <article class="card p-6 sm:p-8">
+          <h3 class="text-lg font-semibold">Prefere pagar à vista?</h3>
+          <p class="mt-2 text-sm text-slate-400">O mesmo site, sem mensalidade:</p>
+          <p class="mt-5 font-display text-4xl font-bold text-white">{oferta.aVista}</p>
+          <p class="mt-2 text-sm text-slate-300">pagamento único</p>
+          <p class="mt-6 border-t border-line pt-4 text-xs text-slate-400">Depois dos 30 dias de ajustes, cada alteração custa {oferta.avulsa}. Domínio próprio (.com.br), se quiser, é pago à parte.</p>
+        </article>
       </div>
-      <p class="mt-6 text-xs text-slate-400">Todo site tem 30 dias de ajustes depois da entrega. Domínio próprio (.com.br), se quiser, é pago à parte.</p>
+      <p class="mt-6 text-xs text-slate-400">Alteração: trocar preços, fotos, horários, telefone ou incluir um serviço na lista. Página ou seção nova é orçada à parte.</p>
     </div>
   </section>
 
