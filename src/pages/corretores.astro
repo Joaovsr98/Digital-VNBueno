@@ -14,7 +14,6 @@ const oferta = {
 };
 
 const mensagem = 'Olá! Vi a página para corretores da VN Bueno Digital e quero o meu site de corretor.';
-const exemplo = 'https://corretorbr.vercel.app';
 
 const recursos = [
   { titulo: 'Vitrine dos seus imóveis', texto: 'Uma página para cada imóvel, com galeria de fotos, metragem, valores e localização.' },
@@ -55,6 +54,15 @@ const exemplos = [
 ];
 
 const aVistaOrdenado = [...exemplos].sort((a, b) => parseInt(a.aVista.replace(/\D/g, '')) - parseInt(b.aVista.replace(/\D/g, '')));
+
+const destaques = ['Sua marca e suas cores', 'Uma página para cada imóvel', 'Contato direto no WhatsApp', 'Pronto para celular e Google'];
+
+// Leque do topo: o principal no meio, na frente.
+const celulares = [
+  { nome: 'Britto', imagem: '/portfolio/britto-celular.webp', classe: 'left-0 z-10 translate-y-[9%] -rotate-[7deg] opacity-90' },
+  { nome: 'Shelby House', imagem: '/portfolio/shelby-house-celular.webp', classe: 'right-0 z-10 translate-y-[9%] rotate-[7deg] opacity-90' },
+  { nome: 'Bueno Imóveis', imagem: '/portfolio/bueno-imoveis-celular.webp', classe: 'left-1/2 z-20 -translate-x-1/2', principal: true },
+];
 
 const passos = [
   { titulo: 'Conversa rápida', texto: 'Você conta como trabalha, em que região atua e quais imóveis quer mostrar.' },
@@ -112,39 +120,62 @@ const jsonLd = [
   <section class="relative overflow-hidden">
     <div class="grid-bg pointer-events-none absolute inset-0" aria-hidden="true"></div>
     <div class="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[820px] -translate-x-1/2 rounded-full bg-violet-600/20 blur-3xl" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -right-40 top-40 h-[420px] w-[420px] rounded-full bg-cyan-500/10 blur-3xl" aria-hidden="true"></div>
 
-    <div class="container-site relative grid items-center gap-12 py-16 sm:py-24 lg:grid-cols-[1.2fr_1fr]">
+    <div class="container-site relative grid items-center gap-14 py-14 sm:py-20 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
       <div>
         <p class="eyebrow">Para corretores de imóveis</p>
-        <h1 class="mt-5 text-4xl font-bold leading-[1.08] sm:text-5xl">
-          Seu site de corretor, com <span class="text-gradient">seus imóveis</span> e contatos direto no WhatsApp.
+        <h1 class="mt-5 text-[2.6rem] font-bold leading-[1.04] tracking-tight sm:text-6xl">
+          Chega de mandar <span class="text-gradient">foto por foto</span> no WhatsApp.
         </h1>
-        <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-400">
-          Um site profissional com a sua marca, para apresentar seus imóveis e receber interessados sem depender só das redes sociais.
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+          Mande <strong class="text-white">um link só</strong>: o seu site com todos os seus imóveis, a sua marca e o botão para o cliente falar direto com você.
         </p>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href={linkWhatsApp(mensagem)} target="_blank" rel="noopener" class="btn-primary !px-6 !py-3.5 text-base">Quero o meu site</a>
-          <a href={exemplo} target="_blank" rel="noopener" class="btn-ghost !px-6 !py-3.5 text-base">
-            Ver um exemplo <span aria-hidden="true">↗</span><span class="sr-only">(abre em nova aba)</span>
-          </a>
+
+        <ul class="mt-7 grid max-w-xl gap-x-6 gap-y-3 text-sm text-slate-200 sm:grid-cols-2">
+          {destaques.map((d) => (
+            <li class="flex items-center gap-2.5">
+              <svg viewBox="0 0 20 20" class="h-5 w-5 shrink-0 text-cyan-300" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z" clip-rule="evenodd" /></svg>
+              {d}
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a href={linkWhatsApp(mensagem)} target="_blank" rel="noopener" class="btn-primary !px-7 !py-4 text-base">Quero o meu site</a>
+          <a href="#exemplos" class="btn-ghost !px-7 !py-4 text-base">Ver os 3 modelos</a>
         </div>
-        <p class="mt-6 text-sm text-slate-400">
-          Implantação <strong class="text-white">{oferta.implantacao}</strong> · mensalidade <strong class="text-white">{oferta.mensalidade}</strong>
-        </p>
+
+        <a href="#preco" class="group mt-7 inline-flex flex-wrap items-baseline gap-x-2 gap-y-1 rounded-2xl border border-line bg-ink-900/70 px-5 py-3.5 text-sm text-slate-400 backdrop-blur transition hover:border-violet-500/60">
+          <span class="font-display text-2xl font-bold text-white">{oferta.mensalidade}<span class="text-sm font-semibold text-slate-400">/mês</span></span>
+          <span>+ implantação <strong class="text-white">{oferta.implantacao}</strong></span>
+          <span class="hidden text-slate-500 sm:inline" aria-hidden="true">·</span>
+          <span>ou à vista a partir de <strong class="text-white">{aVistaOrdenado[0].aVista}</strong></span>
+          <span class="text-violet-300 transition group-hover:translate-x-0.5" aria-hidden="true">→</span>
+        </a>
       </div>
 
-      <!-- Exemplo no celular -->
-      <div class="mx-auto w-full max-w-[300px]">
-        <div class="rounded-[2.2rem] border border-line bg-ink-900 p-2.5 shadow-2xl shadow-violet-900/30">
-          <img
-            src="/portfolio/bueno-imoveis-celular.webp"
-            alt="Exemplo de site de corretor aberto no celular"
-            width="390"
-            height="844"
-            class="w-full rounded-[1.7rem]"
-          />
+      <!-- Três modelos no celular, em leque -->
+      <div class="relative mx-auto w-full max-w-[520px]">
+        <div class="relative aspect-[5/5.4]">
+          {celulares.map((c) => (
+            <figure class={`absolute top-0 w-[44%] transition duration-500 ${c.classe}`}>
+              <div class="rounded-[1.9rem] border border-line bg-ink-900 p-2 shadow-2xl shadow-black/60">
+                <img src={c.imagem} alt={`Site ${c.nome} aberto no celular`} width="390" height="844" loading={c.principal ? 'eager' : 'lazy'} decoding="async" class="w-full rounded-[1.5rem]" />
+              </div>
+            </figure>
+          ))}
+
+          <!-- Balão: a mensagem que o cliente manda já vem preenchida -->
+          <div class="absolute -left-2 bottom-[14%] z-30 max-w-[210px] rounded-2xl rounded-bl-sm border border-emerald-400/30 bg-[#0b2b22]/95 px-4 py-3 text-xs leading-snug text-emerald-50 shadow-xl shadow-black/50 backdrop-blur sm:-left-6">
+            <p class="mb-1 flex items-center gap-1.5 font-semibold text-emerald-300">
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z" /></svg>
+              WhatsApp
+            </p>
+            "Olá! Vi este imóvel no seu site e quero saber mais."
+          </div>
         </div>
-        <p class="mt-3 text-center text-xs text-slate-400">Exemplo: Bueno Imóveis (projeto acadêmico)</p>
+        <p class="mt-2 text-center text-xs text-slate-500">Mesma base, a cara de cada corretor. Britto: em andamento · Bueno Imóveis e Shelby House: projetos acadêmicos.</p>
       </div>
     </div>
   </section>
