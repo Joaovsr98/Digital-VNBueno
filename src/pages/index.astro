@@ -353,7 +353,7 @@ const jsonLd = [
                   </div>
                 )}
                 {rotulo && (
-                  <span class="absolute bottom-3 left-3 rounded-full border border-white/10 bg-ink-950/80 px-3 py-1 text-xs text-slate-200 backdrop-blur">{rotulo}</span>
+                  <span class={`absolute bottom-3 left-3 rounded-full border px-3 py-1 text-xs backdrop-blur ${p.tipo === 'modelo' ? 'border-emerald-400/50 bg-emerald-950/85 font-semibold text-emerald-200' : 'border-white/10 bg-ink-950/80 text-slate-200'}`}>{rotulo}</span>
                 )}
               </div>
               <div class="flex flex-1 flex-col p-6">
@@ -367,7 +367,7 @@ const jsonLd = [
                 <div class="mt-auto pt-6">
                   <div class="flex flex-wrap items-center gap-3">
                     <a href={linkWhatsApp(mensagemInteresse(p))} target="_blank" rel="noopener" class="btn-primary !px-4 !py-2.5">
-                      Quero um site assim
+                      {p.tipo === 'modelo' ? 'Quero esse modelo' : 'Quero um site assim'}
                     </a>
                     {p.demo && (
                       <a href={p.url} target="_blank" rel="noopener" class="btn-ghost !px-4 !py-2.5">

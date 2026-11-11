@@ -8,7 +8,7 @@
 // - `resultado` fala com o dono do negócio (o que ele ganha), sem termo técnico.
 //   A parte técnica fica em `stack`, pequena, no fim do card.
 
-export type TipoProjeto = 'contratado' | 'em-andamento' | 'pessoal' | 'academico' | 'demonstracao' | 'a-confirmar';
+export type TipoProjeto = 'contratado' | 'em-andamento' | 'pessoal' | 'academico' | 'demonstracao' | 'modelo' | 'a-confirmar';
 
 // 'sistemas' = produtos próprios (SaaS): vão para a seção "Produtos VN Bueno Digital", fora da grade de sites.
 export type Categoria = 'imobiliario' | 'servicos' | 'empresas' | 'eventos' | 'sistemas';
@@ -44,11 +44,13 @@ export const rotuloTipo: Record<TipoProjeto, string | null> = {
   pessoal: 'Projeto autoral',
   academico: 'Projeto acadêmico',
   demonstracao: 'Projeto demonstrativo',
+  modelo: 'Modelo disponível', // demo sem dono, à venda como modelo pronto (com a marca do cliente)
   'a-confirmar': null, // TODO: definir o tipo de cada projeto antes de publicar
 };
 
 /** Mensagem pronta do botão "Quero um site assim". */
 export function mensagemInteresse(p: Projeto) {
+  if (p.tipo === 'modelo') return `Olá! Vi o modelo ${p.nome} no portfólio da VN Bueno Digital e quero esse modelo com a marca do meu negócio.`;
   const oQue = p.categoria === 'sistemas' ? 'um sistema' : 'um site';
   return `Olá! Vi o projeto ${p.nome} no portfólio da VN Bueno Digital e quero ${oQue} parecido para o meu negócio.`;
 }
@@ -56,17 +58,18 @@ export function mensagemInteresse(p: Projeto) {
 export const projetos: Projeto[] = [
   {
     // Marca fictícia (antes Paddock 22, que não fechou). Repo: Joaovsr98/invdevs-kart
+    // Desde 11/11/2026 é oferecido como modelo pronto (tipo 'modelo'): troca marca, cores, datas e contatos.
     nome: 'INV Racing',
     categoria: 'eventos',
     segmento: 'Campeonatos e eventos',
-    resultado: 'Site para campeonato ou evento com inscrição direto pelo WhatsApp.',
+    resultado: 'Modelo pronto para kartódromo, campeonato ou liga de sim racing: entra com a sua marca, cores e datas.',
     descricao:
       'Visual de transmissão ao vivo, com mapa animado do circuito, telemetria e contagem regressiva para a próxima etapa.',
     destaques: ['Inscrição pelo WhatsApp', 'Contagem regressiva', 'Mapa animado', 'Calendário e ranking'],
     stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     url: 'https://invdevs-kart.vercel.app',
     imagem: '/portfolio/inv-racing.webp',
-    tipo: 'demonstracao',
+    tipo: 'modelo',
     publicar: true,
     demo: true,
   },
