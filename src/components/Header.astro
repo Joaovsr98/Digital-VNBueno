@@ -1,9 +1,14 @@
 ---
 import Logo from './Logo.astro';
 
+// Páginas por segmento. Entra um segmento novo só quando houver caso real (barbearias: depois do primeiro cliente).
+const segmentos = [
+  { href: '/corretores', rotulo: 'Corretores de imóveis' },
+  { href: '/oficinas', rotulo: 'Oficinas mecânicas' },
+];
+
 const links = [
   { href: '/#servicos', rotulo: 'Serviços' },
-  { href: '/corretores', rotulo: 'Para corretores' },
   { href: '/#portfolio', rotulo: 'Portfólio' },
   { href: '/#produtos', rotulo: 'Produtos' },
   { href: '/#precos', rotulo: 'Preços' },
@@ -17,8 +22,23 @@ const links = [
       <Logo />
     </a>
 
-    <ul class="hidden items-center gap-8 text-sm md:flex">
-      {links.map((l) => (
+    <ul class="hidden items-center gap-6 text-sm md:flex lg:gap-8">
+      <li><a href={links[0].href} class="text-slate-400 transition hover:text-white">{links[0].rotulo}</a></li>
+      <!-- Segmentos: abre ao passar o mouse ou ao focar pelo teclado (sem JavaScript) -->
+      <li class="group relative">
+        <button type="button" class="inline-flex items-center gap-1 text-slate-400 transition hover:text-white group-focus-within:text-white" aria-haspopup="true">
+          Segmentos
+          <svg viewBox="0 0 20 20" class="h-4 w-4 transition group-hover:rotate-180 group-focus-within:rotate-180" fill="currentColor" aria-hidden="true"><path d="M5.3 7.3a1 1 0 0 1 1.4 0L10 10.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 0-1.4z" /></svg>
+        </button>
+        <div class="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+          <ul class="w-60 rounded-xl border border-line bg-ink-900 p-2 shadow-2xl shadow-black/50">
+            {segmentos.map((s) => (
+              <li><a href={s.href} class="block rounded-lg px-3 py-2.5 text-slate-300 hover:bg-ink-800 hover:text-white focus:bg-ink-800 focus:text-white">{s.rotulo}</a></li>
+            ))}
+          </ul>
+        </div>
+      </li>
+      {links.slice(1).map((l) => (
         <li><a href={l.href} class="text-slate-400 transition hover:text-white">{l.rotulo}</a></li>
       ))}
     </ul>
@@ -44,6 +64,10 @@ const links = [
     <ul class="container-site flex flex-col gap-1 py-4">
       {links.map((l) => (
         <li><a href={l.href} class="block rounded-lg px-3 py-3 text-slate-300 hover:bg-ink-800 hover:text-white">{l.rotulo}</a></li>
+      ))}
+      <li class="mt-2 border-t border-line/60 px-3 pb-1 pt-4 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Segmentos</li>
+      {segmentos.map((s) => (
+        <li><a href={s.href} class="block rounded-lg px-3 py-3 text-slate-300 hover:bg-ink-800 hover:text-white">{s.rotulo}</a></li>
       ))}
       <li class="pt-2"><a href="/#orcamento" class="btn-primary w-full">Solicite seu orçamento</a></li>
     </ul>
