@@ -21,3 +21,45 @@
   ! Content-Security-Policy-Report-Only
   ! X-Frame-Options
   ! Permissions-Policy
+
+# Arquivos da raiz (o _headers não aceita a regra "sem extensão" da Vercel, então vão nomeados).
+/apple-touch-icon.png
+  ! Content-Security-Policy-Report-Only
+  ! X-Frame-Options
+  ! Permissions-Policy
+/favicon.png
+  ! Content-Security-Policy-Report-Only
+  ! X-Frame-Options
+  ! Permissions-Policy
+/logo-inv-devs.png
+  ! Content-Security-Policy-Report-Only
+  ! X-Frame-Options
+  ! Permissions-Policy
+/logo-simbolo.png
+  ! Content-Security-Policy-Report-Only
+  ! X-Frame-Options
+  ! Permissions-Policy
+/og-corretores.jpg
+  ! Content-Security-Policy-Report-Only
+  ! X-Frame-Options
+  ! Permissions-Policy
+/og.jpg
+  ! Content-Security-Policy-Report-Only
+  ! X-Frame-Options
+  ! Permissions-Policy
+/robots.txt
+  ! Content-Security-Policy-Report-Only
+  ! X-Frame-Options
+  ! Permissions-Policy
+/sitemap-0.xml
+  ! Content-Security-Policy-Report-Only
+  ! X-Frame-Options
+  ! Permissions-Policy
+/sitemap-index.xml
+  ! Content-Security-Policy-Report-Only
+  ! X-Frame-Options
+  ! Permissions-Policy
+/vn-bueno-digital.png
+  ! Content-Security-Policy-Report-Only
+  ! X-Frame-Options
+  ! Permissions-Policy
