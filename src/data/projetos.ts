@@ -57,9 +57,9 @@ export function mensagemInteresse(p: Projeto) {
 
 export const projetos: Projeto[] = [
   {
-    // Marca fictícia (antes Paddock 22, que não fechou). Repo: Joaovsr98/invdevs-kart
+    // Marca fictícia VN Racing (antes INV Racing e Paddock 22). Repo: Joaovsr98/vn-racing
     // Desde 11/11/2026 é oferecido como modelo pronto (tipo 'modelo'): troca marca, cores, datas e contatos.
-    nome: 'INV Racing',
+    nome: 'VN Racing',
     categoria: 'eventos',
     segmento: 'Campeonatos e eventos',
     resultado: 'Modelo pronto para kartódromo, campeonato ou liga de sim racing: entra com a sua marca, cores e datas.',
