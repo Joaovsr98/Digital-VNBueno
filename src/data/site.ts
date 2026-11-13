@@ -7,7 +7,10 @@ export const site = {
   // Usado no canonical, no sitemap e na imagem de compartilhamento. vnbuenodigital.vercel.app redireciona.
   // Mudou? Trocar aqui, em astro.config.mjs e em public/robots.txt.
   url: 'https://digital.vnbueno.com.br',
-  slogan: 'Transformamos ideias em soluções digitais para o seu negócio.',
+  // Slogan oficial da marca (confirmado pelo fundador em 12/11/2026). Aparece no topo da home e no rodapé de todas as páginas.
+  slogan: 'Seu presente do futuro.',
+  // Proposta de valor: diz o que vendemos (título da home e texto do rodapé).
+  proposta: 'Transformamos ideias em soluções digitais para o seu negócio.',
   descricao:
     'A VN Bueno Digital desenvolve sites, landing pages, sistemas web e aplicativos sob medida para empresas e profissionais. Solicite seu orçamento.',
   cidade: 'São Paulo, SP',
