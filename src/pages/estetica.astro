@@ -1,0 +1,304 @@
+---
+// Página para clínicas e profissionais de estética (esteticistas, farmacêuticas, biomédicas, dentistas estetas).
+// Caso real: Dra. Natairis Marques — cliente com plano mensal (implantação foi cortesia; ver CLAUDE.md §5).
+// Oferta definida pelo fundador em 13/11/2026 (CLAUDE.md §8): implantação R$ 3.500 + mensalidade, ou R$ 5.500 à vista.
+import Base from '../layouts/Base.astro';
+import { linkWhatsApp } from '../data/site';
+
+const mensagem = 'Olá! Vi a página para clínicas de estética da VN Bueno Digital e quero um site para o meu atendimento.';
+const exemplo = 'https://dranatairismarques.com.br';
+
+const recursos = [
+  { titulo: 'Uma página para cada procedimento', texto: 'Toxina, preenchimento, skincare, corpo: cada tratamento com explicação clara, indicação e o botão para tirar dúvidas no WhatsApp.' },
+  { titulo: 'Sua formação e registro em destaque', texto: 'Quem vai cuidar do próprio rosto quer saber quem é você. O site apresenta sua história, formação e registro profissional.' },
+  { titulo: 'Avaliação pelo WhatsApp, com mensagem pronta', texto: 'A cliente toca no procedimento e a conversa já chega dizendo o que ela quer saber. Você responde do jeito que já atende hoje.' },
+  { titulo: 'Material gratuito para atrair contatos', texto: 'Um guia ou e-book no site para quem ainda está pesquisando, com espaço para deixar o contato.' },
+  { titulo: 'O link certo para a bio do Instagram', texto: 'Quem chega pelo Instagram encontra tudo organizado no celular, em vez de perguntar o preço no direct.' },
+  { titulo: 'Preparado para o Google e o mapa', texto: 'Endereço, horários e conteúdo lido pelo Google, o que ajuda quem pesquisa o procedimento na sua região a encontrar você.' },
+];
+
+const caso = {
+  nome: 'Dra. Natairis Marques',
+  segmento: 'Farmacêutica esteta · Vila Santa Lúcia, São Paulo',
+  imagem: '/portfolio/dra-natairis.webp',
+  url: exemplo,
+  rotulo: 'Cliente · plano mensal',
+  destaques: ['8 páginas de tratamento', 'Avaliação pelo WhatsApp', 'E-book para captar contatos', 'Mapa e horários'],
+};
+
+const oferta = {
+  implantacao: 'R$ 3.500',
+  procedimentosInclusos: 10,
+  mensalidade: 'R$ 150',
+  alteracoesMes: 2,
+  aVista: 'R$ 5.500',
+  avulsa: 'R$ 80',
+};
+
+const destaques = ['Página para cada procedimento', 'Registro profissional em destaque', 'Avaliação pelo WhatsApp', 'Link pronto para a bio do Instagram'];
+
+// Leque do topo (telas reais do site da Dra. Natairis): o início no meio, na frente.
+const celulares = [
+  { alt: 'Tratamentos do site da Dra. Natairis Marques no celular', imagem: '/portfolio/dra-natairis-tratamentos-celular.webp', classe: 'left-0 z-10 translate-y-[9%] -rotate-[7deg] opacity-90' },
+  { alt: 'Página da toxina botulínica no site da Dra. Natairis Marques', imagem: '/portfolio/dra-natairis-procedimento-celular.webp', classe: 'right-0 z-10 translate-y-[9%] rotate-[7deg] opacity-90' },
+  { alt: 'Início do site da Dra. Natairis Marques no celular', imagem: '/portfolio/dra-natairis-celular.webp', classe: 'left-1/2 z-20 -translate-x-1/2', principal: true },
+];
+
+const passos = [
+  { titulo: 'Conversa rápida', texto: 'Você conta quais procedimentos faz, onde atende e como gosta de receber os agendamentos.' },
+  { titulo: 'Fotos e textos', texto: 'Você manda suas fotos e a descrição dos tratamentos. A gente organiza, escreve de forma clara e você revisa tudo.' },
+  { titulo: 'Site no ar', texto: 'Você aprova e o site vai para o ar com o seu WhatsApp, endereço e Instagram.' },
+];
+
+const duvidas = [
+  {
+    p: 'O site respeita as regras de publicidade do meu conselho?',
+    r: 'Os textos seguem uma linha informativa, sem promessa de resultado, e você revisa tudo antes de ir ao ar. Regras como fotos de antes e depois variam de conselho para conselho (CRF, CRBM, CRO e outros): o site é montado conforme a orientação do seu.',
+  },
+  {
+    p: 'Preciso de fotos profissionais?',
+    r: 'Ajuda muito ter boas fotos suas e do espaço de atendimento. Para ilustrar os procedimentos, dá para usar imagens ilustrativas identificadas como tal.',
+  },
+  {
+    p: 'A cliente consegue agendar pelo site?',
+    r: 'O site leva a cliente direto para o seu WhatsApp, já dizendo qual procedimento ela quer conhecer. O horário vocês combinam na conversa, como você já faz hoje.',
+  },
+  {
+    p: 'O que a mensalidade cobre?',
+    r: `Manter o site no ar (hospedagem), o suporte pelo WhatsApp e até ${oferta.alteracoesMes} alterações por mês, como trocar fotos, horários e textos ou incluir um procedimento. As alterações não acumulam para o mês seguinte. O detalhe fica no contrato.`,
+  },
+  {
+    p: 'Posso pagar à vista, sem mensalidade?',
+    r: `Sim: ${oferta.aVista} em pagamento único. Você tem 30 dias de ajustes depois da entrega e, depois disso, cada alteração custa ${oferta.avulsa}.`,
+  },
+  {
+    p: 'Preciso ter domínio próprio (.com.br)?',
+    r: 'Não é obrigatório para começar, mas para clínica e profissional de saúde ele passa mais confiança. Ajudamos a registrar; o domínio é pago à parte, direto no registro.br.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: duvidas.map((d) => ({ '@type': 'Question', name: d.p, acceptedAnswer: { '@type': 'Answer', text: d.r } })),
+  },
+];
+---
+
+<Base
+  titulo="Site para clínica de estética"
+  descricao={`Site para clínica de estética, esteticista, farmacêutica e biomédica esteta: uma página para cada procedimento, registro profissional em destaque e avaliação pelo WhatsApp. Implantação ${oferta.implantacao} e mensalidade ${oferta.mensalidade}.`}
+  jsonLd={jsonLd}
+>
+<!-- Tema estética: champanhe e rosé por cima da base VN Bueno (cabeçalho, rodapé, botões e fundo continuam da marca) -->
+<div class="tema-estetica">
+  <!-- Topo -->
+  <section class="relative overflow-hidden">
+    <div class="grid-bg pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[820px] -translate-x-1/2 rounded-full bg-violet-600/15 blur-3xl" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -right-40 top-32 h-[460px] w-[460px] rounded-full bg-rose-300/10 blur-3xl" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -left-32 bottom-0 h-[360px] w-[360px] rounded-full bg-amber-200/[0.07] blur-3xl" aria-hidden="true"></div>
+
+    <div class="container-site relative grid items-center gap-14 py-14 sm:py-20 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
+      <div>
+        <p class="eyebrow">Para clínicas e profissionais de estética</p>
+        <h1 class="mt-5 text-[2.6rem] font-bold leading-[1.04] tracking-tight sm:text-[3.3rem]">
+          Antes de agendar, sua cliente pesquisa. <span class="text-gradient serifa">Que ela encontre você.</span>
+        </h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+          Um site para esteticistas, farmacêuticas, biomédicas e clínicas: cada procedimento bem explicado, sua formação em destaque e a avaliação <strong class="text-white">marcada pelo WhatsApp</strong>.
+        </p>
+
+        <ul class="mt-7 grid max-w-xl gap-x-6 gap-y-3 text-sm text-slate-200 sm:grid-cols-2">
+          {destaques.map((d) => (
+            <li class="flex items-center gap-2.5">
+              <svg viewBox="0 0 20 20" class="h-5 w-5 shrink-0 text-[#e3bf96]" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z" clip-rule="evenodd" /></svg>
+              {d}
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a href={linkWhatsApp(mensagem)} target="_blank" rel="noopener" class="btn-primary !px-7 !py-4 text-base">Quero o meu site</a>
+          <a href={exemplo} target="_blank" rel="noopener" class="btn-ghost !px-7 !py-4 text-base">
+            Ver um exemplo <span aria-hidden="true">↗</span><span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </div>
+
+        <a href="#preco" class="group mt-7 inline-flex flex-wrap items-baseline gap-x-2 gap-y-1 rounded-2xl border border-line bg-ink-900/70 px-5 py-3.5 text-sm text-slate-400 backdrop-blur transition hover:border-violet-500/60">
+          <span class="font-display text-2xl font-bold text-white">{oferta.mensalidade}<span class="text-sm font-semibold text-slate-400">/mês</span></span>
+          <span>+ implantação <strong class="text-white">{oferta.implantacao}</strong></span>
+          <span class="hidden text-slate-500 sm:inline" aria-hidden="true">·</span>
+          <span>ou à vista <strong class="text-white">{oferta.aVista}</strong></span>
+          <span class="text-violet-300 transition group-hover:translate-x-0.5" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- Três telas do site da Dra. Natairis no celular, em leque -->
+      <div class="relative mx-auto w-full max-w-[520px]">
+        <div class="relative aspect-[5/5.4]">
+          {celulares.map((c) => (
+            <div class={`absolute top-0 w-[44%] ${c.classe}`}>
+              <div class="rounded-[1.9rem] border border-line bg-ink-900 p-2 shadow-2xl shadow-black/60">
+                <img src={c.imagem} alt={c.alt} width="390" height="844" loading={c.principal ? 'eager' : 'lazy'} decoding="async" class="w-full rounded-[1.5rem]" />
+              </div>
+            </div>
+          ))}
+
+          <!-- Balão: a mensagem que o site da Dra. Natairis envia de verdade -->
+          <div class="absolute -left-2 bottom-[14%] z-30 max-w-[230px] rounded-2xl rounded-bl-sm border border-emerald-400/30 bg-[#0b2b22]/95 px-4 py-3 text-xs leading-snug text-emerald-50 shadow-xl shadow-black/50 backdrop-blur sm:-left-6">
+            <p class="mb-1 flex items-center gap-1.5 font-semibold text-emerald-300">
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z" /></svg>
+              WhatsApp
+            </p>
+            "Olá, vim pelo seu site e gostaria de saber mais sobre a <strong>toxina botulínica</strong>!"
+          </div>
+        </div>
+        <p class="mt-2 text-center text-xs text-slate-500">Dra. Natairis Marques (cliente, plano mensal): início, tratamentos e página de procedimento.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- O que o site tem -->
+  <section class="border-t border-line/60 py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">O que o site tem</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Tudo o que a cliente precisa para <span class="text-gradient serifa">confiar em você</span></h2>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {recursos.map((r) => (
+          <article class="card card-estetica p-6">
+            <h3 class="text-lg font-semibold">{r.titulo}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">{r.texto}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Caso real -->
+  <section id="exemplo" class="border-t border-line/60 bg-ink-900/40 py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">Exemplo real</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Dra. Natairis Marques, farmacêutica esteta em São Paulo</h2>
+      <p class="mt-4 max-w-2xl text-slate-400">Site no ar e em uso. Abra no celular, escolha um tratamento e veja a conversa no WhatsApp chegar pronta.</p>
+      <article class="card mt-12 grid overflow-hidden lg:grid-cols-[1.2fr_1fr]">
+        <div class="relative aspect-[16/9] overflow-hidden border-b border-line bg-ink-800 lg:aspect-auto lg:border-b-0 lg:border-r">
+          <img src={caso.imagem} alt={`Site ${caso.nome}`} loading="lazy" decoding="async" class="h-full w-full object-cover object-top" />
+          <span class="absolute bottom-3 left-3 rounded-full border border-emerald-400/50 bg-emerald-950/85 px-3 py-1 text-xs font-semibold text-emerald-200 backdrop-blur">{caso.rotulo}</span>
+        </div>
+        <div class="flex flex-col p-6 sm:p-8">
+          <p class="text-xs font-medium text-violet-300">{caso.segmento}</p>
+          <h3 class="mt-1 text-2xl font-semibold">{caso.nome}</h3>
+          <ul class="mt-5 flex flex-wrap gap-2">
+            {caso.destaques.map((d) => <li class="rounded-lg bg-ink-800 px-2.5 py-1 text-xs text-slate-300">{d}</li>)}
+          </ul>
+          <div class="mt-auto flex flex-wrap gap-3 pt-8">
+            <a href={caso.url} target="_blank" rel="noopener" class="btn-ghost !px-4 !py-2.5">
+              Ver o site <span aria-hidden="true">↗</span><span class="sr-only">(abre em nova aba)</span>
+            </a>
+            <a href={linkWhatsApp(mensagem)} target="_blank" rel="noopener" class="btn-primary !px-4 !py-2.5">Quero um assim</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Preço -->
+  <section id="preco" class="border-t border-line/60 py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">Investimento</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Quanto custa</h2>
+
+      <div class="mt-12 grid gap-5 lg:grid-cols-[1.3fr_1fr]">
+        <article class="card border-violet-500/50 bg-gradient-to-b from-violet-600/10 to-transparent p-6 sm:p-8">
+          <div class="grid gap-8 sm:grid-cols-2">
+            <div>
+              <p class="text-sm text-slate-400">Implantação</p>
+              <p class="mt-1 font-display text-4xl font-bold text-white">{oferta.implantacao}</p>
+              <p class="mt-2 text-sm text-slate-300">pagamento único · até {oferta.procedimentosInclusos} procedimentos, página sobre você, mapa e horários</p>
+            </div>
+            <div>
+              <p class="text-sm text-slate-400">Mensalidade</p>
+              <p class="mt-1 font-display text-4xl font-bold text-white">{oferta.mensalidade}<span class="text-lg font-semibold text-slate-400">/mês</span></p>
+              <p class="mt-2 text-sm text-slate-300">site no ar, suporte pelo WhatsApp e {oferta.alteracoesMes} alterações por mês</p>
+            </div>
+          </div>
+          <a href={linkWhatsApp(mensagem)} target="_blank" rel="noopener" class="btn-primary mt-8 w-full sm:w-auto">Quero o meu site</a>
+        </article>
+
+        <article class="card p-6 sm:p-8">
+          <h3 class="text-lg font-semibold">Prefere pagar à vista?</h3>
+          <p class="mt-2 text-sm text-slate-400">O mesmo site, sem mensalidade:</p>
+          <p class="mt-5 font-display text-4xl font-bold text-white">{oferta.aVista}</p>
+          <p class="mt-2 text-sm text-slate-300">pagamento único</p>
+          <p class="mt-6 border-t border-line pt-4 text-xs text-slate-400">Depois dos 30 dias de ajustes, cada alteração custa {oferta.avulsa}. Domínio próprio (.com.br), se quiser, é pago à parte.</p>
+        </article>
+      </div>
+      <p class="mt-6 text-xs text-slate-400">Alteração: trocar fotos, textos, horários, telefone ou incluir um procedimento. Página ou seção nova é orçada à parte.</p>
+    </div>
+  </section>
+
+  <!-- Como funciona -->
+  <section class="border-t border-line/60 bg-ink-900/40 py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">Como funciona</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Três passos até o seu site no ar</h2>
+      <ol class="mt-12 grid gap-5 md:grid-cols-3">
+        {passos.map((p, i) => (
+          <li class="card p-6">
+            <span class="font-display text-sm font-semibold text-gradient">0{i + 1}</span>
+            <h3 class="mt-3 text-lg font-semibold">{p.titulo}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">{p.texto}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Dúvidas -->
+  <section class="border-t border-line/60 py-20 sm:py-24">
+    <div class="container-site max-w-3xl">
+      <p class="eyebrow">Dúvidas</p>
+      <h2 class="mt-3 text-3xl font-bold sm:text-4xl">Perguntas comuns</h2>
+      <div class="mt-10 divide-y divide-line border-y border-line">
+        {duvidas.map((d) => (
+          <details class="group py-5">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-white">
+              {d.p}
+              <span class="text-violet-300 transition group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-400">{d.r}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Chamada final -->
+  <section class="border-t border-line/60 bg-ink-900/40 py-20 sm:py-24">
+    <div class="container-site text-center">
+      <h2 class="mx-auto max-w-2xl text-3xl font-bold sm:text-4xl">Vamos levar seu atendimento <span class="text-gradient serifa">para o digital?</span></h2>
+      <p class="mx-auto mt-4 max-w-xl text-slate-400">Chame no WhatsApp e conte quais procedimentos você faz. A conversa é sem compromisso.</p>
+      <a href={linkWhatsApp(mensagem)} target="_blank" rel="noopener" class="btn-primary mt-8 !px-8 !py-4 text-base">Fale com a VN Bueno Digital</a>
+    </div>
+  </section>
+</div>
+</Base>
+
+<style>
+  /* Acento da estética (champanhe → rosé) que termina no roxo da VN Bueno: o visual muda, a marca continua. */
+  .tema-estetica .eyebrow { color: #e3bf96; }
+  .tema-estetica .text-gradient {
+    background-image: linear-gradient(100deg, #f1d3ab, #e8b4bf 55%, #a78bfa);
+  }
+  .tema-estetica .serifa {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .tema-estetica .card-estetica { border-color: rgb(227 191 150 / 0.18); }
+  .tema-estetica .card-estetica:hover { border-color: rgb(232 180 191 / 0.45); }
+  .tema-estetica details summary span { color: #e8b4bf; }
+</style>
