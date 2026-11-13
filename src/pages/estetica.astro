@@ -88,7 +88,7 @@ const jsonLd = [
 
 <Base
   titulo="Site para clínica de estética"
-  descricao={`Site para clínica de estética, esteticista, farmacêutica e biomédica esteta: uma página para cada procedimento, registro profissional em destaque e avaliação pelo WhatsApp. Implantação ${oferta.implantacao} e mensalidade ${oferta.mensalidade}.`}
+  descricao={`Site para clínica de estética, esteticista, farmacêutica e biomédica esteta: uma página para cada procedimento, registro profissional em destaque e avaliação pelo WhatsApp. Implantação a partir de ${oferta.implantacao} e mensalidade ${oferta.mensalidade}.`}
   jsonLd={jsonLd}
 >
 <!-- Tema estética: champanhe e rosé por cima da base VN Bueno (cabeçalho, rodapé, botões e fundo continuam da marca) -->
@@ -128,7 +128,7 @@ const jsonLd = [
 
         <a href="#preco" class="group mt-7 inline-flex flex-wrap items-baseline gap-x-2 gap-y-1 rounded-2xl border border-line bg-ink-900/70 px-5 py-3.5 text-sm text-slate-400 backdrop-blur transition hover:border-violet-500/60">
           <span class="font-display text-2xl font-bold text-white">{oferta.mensalidade}<span class="text-sm font-semibold text-slate-400">/mês</span></span>
-          <span>+ implantação <strong class="text-white">{oferta.implantacao}</strong></span>
+          <span>+ implantação a partir de <strong class="text-white">{oferta.implantacao}</strong></span>
           <span class="hidden text-slate-500 sm:inline" aria-hidden="true">·</span>
           <span>ou à vista <strong class="text-white">{oferta.aVista}</strong></span>
           <span class="text-violet-300 transition group-hover:translate-x-0.5" aria-hidden="true">→</span>
@@ -214,7 +214,7 @@ const jsonLd = [
         <article class="card border-violet-500/50 bg-gradient-to-b from-violet-600/10 to-transparent p-6 sm:p-8">
           <div class="grid gap-8 sm:grid-cols-2">
             <div>
-              <p class="text-sm text-slate-400">Implantação</p>
+              <p class="text-sm text-slate-400">Implantação, a partir de</p>
               <p class="mt-1 font-display text-4xl font-bold text-white">{oferta.implantacao}</p>
               <p class="mt-2 text-sm text-slate-300">pagamento único · até {oferta.procedimentosInclusos} procedimentos, página sobre você, mapa e horários</p>
             </div>
