@@ -85,8 +85,8 @@ const pessoas = [
     nome: 'João Victor',
     nomeCompleto: 'João Victor dos Santos Rodrigues',
     foco: 'Tecnologia e desenvolvimento',
-    resumo: 'Construção de aplicações digitais, integração de tecnologias, programação assistida por IA e desenvolvimento de produtos.',
-    especialidades: ['Sites e aplicações web', 'Sistemas e plataformas', 'Integrações e APIs', 'Programação assistida por IA', 'Mercado imobiliário'],
+    resumo: 'Construção de aplicações digitais, integração de tecnologias e desenvolvimento de produtos.',
+    especialidades: ['Sites e aplicações web', 'Sistemas e plataformas', 'Integrações e APIs', 'Mercado imobiliário'],
     iniciais: 'JV',
     tom: 'from-blue-600/40',
   },
@@ -122,7 +122,8 @@ const inclusos = [
   'Garantia contra defeitos: 30 dias no pagamento à vista e o tempo todo nos planos com mensalidade',
 ];
 
-const usosIA = ['Pesquisa e organização de requisitos', 'Prototipação', 'Programação assistida', 'Revisão de código', 'Documentação'];
+// IA como apoio e pesquisa (posicionamento igual ao da Freshlab): quem faz é a equipe.
+const usosIA = ['Pesquisa de referências', 'Organização de ideias e requisitos', 'Apoio na revisão de textos e código'];
 
 const duvidas = [
   {
@@ -159,7 +160,11 @@ const duvidas = [
   },
   {
     p: 'Quem vai fazer o meu site?',
-    r: 'O João e a Nariely, sem terceirizar. Usamos inteligência artificial como ferramenta, sempre com revisão humana.',
+    r: 'O João e a Nariely, sem terceirizar.',
+  },
+  {
+    p: 'O site é feito por inteligência artificial?',
+    r: 'Não. O planejamento, o design e a programação são feitos por nós, com a sua marca e o seu conteúdo. Usamos inteligência artificial apenas como ferramenta de apoio e pesquisa: para buscar referências, organizar ideias e ajudar na revisão.',
   },
   {
     p: 'Como começa um projeto?',
@@ -585,7 +590,7 @@ const jsonLd = [
         ))}
       </ol>
       <div class="card mt-6 flex flex-col gap-4 p-6 sm:flex-row sm:items-center">
-        <p class="text-sm font-semibold text-white sm:w-72 sm:shrink-0">Inteligência artificial em todas as etapas, <span class="text-gradient">sempre com revisão humana.</span></p>
+        <p class="text-sm font-semibold text-white sm:w-80 sm:shrink-0">Cada projeto é planejado, desenhado e programado por nós. <span class="text-gradient">A inteligência artificial entra só como apoio e pesquisa.</span></p>
         <ul class="flex flex-wrap gap-2">
           {usosIA.map((u) => <li class="rounded-lg bg-ink-800 px-2.5 py-1 text-xs text-slate-300">{u}</li>)}
         </ul>
