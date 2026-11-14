@@ -282,7 +282,7 @@ const jsonLd = [
        Three.js só carrega depois que a página termina de abrir; sem WebGL fica a ilustração estática. -->
   <section id="topo-cena" class="relative isolate flex min-h-[calc(100svh-4rem)] items-end overflow-hidden lg:items-center">
     <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-      <div class="absolute left-[55%] top-1/2 h-[520px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-600/15 blur-3xl"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(40%_45%_at_62%_50%,rgb(124_58_237/0.18),transparent_70%)]"></div>
       <svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice" class="topo-fallback absolute inset-0 h-full w-full transition-opacity duration-1000">
         {Array.from({ length: 10 }, (_, i) => (
           <ellipse cx="66" cy="30" rx={4 + i * 4.2} ry={2.6 + i * 2.5} fill="none" stroke={i % 2 ? '#a78bfa' : '#60a5fa'} stroke-opacity={0.45 - i * 0.04} stroke-width=".2" />

@@ -1,6 +1,7 @@
 // Cena de partículas da seção "Como trabalhamos": cada etapa do método tem uma forma.
 // Leve por padrão: o Three.js (chunk separado) só é baixado quando a seção chega perto da tela.
 import type { ShapeName } from './morph/shapes';
+import { podeAnimar3D } from './morph/gpu';
 
 const FORMAS: ShapeName[] = ['field', 'network', 'type', 'lattice', 'flow', 'knot'];
 const INTERVALO = 5200;
@@ -10,15 +11,7 @@ const canvas = cena?.querySelector('canvas');
 const legenda = cena?.querySelector<HTMLElement>('[data-legenda]');
 const cards = Array.from(document.querySelectorAll<HTMLElement>('#metodo-etapas [data-etapa]'));
 
-function temWebGL2() {
-  try {
-    return !!document.createElement('canvas').getContext('webgl2');
-  } catch {
-    return false;
-  }
-}
-
-if (cena && canvas && legenda && cards.length === FORMAS.length && temWebGL2()) {
+if (cena && canvas && legenda && cards.length === FORMAS.length) {
   const titulos = cards.map((c) => c.querySelector('h3')?.textContent?.trim() ?? '');
   const reduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const mobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
@@ -29,6 +22,7 @@ if (cena && canvas && legenda && cards.length === FORMAS.length && temWebGL2()) 
   };
 
   const iniciar = async () => {
+    if (!podeAnimar3D()) return;
     const { createMorph } = await import('./morph/morph');
     const api = await createMorph(canvas, { mobile, reduced: reduzido, initial: FORMAS[0] });
     canvas.classList.remove('opacity-0');

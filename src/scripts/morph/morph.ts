@@ -218,9 +218,11 @@ export async function createMorph(canvas: HTMLCanvasElement, opts: MorphOptions)
   resize();
 
   let visible = true, raf = 0, last = performance.now(), disposed = false;
+  // proteção: se os primeiros quadros custarem caro ao processador, a cena congela num quadro parado
+  let quadros = 0, custo = 0, lento = false;
   const io = new IntersectionObserver(([e]) => {
     visible = e.isIntersecting;
-    if (visible && !raf && !disposed) {
+    if (visible && !raf && !disposed && !lento) {
       last = performance.now();
       raf = requestAnimationFrame(tick);
     }
@@ -274,8 +276,13 @@ export async function createMorph(canvas: HTMLCanvasElement, opts: MorphOptions)
     if (disposed) return;
     const dt = Math.max(0, Math.min(0.05, (now - last) / 1000));
     last = now;
+    const t0 = performance.now();
     frame(dt);
-    if (visible && !opts.reduced) raf = requestAnimationFrame(tick);
+    if (quadros < 30) {
+      custo += performance.now() - t0;
+      if (++quadros === 30 && custo / 30 > 22) lento = true;
+    }
+    if (visible && !opts.reduced && !lento) raf = requestAnimationFrame(tick);
   }
   raf = requestAnimationFrame(tick);
 

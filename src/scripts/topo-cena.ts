@@ -2,6 +2,7 @@
 // Para não atrasar a abertura da página, o Three.js só é baixado depois do carregamento,
 // num momento ocioso do navegador.
 import type { ShapeName } from './morph/shapes';
+import { aoInteragir, podeAnimar3D } from './morph/gpu';
 
 const CICLO: { forma: ShapeName; rotulo: string }[] = [
   { forma: 'type', rotulo: 'VN Bueno Digital' },
@@ -17,16 +18,8 @@ const cena = document.getElementById('topo-cena');
 const canvas = cena?.querySelector('canvas');
 const legenda = cena?.querySelector<HTMLElement>('[data-legenda]');
 
-function temWebGL2() {
-  try {
-    return !!document.createElement('canvas').getContext('webgl2');
-  } catch {
-    return false;
-  }
-}
-
 async function iniciar() {
-  if (!cena || !canvas || !temWebGL2()) return;
+  if (!cena || !canvas || !podeAnimar3D()) return;
   const reduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const mobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
   const largo = window.innerWidth >= 1024;
@@ -50,6 +43,6 @@ async function iniciar() {
 const quandoOcioso = (fn: () => void) =>
   'requestIdleCallback' in window ? window.requestIdleCallback(fn, { timeout: 1500 }) : window.setTimeout(fn, 300);
 
-const comecar = () => quandoOcioso(() => iniciar().catch(() => {}));
+const comecar = () => aoInteragir(() => quandoOcioso(() => iniciar().catch(() => {})));
 if (document.readyState === 'complete') comecar();
 else window.addEventListener('load', comecar, { once: true });
