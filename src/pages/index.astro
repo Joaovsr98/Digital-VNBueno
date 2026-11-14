@@ -87,9 +87,11 @@ const pessoas = [
     nome: 'João Victor',
     nomeCompleto: 'João Victor dos Santos Rodrigues',
     foco: 'Tecnologia e desenvolvimento',
-    resumo: 'Construção de aplicações digitais, integração de tecnologias e desenvolvimento de produtos.',
-    especialidades: ['Sites e aplicações web', 'Sistemas e plataformas', 'Integrações e APIs', 'Mercado imobiliário'],
+    resumo: 'Desenvolvimento de sites, aplicações e sistemas sob medida, integrando interfaces, APIs, bancos de dados e infraestrutura para criar soluções digitais eficientes, escaláveis e alinhadas às necessidades de cada negócio.',
+    especialidades: ['Desenvolvimento Full Stack', 'Sistemas e plataformas', 'APIs e integrações', 'Bancos de dados', 'Infraestrutura e deploy'],
     iniciais: 'JV',
+    foto: '/equipe/joao-victor.webp',
+    projetos: '#portfolio',
     tom: 'from-blue-600/40',
   },
   {
@@ -598,9 +600,15 @@ const jsonLd = [
       <div class="mt-12 grid gap-6 md:grid-cols-2">
         {pessoas.map((p) => (
           <article class="card flex flex-col overflow-hidden sm:flex-row">
-            <div role="img" aria-label={`Espaço para o retrato de ${p.nomeCompleto}`} class={`escuro relative flex aspect-[4/3] items-center justify-center bg-gradient-to-br ${p.tom} via-ink-900 to-ink-950 sm:aspect-auto sm:w-44 sm:shrink-0`}>
-              <span class="font-display text-6xl font-bold text-white/25">{p.iniciais}</span>
-            </div>
+            {p.foto ? (
+              <div class="escuro relative aspect-[4/3] overflow-hidden bg-ink-900 sm:aspect-auto sm:w-44 sm:shrink-0">
+                <img src={p.foto} alt={`Retrato de ${p.nomeCompleto}`} width="560" height="747" loading="lazy" decoding="async" class="h-full w-full object-cover object-[50%_20%]" />
+              </div>
+            ) : (
+              <div role="img" aria-label={`Espaço para o retrato de ${p.nomeCompleto}`} class={`escuro relative flex aspect-[4/3] items-center justify-center bg-gradient-to-br ${p.tom} via-ink-900 to-ink-950 sm:aspect-auto sm:w-44 sm:shrink-0`}>
+                <span class="font-display text-6xl font-bold text-white/25">{p.iniciais}</span>
+              </div>
+            )}
             <div class="flex flex-1 flex-col p-6">
               <p class="text-xs font-medium text-violet-300">{p.foco}</p>
               <h3 class="mt-1 text-xl font-semibold">{p.nome}</h3>
@@ -608,6 +616,11 @@ const jsonLd = [
               <ul class="mt-4 flex flex-wrap gap-2">
                 {p.especialidades.map((e) => <li class="rounded-lg bg-ink-800 px-2.5 py-1 text-xs text-slate-300">{e}</li>)}
               </ul>
+              {p.projetos && (
+                <a href={p.projetos} class="mt-auto pt-5 text-sm font-semibold text-white hover:text-violet-300">
+                  Explorar projetos <span aria-hidden="true">→</span>
+                </a>
+              )}
               {p.linkedin && (
                 <a href={p.linkedin} target="_blank" rel="noopener" class="mt-auto pt-5 text-sm font-semibold text-white hover:text-violet-300">
                   LinkedIn <span aria-hidden="true">↗</span><span class="sr-only">(abre em nova aba)</span>
