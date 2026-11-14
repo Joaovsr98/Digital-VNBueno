@@ -94,3 +94,9 @@
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
 }
+
+/* Etapa do método em destaque enquanto a cena de partículas mostra a forma dela */
+.etapa-ativa {
+  border-color: rgb(139 92 246 / 0.55);
+  background-color: rgb(17 24 50 / 0.9);
+}

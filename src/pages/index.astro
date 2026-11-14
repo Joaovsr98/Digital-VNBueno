@@ -575,9 +575,26 @@ const jsonLd = [
     <div class="container-site">
       <p class="eyebrow">Como trabalhamos</p>
       <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Da ideia à solução, em seis etapas</h2>
-      <ol class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+      <!-- Animação de partículas: cada etapa ganha uma forma. Motor criado por Nariely Marques
+           (protótipo vnbueno-digital), adaptado às cores da VN Bueno. Three.js só é baixado quando
+           a seção se aproxima da tela; sem WebGL fica a ilustração estática. -->
+      <div id="metodo-cena" class="relative mt-10 h-[260px] overflow-hidden rounded-2xl border border-line bg-ink-950/70 sm:h-[360px]" aria-hidden="true">
+        <svg viewBox="0 0 100 50" preserveAspectRatio="xMidYMid slice" class="metodo-fallback absolute inset-0 h-full w-full transition-opacity duration-700">
+          {Array.from({ length: 9 }, (_, i) => (
+            <ellipse cx="50" cy="25" rx={6 + i * 5} ry={3 + i * 2.6} fill="none" stroke={i % 2 ? '#a78bfa' : '#60a5fa'} stroke-opacity={0.5 - i * 0.045} stroke-width=".25" />
+          ))}
+        </svg>
+        <canvas class="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-1000"></canvas>
+        <p class="pointer-events-none absolute bottom-4 left-5 flex items-center gap-2 font-display text-xs uppercase tracking-[0.14em] text-slate-300">
+          <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-400"></span>
+          <span data-legenda>01 / 06 · {etapas[0].titulo}</span>
+        </p>
+      </div>
+
+      <ol id="metodo-etapas" class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {etapas.map((e, i) => (
-          <li class="card p-6">
+          <li class="card p-6 transition-colors duration-500" data-etapa={i}>
             <span class="font-display text-sm font-semibold text-gradient">0{i + 1}</span>
             <h3 class="mt-3 text-base font-semibold">{e.titulo}</h3>
             <p class="mt-2 text-sm leading-relaxed text-slate-400">{e.texto}</p>
@@ -693,6 +710,10 @@ const jsonLd = [
   </section>
   <Galeria itens={galeria} />
 </Base>
+
+<script>
+  import '../scripts/metodo-cena';
+</script>
 
 <script>
   // Filtro do portfólio por tipo de negócio. Sem JS, os botões ficam escondidos e tudo aparece.
