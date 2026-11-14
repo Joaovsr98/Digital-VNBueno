@@ -22,7 +22,7 @@ const {
   imagem = '/og.jpg',
   imagemAlt = 'VN Bueno Digital, sites, sistemas e aplicativos sob medida',
 } = Astro.props;
-const tituloCompleto = titulo ? `${titulo} | ${site.nome}` : `${site.nome} | Sites, sistemas e aplicativos sob medida`;
+const tituloCompleto = titulo ? `${titulo} | ${site.nome}` : `${site.nome} | Sites, sistemas e aplicativos sob medida em São Paulo`;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL(imagem, site.url).href;
 ---

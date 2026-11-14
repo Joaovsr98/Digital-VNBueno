@@ -12,7 +12,7 @@ export const site = {
   // Proposta de valor: diz o que vendemos (título da home e texto do rodapé).
   proposta: 'Transformamos ideias em soluções digitais para o seu negócio.',
   descricao:
-    'A VN Bueno Digital desenvolve sites, landing pages, sistemas web e aplicativos sob medida para empresas e profissionais. Solicite seu orçamento.',
+    'A VN Bueno Digital desenvolve sites, landing pages, sistemas web e aplicativos sob medida em São Paulo, para empresas e profissionais de todo o Brasil. Solicite seu orçamento.',
   cidade: 'São Paulo, SP',
 
   // Número com DDI e DDD, só dígitos.

@@ -1,107 +1,156 @@
 ---
-// Seção "Presença no Google e nas IAs" (14/11/2026). Diagrama de órbitas só em CSS (sem JS):
-// o negócio do cliente no centro, buscadores e IAs girando nas três camadas do trabalho.
-// Nomes das plataformas em texto (sem logos de marca). Promessa: trabalho e medição mensal,
-// nunca "garantimos aparecer". Com "reduzir movimento", as órbitas ficam paradas.
-// Sem atributo style no HTML (a CSP bloqueia): ângulo e velocidade vêm de classes do bloco de estilo.
+// Seção "Presença no Google e nas IAs" (14/11/2026, versão 2).
+// Em vez de só explicar, o visitante testa: escolhe o tipo de negócio e a cidade, o site monta a
+// pergunta que o cliente dele faria e abre essa pergunta no ChatGPT, Perplexity, Google ou Copilot.
+// Nada é enviado para a VN Bueno: a pergunta é montada no navegador e só sai quando a pessoa clica.
+// Promessa: trabalho e medição mensal, nunca "garantimos aparecer".
+// Sem atributo style no HTML (a CSP bloqueia). Script externo (Astro gera em /_astro/).
 import { linkWhatsApp } from '../data/site';
 
-const camadas = [
-  {
-    titulo: 'Base técnica',
-    texto: 'Site rápido, dados estruturados e o arquivo llms.txt, que ajudam o Google e as IAs a entender quem você é, o que faz e onde atende.',
-  },
-  {
-    titulo: 'Perfil no Google',
-    texto: 'Perfil da Empresa configurado, com categoria, endereço, horários e fotos certos, para aparecer no mapa e nas buscas da região.',
-  },
-  {
-    titulo: 'Conteúdo e medição',
-    texto: 'Respostas para as perguntas que o seu cliente faz e, todo mês, um relatório mostrando em quais IAs o seu negócio apareceu.',
-  },
+const negocios = [
+  { rotulo: 'Oficina mecânica', plural: 'oficinas mecânicas' },
+  { rotulo: 'Corretor de imóveis', plural: 'corretores de imóveis' },
+  { rotulo: 'Clínica de estética', plural: 'clínicas de estética' },
+  { rotulo: 'Restaurante', plural: 'restaurantes' },
+  { rotulo: 'Advogado', plural: 'escritórios de advocacia' },
+  { rotulo: 'Dentista', plural: 'dentistas' },
 ];
 
-// Plataformas em cada órbita (de dentro para fora).
-const orbitas = [
-  { raio: 'inset-[22%]', vel: 'v1', itens: [{ nome: 'Google', ang: 'a210' }, { nome: 'Google Maps', ang: 'a30' }] },
-  { raio: 'inset-[11%]', vel: 'v2', itens: [{ nome: 'ChatGPT', ang: 'a300' }, { nome: 'Gemini', ang: 'a130' }] },
-  { raio: 'inset-0', vel: 'v3', itens: [{ nome: 'Perplexity', ang: 'a250' }, { nome: 'Copilot', ang: 'a70' }] },
+const ias = [
+  { id: 'chatgpt', nome: 'ChatGPT' },
+  { id: 'perplexity', nome: 'Perplexity' },
+  { id: 'google', nome: 'Google' },
+  { id: 'copilot', nome: 'Copilot' },
+];
+
+const camadas = [
+  { titulo: 'Base técnica', texto: 'Site rápido, dados estruturados e o arquivo llms.txt, que explicam para o Google e para as IAs quem você é, o que faz e onde atende.' },
+  { titulo: 'Perfil no Google', texto: 'Perfil da Empresa com categoria, endereço, horários e fotos certos, para o seu negócio entrar no mapa e nas buscas da região.' },
+  { titulo: 'Conteúdo que responde', texto: 'Páginas e perguntas frequentes escritas do jeito que o seu cliente pergunta, que é como as IAs procuram respostas.' },
+  { titulo: 'Medição todo mês', texto: 'As mesmas perguntas feitas nas principais IAs todo mês, com um relatório simples mostrando onde você apareceu e a evolução.' },
 ];
 ---
 
 <section id="presenca" class="relative overflow-hidden border-t border-line/60 bg-ink-950 py-20 sm:py-28">
-  <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(45%_60%_at_78%_50%,rgb(59_130_246/0.16),transparent_70%)]" aria-hidden="true"></div>
-  <div class="container-site relative grid items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
-    <div>
-      <p class="eyebrow">Presença no Google e nas IAs</p>
-      <h2 class="mt-4 text-3xl font-bold leading-tight sm:text-[2.6rem]">
-        Quando o seu cliente pergunta ao Google ou a uma IA, <span class="text-gradient">o seu negócio aparece?</span>
-      </h2>
-      <p class="mt-5 max-w-xl leading-relaxed text-slate-300">
-        Cada vez mais gente pergunta ao ChatGPT ou ao Google qual é a melhor oficina, clínica ou corretor da região. Trabalhamos a sua presença em três camadas e, todo mês, medimos se o seu negócio aparece nessas respostas.
-      </p>
+  <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(40%_55%_at_80%_35%,rgb(124_58_237/0.22),transparent_70%),radial-gradient(35%_45%_at_10%_90%,rgb(34_211_238/0.12),transparent_70%)]" aria-hidden="true"></div>
+  <div class="grid-bg pointer-events-none absolute inset-0 opacity-60" aria-hidden="true"></div>
 
-      <ol class="mt-8 space-y-3">
+  <div class="container-site relative">
+    <div class="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
+      <div>
+        <p class="eyebrow">Presença no Google e nas IAs</p>
+        <h2 class="mt-4 text-3xl font-bold leading-[1.1] sm:text-5xl">
+          O seu cliente já pergunta para a IA. <span class="text-gradient">Ela fala de você?</span>
+        </h2>
+        <p class="mt-5 max-w-xl text-lg leading-relaxed text-slate-300">
+          Antes de ligar ou mandar mensagem, muita gente pergunta ao ChatGPT ou ao Google qual é a melhor opção da região. Quem não aparece nessa resposta nem entra na disputa.
+        </p>
+        <p class="mt-4 max-w-xl text-slate-400">
+          Faça o teste ao lado. Leva dez segundos e você vê com os próprios olhos o que o seu cliente vê.
+        </p>
+      </div>
+
+      <!-- Teste interativo -->
+      <div id="teste-ia" class="relative rounded-3xl border border-white/10 bg-ink-900/90 p-5 shadow-[0_40px_100px_-40px_rgb(124_58_237/0.8)] sm:p-7">
+        <div class="flex items-center gap-2 border-b border-white/10 pb-4">
+          <span class="h-2.5 w-2.5 rounded-full bg-rose-400/70"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-amber-300/70"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/70"></span>
+          <span class="ml-2 text-xs font-medium text-slate-400">Teste de presença nas IAs</span>
+        </div>
+
+        <fieldset class="mt-5">
+          <legend class="text-sm font-semibold text-white">1. Qual é o seu negócio?</legend>
+          <div class="mt-3 flex flex-wrap gap-2">
+            {negocios.map((n, i) => (
+              <label class="cursor-pointer rounded-full border border-white/15 bg-white/[0.04] px-3.5 py-1.5 text-sm text-slate-200 transition hover:border-violet-400/60 has-[:checked]:border-transparent has-[:checked]:bg-gradient-to-r has-[:checked]:from-blue-500 has-[:checked]:to-violet-500 has-[:checked]:text-white has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-violet-400">
+                <input type="radio" name="negocio" value={n.plural} checked={i === 0} class="sr-only" />
+                {n.rotulo}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <label class="mt-5 block">
+          <span class="text-sm font-semibold text-white">2. Em que cidade ou bairro?</span>
+          <input id="teste-cidade" type="text" autocomplete="address-level2" maxlength="60" value="São Paulo" class="mt-2 w-full rounded-xl border border-white/15 bg-ink-950 px-4 py-3 text-base text-white placeholder:text-slate-500 focus:border-violet-400 focus:outline-none focus:ring-4 focus:ring-violet-500/20 sm:text-sm" placeholder="Ex.: Taboão da Serra" />
+        </label>
+
+        <p class="mt-6 text-sm font-semibold text-white">3. A pergunta que o seu cliente faria:</p>
+        <div class="mt-3 flex justify-end">
+          <p id="teste-pergunta" class="max-w-[92%] rounded-2xl rounded-tr-sm bg-gradient-to-br from-blue-600 to-violet-600 px-4 py-3 text-[0.95rem] leading-snug text-white shadow-lg shadow-violet-900/40" aria-live="polite">
+            Quais são as melhores oficinas mecânicas em São Paulo?
+          </p>
+        </div>
+
+        <p class="mt-6 text-sm font-semibold text-white">4. Pergunte agora em:</p>
+        <div class="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+          {ias.map((ia) => (
+            <a href="#presenca" data-ia={ia.id} target="_blank" rel="noopener" class="flex items-center justify-center gap-1.5 rounded-xl border border-white/15 bg-white/[0.06] px-3 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-violet-400 hover:bg-violet-500/15">
+              {ia.nome} <span aria-hidden="true" class="text-slate-400">↗</span><span class="sr-only">(abre em nova aba)</span>
+            </a>
+          ))}
+        </div>
+
+        <div class="mt-6 flex flex-col gap-3 rounded-2xl border border-emerald-400/20 bg-emerald-500/[0.07] p-4 sm:flex-row sm:items-center sm:justify-between">
+          <p class="text-sm text-slate-200"><strong class="text-white">O seu negócio não apareceu?</strong> É exatamente isso que a gente resolve.</p>
+          <a id="teste-whats" href={linkWhatsApp('Olá! Fiz o teste de presença nas IAs no site da VN Bueno Digital e quero aparecer nas respostas.')} target="_blank" rel="noopener" class="btn-primary shrink-0 !px-4 !py-2.5 text-sm">Quero aparecer</a>
+        </div>
+        <p class="mt-3 text-[0.7rem] leading-relaxed text-slate-500">A pergunta é montada aqui no seu navegador e só é enviada para a IA que você escolher. Nada fica salvo com a gente.</p>
+      </div>
+    </div>
+
+    <!-- Como trabalhamos a presença -->
+    <div class="mt-20">
+      <h3 class="max-w-2xl text-2xl font-bold sm:text-3xl">Como colocamos o seu negócio <span class="text-gradient">nessa resposta</span></h3>
+      <ol class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {camadas.map((c, i) => (
-          <li class="flex gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-violet-500 font-display text-sm font-semibold text-white">{i + 1}</span>
-            <div>
-              <h3 class="text-base font-semibold">{c.titulo}</h3>
-              <p class="mt-1 text-sm leading-relaxed text-slate-400">{c.texto}</p>
-            </div>
+          <li class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-violet-400/50 hover:bg-white/[0.05]">
+            <span class="font-display text-5xl font-bold text-white/10 transition group-hover:text-violet-400/30">{i + 1}</span>
+            <h4 class="mt-2 text-lg font-semibold text-white">{c.titulo}</h4>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">{c.texto}</p>
           </li>
         ))}
       </ol>
-
-      <a href={linkWhatsApp('Olá! Quero saber se o meu negócio aparece no Google e nas IAs.')} target="_blank" rel="noopener" class="btn-primary mt-8 !px-6 !py-3.5">Quero o meu negócio nas IAs</a>
-      <p class="mt-4 max-w-xl text-xs leading-relaxed text-slate-500">
-        Nenhuma empresa consegue garantir que uma IA vai citar o seu negócio, porque a resposta muda conforme a pessoa, a cidade e o dia. O que entregamos é o trabalho feito e a medição todo mês.
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-500">
+        Nenhuma empresa consegue garantir que uma IA vai citar o seu negócio, porque a resposta muda conforme a pessoa, a cidade e o dia. O que entregamos é o trabalho feito e a medição todo mês, com as mesmas perguntas, para você acompanhar a evolução.
       </p>
-    </div>
-
-    <!-- Diagrama de órbitas -->
-    <div class="relative mx-auto aspect-square w-full max-w-[520px]" aria-hidden="true">
-      {orbitas.map((o) => (
-        <div class={`orbita ${o.vel} absolute ${o.raio} rounded-full border border-white/10`}>
-          {o.itens.map((it) => (
-            <div class={`braco ${it.ang} absolute inset-0`}>
-              <span class="planeta absolute left-1/2 top-0">
-                <span class="block whitespace-nowrap rounded-full border border-white/15 bg-ink-900/90 px-3 py-1.5 text-xs font-medium text-slate-200 shadow-lg shadow-black/40">{it.nome}</span>
-              </span>
-            </div>
-          ))}
-        </div>
-      ))}
-      <div class="absolute inset-[37%] flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-indigo-500 to-violet-600 text-center shadow-[0_0_80px_-10px_rgb(124_58_237/0.8)]">
-        <span class="px-2 font-display text-sm font-bold uppercase leading-tight tracking-wide text-white sm:text-base">Seu<br />negócio</span>
-      </div>
     </div>
   </div>
 </section>
 
-<style>
-  /* A órbita gira; cada nome gira ao contrário, para continuar de pé. */
-  .v1 { --duracao: 38s; }
-  .v2 { --duracao: 54s; }
-  .v3 { --duracao: 72s; }
-  .a30 { --ang: 30deg; }
-  .a70 { --ang: 70deg; }
-  .a130 { --ang: 130deg; }
-  .a210 { --ang: 210deg; }
-  .a250 { --ang: 250deg; }
-  .a300 { --ang: 300deg; }
-  .braco { transform: rotate(var(--ang)); }
-  .orbita { animation: girar var(--duracao) linear infinite; }
-  .planeta {
-    transform: translate(-50%, -50%) rotate(calc(var(--ang) * -1));
-    animation: desgirar var(--duracao) linear infinite;
-  }
-  @keyframes girar { to { transform: rotate(360deg); } }
-  @keyframes desgirar {
-    from { transform: translate(-50%, -50%) rotate(calc(var(--ang) * -1)); }
-    to { transform: translate(-50%, -50%) rotate(calc(var(--ang) * -1 - 360deg)); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .orbita, .planeta { animation: none; }
-  }
-</style>
+<script>
+  // Monta a pergunta e os links das IAs conforme o negócio e a cidade escolhidos.
+  const caixa = document.getElementById('teste-ia');
+  const cidadeEl = document.getElementById('teste-cidade') as HTMLInputElement | null;
+  const perguntaEl = document.getElementById('teste-pergunta');
+  const whats = document.getElementById('teste-whats') as HTMLAnchorElement | null;
+
+  const urls: Record<string, (q: string) => string> = {
+    chatgpt: (q) => `https://chatgpt.com/?q=${encodeURIComponent(q)}&hints=search`,
+    perplexity: (q) => `https://www.perplexity.ai/search?q=${encodeURIComponent(q)}`,
+    google: (q) => `https://www.google.com/search?q=${encodeURIComponent(q)}`,
+    copilot: (q) => `https://www.bing.com/copilotsearch?q=${encodeURIComponent(q)}`,
+  };
+
+  const atualizar = () => {
+    if (!caixa || !perguntaEl) return;
+    const negocio = (caixa.querySelector('input[name="negocio"]:checked') as HTMLInputElement | null)?.value ?? 'empresas';
+    const cidade = (cidadeEl?.value || '').trim().replace(/\s+/g, ' ') || 'minha cidade';
+    const pergunta = `Quais são as melhores ${negocio} em ${cidade}?`;
+    perguntaEl.textContent = pergunta;
+    caixa.querySelectorAll<HTMLAnchorElement>('[data-ia]').forEach((a) => {
+      const montar = urls[a.dataset.ia ?? ''];
+      if (montar) a.href = montar(pergunta);
+    });
+    if (whats) {
+      const numero = new URL(whats.href).pathname.replace('/', '');
+      const msg = `Olá! Fiz o teste de presença nas IAs no site da VN Bueno Digital com a pergunta "${pergunta}" e quero aparecer nas respostas.`;
+      whats.href = `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
+    }
+  };
+
+  caixa?.addEventListener('change', atualizar);
+  cidadeEl?.addEventListener('input', atualizar);
+  atualizar();
+</script>
