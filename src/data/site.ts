@@ -25,6 +25,8 @@ export const site = {
   // Compromissos de atendimento (decisão de 13/11/2026). Mudou? Muda aqui e vale no site todo.
   respostaEm: '1 hora',
   prazoSiteDiasUteis: 10,
+  // Domínio .com.br: pago à VN Bueno, que registra e renova em nome do cliente (decisão 13/11/2026).
+  dominioAno: 'R$ 120',
 
   // Vercel Web Analytics: ligar aqui SÓ depois de ativar na aba Analytics do projeto na Vercel.
   // Liga o script no <head> e o parágrafo correspondente na política de privacidade.

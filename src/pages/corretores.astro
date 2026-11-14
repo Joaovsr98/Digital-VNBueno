@@ -104,11 +104,11 @@ const duvidas = [
   },
   {
     p: 'E se eu cancelar a mensalidade?',
-    r: 'O plano com mensalidade é um contrato: se ele for cancelado, o site sai do ar. O domínio (.com.br), quando houver, continua no seu nome. Tudo isso fica por escrito no contrato antes de começar.',
+    r: 'O plano com mensalidade é um contrato: se ele for cancelado, o site sai do ar. O domínio (.com.br), quando houver, continua no seu nome e passamos para você a gestão dele. Tudo isso fica por escrito no contrato antes de começar.',
   },
   {
     p: 'Preciso ter domínio próprio (.com.br)?',
-    r: 'Não é obrigatório para começar. Se quiser um endereço próprio, ajudamos a registrar; o domínio é pago à parte, direto no registro.br.',
+    r: `Não é obrigatório para começar. Se quiser um endereço próprio, o domínio .com.br custa ${site.dominioAno} por ano: nós registramos, configuramos e renovamos, sempre no seu nome.`,
   },
 ];
 
@@ -271,7 +271,7 @@ const jsonLd = [
               <dd class="shrink-0 font-display text-2xl font-bold text-white">{oferta.extraDepois}</dd>
             </div>
           </dl>
-          <p class="mt-6 text-xs text-slate-400">Valores por imóvel. Domínio próprio (.com.br), se quiser, é pago à parte.</p>
+          <p class="mt-6 text-xs text-slate-400">Valores por imóvel. Domínio próprio (.com.br), se quiser: {site.dominioAno} por ano, registrado no seu nome.</p>
         </article>
       </div>
       <p class="mt-5 rounded-xl border border-violet-500/30 bg-violet-600/10 p-4 text-sm leading-relaxed text-slate-300"><strong class="text-white">Modelo pronto ou sob medida?</strong> A implantação de {oferta.implantacao} usa um dos três modelos acima (Britto, Shelby House ou Bueno Imóveis), personalizado com o seu logo, cores, fotos, imóveis e contatos. A estrutura das páginas segue o modelo escolhido. Quer um layout exclusivo, desenhado do zero só para você? É um site <strong class="text-white">sob medida</strong>, com orçamento à parte.</p>
@@ -287,7 +287,7 @@ const jsonLd = [
             </div>
           ))}
         </dl>
-        <p class="mt-6 text-xs text-slate-400">Pagamento único. Inclui 30 dias de ajustes após a entrega; depois disso, imóveis novos e alterações são cobrados à parte. Domínio próprio, se quiser, é pago à parte.</p>
+        <p class="mt-6 text-xs text-slate-400">Pagamento único. Inclui 30 dias de ajustes após a entrega; depois disso, imóveis novos e alterações são cobrados à parte. Domínio próprio, se quiser: {site.dominioAno} por ano, registrado no seu nome.</p>
       </article>
     </div>
   </section>
