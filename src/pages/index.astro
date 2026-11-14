@@ -66,13 +66,40 @@ const segmentos = [
   },
 ];
 
+// Método em 6 etapas (13/11/2026), adaptado do trabalho da Nariely Marques (repo vnbueno-digital, src/data/method.ts).
 const etapas = [
-  { titulo: 'Entendimento', texto: 'Conversamos sobre o seu negócio, o objetivo do projeto e o que já existe.' },
-  { titulo: 'Planejamento', texto: 'Você recebe uma proposta com escopo, prazo, valor e o que está incluído.' },
+  { titulo: 'Descoberta', texto: 'Entendemos o seu negócio, o objetivo do projeto e o que já existe hoje.' },
+  { titulo: 'Estratégia', texto: 'Definimos escopo, prioridades e prazo. Você recebe a proposta com valor e tudo o que está incluído.' },
+  { titulo: 'Concepção', texto: 'Desenhamos a solução e as telas antes de programar, para você ver e aprovar.' },
   { titulo: 'Desenvolvimento', texto: 'Construímos o projeto e mostramos o andamento para você acompanhar.' },
-  { titulo: 'Testes', texto: 'Revisamos no celular e no computador e ajustamos o que for preciso.' },
-  { titulo: 'Entrega e suporte', texto: 'Publicamos, explicamos como usar e oferecemos manutenção se quiser.' },
+  { titulo: 'Validação', texto: 'Testamos no celular e no computador, revisamos a segurança e ajustamos o que for preciso.' },
+  { titulo: 'Entrega e evolução', texto: 'Publicamos, explicamos como usar e seguimos com manutenção e melhorias, se você quiser.' },
 ];
+
+// Quem faz (13/11/2026). Só informação confirmada; sem foto até existir retrato real (moldura com iniciais).
+const pessoas = [
+  {
+    nome: 'João Victor',
+    nomeCompleto: 'João Victor dos Santos Rodrigues',
+    foco: 'Tecnologia e desenvolvimento',
+    resumo: 'Construção de aplicações digitais, integração de tecnologias, programação assistida por IA e desenvolvimento de produtos.',
+    especialidades: ['Sites e aplicações web', 'Sistemas e plataformas', 'Integrações e APIs', 'Programação assistida por IA', 'Mercado imobiliário'],
+    iniciais: 'JV',
+    tom: 'from-blue-600/40',
+  },
+  {
+    nome: 'Nariely Marques',
+    nomeCompleto: 'Nariely Marques Santos',
+    foco: 'Estratégia e engenharia',
+    resumo: 'Visão multidisciplinar que conecta infraestrutura, território, processos, tecnologia, dados e criação.',
+    especialidades: ['Arquitetura e urbanismo', 'Geoprocessamento', 'Gestão de processos', 'Infraestrutura aeroportuária', 'Design e comunicação'],
+    iniciais: 'NM',
+    tom: 'from-violet-600/45',
+    linkedin: 'https://www.linkedin.com/in/nariely-marques-253634150/',
+  },
+];
+
+const usosIA = ['Pesquisa e organização de requisitos', 'Prototipação', 'Programação assistida', 'Revisão de código', 'Documentação'];
 
 const duvidas = [
   {
@@ -503,8 +530,8 @@ const jsonLd = [
   <section id="como-trabalhamos" class="border-t border-line/60 bg-ink-900/40 py-20 sm:py-24">
     <div class="container-site">
       <p class="eyebrow">Como trabalhamos</p>
-      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Um processo simples, do primeiro contato à entrega</h2>
-      <ol class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Da ideia à solução, em seis etapas</h2>
+      <ol class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {etapas.map((e, i) => (
           <li class="card p-6">
             <span class="font-display text-sm font-semibold text-gradient">0{i + 1}</span>
@@ -513,6 +540,44 @@ const jsonLd = [
           </li>
         ))}
       </ol>
+      <div class="card mt-6 flex flex-col gap-4 p-6 sm:flex-row sm:items-center">
+        <p class="text-sm font-semibold text-white sm:w-72 sm:shrink-0">Inteligência artificial em todas as etapas, <span class="text-gradient">sempre com revisão humana.</span></p>
+        <ul class="flex flex-wrap gap-2">
+          {usosIA.map((u) => <li class="rounded-lg bg-ink-800 px-2.5 py-1 text-xs text-slate-300">{u}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quem faz -->
+  <section id="quem-somos" class="border-t border-line/60 py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">Quem faz</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">As pessoas por trás da VN Bueno Digital</h2>
+      <p class="mt-4 max-w-2xl text-slate-400">Duas trajetórias diferentes e complementares: tecnologia de um lado, estratégia e engenharia do outro.</p>
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {pessoas.map((p) => (
+          <article class="card flex flex-col overflow-hidden sm:flex-row">
+            <div role="img" aria-label={`Espaço para o retrato de ${p.nomeCompleto}`} class={`relative flex aspect-[4/3] items-center justify-center bg-gradient-to-br ${p.tom} via-ink-900 to-ink-950 sm:aspect-auto sm:w-44 sm:shrink-0`}>
+              <span class="font-display text-6xl font-bold text-white/25">{p.iniciais}</span>
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <p class="text-xs font-medium text-violet-300">{p.foco}</p>
+              <h3 class="mt-1 text-xl font-semibold">{p.nome}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-400">{p.resumo}</p>
+              <ul class="mt-4 flex flex-wrap gap-2">
+                {p.especialidades.map((e) => <li class="rounded-lg bg-ink-800 px-2.5 py-1 text-xs text-slate-300">{e}</li>)}
+              </ul>
+              {p.linkedin && (
+                <a href={p.linkedin} target="_blank" rel="noopener" class="mt-auto pt-5 text-sm font-semibold text-white hover:text-violet-300">
+                  LinkedIn <span aria-hidden="true">↗</span><span class="sr-only">(abre em nova aba)</span>
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="mt-6 max-w-3xl text-sm text-slate-400"><strong class="text-white">Juntos:</strong> estruturação de produtos digitais, soluções de gestão, experiências digitais e prototipação, em projetos criativos e tecnológicos.</p>
     </div>
   </section>
 

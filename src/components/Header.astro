@@ -12,6 +12,7 @@ const links = [
   { href: '/#servicos', rotulo: 'Serviços' },
   { href: '/#portfolio', rotulo: 'Portfólio' },
   { href: '/#produtos', rotulo: 'Produtos' },
+  { href: '/#quem-somos', rotulo: 'Quem somos' },
   { href: '/#precos', rotulo: 'Preços' },
   { href: '/#duvidas', rotulo: 'Dúvidas' },
 ];
@@ -23,7 +24,7 @@ const links = [
       <Logo />
     </a>
 
-    <ul class="hidden items-center gap-6 text-sm md:flex lg:gap-8">
+    <ul class="hidden items-center gap-7 whitespace-nowrap text-sm xl:flex">
       <li><a href={links[0].href} class="text-slate-400 transition hover:text-white">{links[0].rotulo}</a></li>
       <!-- Segmentos: abre ao passar o mouse ou ao focar pelo teclado (sem JavaScript) -->
       <li class="group relative">
@@ -45,11 +46,11 @@ const links = [
     </ul>
 
     <div class="flex items-center gap-2">
-      <a href="/#orcamento" class="btn-primary hidden !py-2.5 sm:inline-flex">Solicite seu orçamento</a>
+      <a href="/#orcamento" class="btn-primary hidden whitespace-nowrap !py-2.5 sm:inline-flex">Solicite seu orçamento</a>
       <button
         type="button"
         id="menu-botao"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line text-slate-200 md:hidden"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line text-slate-200 xl:hidden"
         aria-controls="menu-mobile"
         aria-expanded="false"
         aria-label="Abrir menu"
@@ -61,7 +62,7 @@ const links = [
     </div>
   </nav>
 
-  <div id="menu-mobile" class="hidden border-t border-line/60 md:hidden">
+  <div id="menu-mobile" class="hidden border-t border-line/60 xl:hidden">
     <ul class="container-site flex flex-col gap-1 py-4">
       {links.map((l) => (
         <li><a href={l.href} class="block rounded-lg px-3 py-3 text-slate-300 hover:bg-ink-800 hover:text-white">{l.rotulo}</a></li>
