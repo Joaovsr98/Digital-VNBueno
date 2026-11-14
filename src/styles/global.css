@@ -123,17 +123,18 @@
 }
 
 /* ── Seção clara ──────────────────────────────────────────────────────────
-   Respiro no meio do fundo escuro: fundo gelo, cards brancos e texto escuro.
+   Respiro no meio do fundo escuro: azul claro (mesmo tom do site do Britto, #DBE6F0),
+   cards brancos e texto escuro.
    Tudo que estiver dentro de um elemento .escuro (card de destaque, chamada
    colorida) mantém o visual escuro original. */
 .secao-clara {
-  background: linear-gradient(180deg, #f5f7fc, #eaeef8);
+  background: linear-gradient(180deg, #e2ebf4, #d4e1ee);
   color: #334155;
-  border-color: #dfe5f1 !important;
+  border-color: #c5d4e4 !important;
 }
 .secao-clara :is(h2, h3, h4):not(.escuro *) { color: #0b1226; }
 .secao-clara .text-white:not(.escuro *):not(.btn-primary) { color: #0b1226; }
-.secao-clara .text-slate-400:not(.escuro *) { color: #4b5875; }
+.secao-clara .text-slate-400:not(.escuro *) { color: #3f5266; }
 .secao-clara .text-slate-300:not(.escuro *) { color: #334155; }
 .secao-clara :is(.text-cyan-400, .text-cyan-300):not(.escuro *) { color: #0891b2; }
 .secao-clara .text-violet-300:not(.escuro *) { color: #7c3aed; }
@@ -142,8 +143,8 @@
 }
 .secao-clara .card:not(.escuro) {
   background: #fff;
-  border-color: #e1e7f2;
-  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 14px 34px -18px rgb(30 41 82 / 0.22);
+  border-color: #c9d8e8;
+  box-shadow: 0 1px 2px rgb(20 50 64 / 0.06), 0 16px 36px -18px rgb(20 50 64 / 0.28);
 }
 .secao-clara .card-vivo:not(.escuro):hover {
   border-color: rgb(124 58 237 / 0.45);
@@ -160,4 +161,4 @@
   border-color: #cfd7e6;
 }
 .secao-clara .btn-ghost:not(.escuro *):hover { border-color: #7c3aed; color: #5b21b6; }
-.secao-clara :is(.border-line, .divide-line > *) { border-color: #dbe2ef; }
+.secao-clara :is(.border-line, .divide-line > *) { border-color: #b9cbdd; }
