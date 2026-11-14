@@ -128,13 +128,13 @@
   color: #334155;
   border-color: #c5d4e4 !important;
 }
-.secao-clara :is(h2, h3, h4):not(.escuro *) { color: #0b1226; }
-.secao-clara .text-white:not(.escuro *):not(.btn-primary) { color: #0b1226; }
-.secao-clara .text-slate-400:not(.escuro *) { color: #3f5266; }
-.secao-clara .text-slate-300:not(.escuro *) { color: #334155; }
-.secao-clara :is(.text-cyan-400, .text-cyan-300):not(.escuro *) { color: #0891b2; }
-.secao-clara .text-violet-300:not(.escuro *) { color: #7c3aed; }
-.secao-clara .text-gradient:not(.escuro *) {
+.secao-clara :is(h2, h3, h4):not(.escuro *, [class*="bg-[#"] *, [class*="bg-ink-9"] *) { color: #0b1226; }
+.secao-clara .text-white:not(.escuro *, [class*="bg-[#"] *, [class*="bg-ink-9"] *):not(.btn-primary) { color: #0b1226; }
+.secao-clara .text-slate-400:not(.escuro *, [class*="bg-[#"] *, [class*="bg-ink-9"] *) { color: #3f5266; }
+.secao-clara .text-slate-300:not(.escuro *, [class*="bg-[#"] *, [class*="bg-ink-9"] *) { color: #334155; }
+.secao-clara :is(.text-cyan-400, .text-cyan-300):not(.escuro *, [class*="bg-[#"] *, [class*="bg-ink-9"] *) { color: #0891b2; }
+.secao-clara .text-violet-300:not(.escuro *, [class*="bg-[#"] *, [class*="bg-ink-9"] *) { color: #7c3aed; }
+.secao-clara .text-gradient:not(.escuro *, [class*="bg-[#"] *, [class*="bg-ink-9"] *) {
   background-image: linear-gradient(100deg, #0891b2, #2563eb 45%, #7c3aed);
 }
 .secao-clara .card:not(.escuro) {
@@ -151,14 +151,14 @@
   border-color: rgb(124 58 237 / 0.28);
   background-color: rgb(124 58 237 / 0.07);
 }
-.secao-clara .btn-ghost:not(.escuro *) {
+.secao-clara .btn-ghost:not(.escuro *, [class*="bg-[#"] *, [class*="bg-ink-9"] *) {
   color: #0b1226;
   background: #fff;
   border-color: #cfd7e6;
 }
-.secao-clara .btn-ghost:not(.escuro *):hover { border-color: #7c3aed; color: #5b21b6; }
+.secao-clara .btn-ghost:not(.escuro *, [class*="bg-[#"] *, [class*="bg-ink-9"] *):hover { border-color: #7c3aed; color: #5b21b6; }
 .secao-clara :is(.border-line, .divide-line > *) { border-color: #b9cbdd; }
-.secao-clara .bg-ink-800:not(.escuro):not(.escuro *) { background-color: #e4edf6; }
+.secao-clara .bg-ink-800:not(.escuro):not(.escuro *, [class*="bg-[#"] *, [class*="bg-ink-9"] *) { background-color: #e4edf6; }
 .secao-clara .filtro { color: #334155; border-color: #b9cbdd; background: #fff; }
 .secao-clara .filtro:hover { color: #0b1226; border-color: #7c3aed; }
 .secao-clara .filtro[aria-pressed="true"] { color: #fff; border-color: transparent; background-image: linear-gradient(110deg, var(--color-brand-blue), var(--color-brand-violet)); }
