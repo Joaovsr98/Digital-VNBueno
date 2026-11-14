@@ -1,0 +1,406 @@
+---
+// Página do serviço "Criação de sites" (14/11/2026). Uma página por serviço,
+// com conteúdo e diferenciais da VN Bueno: quem atende é quem faz, preço publicado,
+// prazo curto, à vista ou mensal, modelo pronto ou sob medida. Ver comercial/base-aprofundamento-vn-digital.md.
+// Regras de texto: sem "·", sem travessão no meio da frase, sem contadores (memória texto-sem-cara-de-ia).
+import Base from '../layouts/Base.astro';
+import { site, linkWhatsApp } from '../data/site';
+import { inclusos } from '../data/inclusos';
+import { projetos, rotuloTipo } from '../data/projetos';
+
+const mensagem = 'Olá! Vi a página de criação de sites da VN Bueno Digital e quero um site para o meu negócio.';
+
+const preco = { site: 'R$ 1.500', landing: 'R$ 800', manutencao: 'R$ 179,99', avulsa: 'R$ 80' };
+
+// Prints pequenos dos projetos reais, em mosaico no topo.
+const mosaico = [
+  { src: '/portfolio/mini/bueno-imoveis.webp', pos: 'left-0 top-0 -rotate-3' },
+  { src: '/portfolio/mini/garagem-notredame.webp', pos: 'right-0 top-24 rotate-2' },
+  { src: '/portfolio/mini/inv-racing.webp', pos: 'left-6 bottom-0 -rotate-1' },
+];
+
+const provas = [
+  `Pronto em até ${site.prazoSiteDiasUteis} dias úteis`,
+  `Resposta em até ${site.respostaEm}`,
+  `Preço publicado, a partir de ${preco.site}`,
+];
+
+// Nossos diferenciais (fatos, não promessa).
+const diferenciais = [
+  {
+    titulo: 'Quem atende é quem faz',
+    texto: 'Você fala direto com o João e a Nariely, as pessoas que planejam e programam o seu site. Sem atendente no meio e sem terceirizar.',
+  },
+  {
+    titulo: 'Preço na mesa desde o início',
+    texto: 'Os valores de referência estão publicados aqui no site. Na proposta, o valor fica fechado e qualquer extra só entra com a sua aprovação por escrito.',
+  },
+  {
+    titulo: 'No ar em dias, não em meses',
+    texto: `Depois que recebemos o seu material, o site fica pronto em até ${site.prazoSiteDiasUteis} dias úteis. O prazo vai escrito na proposta.`,
+  },
+  {
+    titulo: 'Você escolhe como pagar',
+    texto: 'À vista, e o site é seu. Ou um valor menor de entrada com mensalidade, que já inclui hospedagem, suporte e alterações todo mês.',
+  },
+  {
+    titulo: 'Feito para virar contato',
+    texto: 'Botões de WhatsApp que já mandam a mensagem pronta, dizendo o que o cliente quer. Quem chega pelo site não precisa explicar do zero.',
+  },
+  {
+    titulo: 'Rápido e seguro',
+    texto: 'Cadeado (HTTPS), cabeçalhos de segurança com nota A e páginas leves, que abrem rápido mesmo no 4G.',
+  },
+];
+
+// Dúvidas que costumam aparecer antes de fechar, com a nossa regra para cada uma.
+const receios = [
+  {
+    medo: '"Vou ficar preso a vocês?"',
+    resposta: 'No pagamento à vista, o site é seu. No plano com mensalidade, as regras de saída ficam escritas no contrato antes de começar, e o domínio está sempre no seu nome.',
+  },
+  {
+    medo: '"E se atrasar?"',
+    resposta: `O prazo de até ${site.prazoSiteDiasUteis} dias úteis começa quando o material chega e vai escrito na proposta. Você acompanha o andamento pelo WhatsApp.`,
+  },
+  {
+    medo: '"E se aparecer custo no meio do caminho?"',
+    resposta: 'O valor da proposta é fechado. Página ou recurso novo só entra com orçamento à parte e com o seu "pode fazer" por escrito.',
+  },
+  {
+    medo: '"Depois de entregar, vocês somem?"',
+    resposta: `São 30 dias de ajustes depois da entrega. Depois, existe o plano de manutenção ou a alteração avulsa por ${preco.avulsa}. E a resposta no WhatsApp continua em até ${site.respostaEm} em horário comercial.`,
+  },
+  {
+    medo: '"Vai aparecer no Google?"',
+    resposta: 'O site sai preparado para o Google: conteúdo legível, dados estruturados, velocidade e segurança. Primeiro lugar ninguém sério garante, porque depende da concorrência e do tempo.',
+  },
+];
+
+const caminhos = [
+  {
+    titulo: 'Modelo pronto',
+    texto: 'Partimos de um modelo que já funciona (corretor, oficina, estética) e personalizamos com o seu logo, cores, textos, fotos e contatos. É o caminho mais rápido e com o menor preço de entrada.',
+    links: [
+      { rotulo: 'Para corretores', href: '/corretores' },
+      { rotulo: 'Para oficinas', href: '/oficinas' },
+      { rotulo: 'Para estética', href: '/estetica' },
+    ],
+  },
+  {
+    titulo: 'Sob medida',
+    texto: 'Layout desenhado do zero para o seu negócio, com as páginas e os recursos que você precisa. Você aprova o visual antes da programação começar.',
+    links: [],
+  },
+];
+
+const opcionais = [
+  `Domínio próprio (.com.br): ${site.dominioAno} por ano, registrado no seu nome`,
+  `Plano de manutenção: ${preco.manutencao} por mês, com 2 alterações básicas`,
+  'Páginas ou seções extras, orçadas à parte',
+  'Painel para você mesmo editar textos e fotos, orçado à parte',
+];
+
+const etapas = [
+  { titulo: 'Conversa', texto: 'Entendemos o seu negócio, quem é o seu cliente e o que o site precisa resolver.' },
+  { titulo: 'Proposta', texto: 'Você recebe escopo, prazo e valor fechado. Começamos depois do seu aceite.' },
+  { titulo: 'Visual', texto: 'Mostramos como o site vai ficar. Você aprova ou pede ajustes antes de programarmos.' },
+  { titulo: 'Desenvolvimento', texto: 'Construímos o site e mostramos o andamento pelo WhatsApp.' },
+  { titulo: 'Teste com você', texto: 'Você navega pelo site no celular e no computador antes de ele ir para o ar.' },
+  { titulo: 'No ar', texto: 'Publicamos, explicamos como funciona e seguimos com você nos 30 dias de ajustes.' },
+];
+
+const sites = projetos.filter((p) => p.publicar && p.categoria !== 'sistemas' && p.imagem);
+
+const duvidas = [
+  {
+    p: 'Quanto custa um site?',
+    r: `Sites institucionais começam em ${preco.site} e landing pages em ${preco.landing}. Nos segmentos com modelo pronto (corretores, oficinas e estética), também há opção de entrada menor com mensalidade. Depois de entender o que você precisa, enviamos a proposta com o valor fechado.`,
+  },
+  {
+    p: 'Tem mensalidade?',
+    r: `Só se você escolher. No pagamento à vista, não há mensalidade. Se quiser que a gente cuide do site depois, o plano de manutenção custa ${preco.manutencao} por mês, com 2 alterações básicas.`,
+  },
+  {
+    p: 'Em quanto tempo o site fica pronto?',
+    r: `Em até ${site.prazoSiteDiasUteis} dias úteis depois que recebemos o material (textos, fotos e logo). Sites maiores ou com recursos especiais têm o prazo definido na proposta.`,
+  },
+  {
+    p: 'O site é meu?',
+    r: 'No pagamento à vista, sim: depois de quitado, o site é seu. No plano com mensalidade, você usa o site enquanto o plano estiver ativo, e as regras ficam no contrato. O domínio fica sempre no seu nome.',
+  },
+  {
+    p: 'Vocês usam modelo ou fazem do zero?',
+    r: 'Os dois, e você escolhe. O modelo pronto é personalizado com a sua marca e sai mais rápido e mais barato. O sob medida é desenhado do zero só para você, com valor próprio na proposta.',
+  },
+  {
+    p: 'O site é feito por inteligência artificial?',
+    r: 'Não. O planejamento, o design e a programação são feitos por nós. Usamos inteligência artificial apenas como ferramenta de apoio e pesquisa, para buscar referências, organizar ideias e ajudar na revisão.',
+  },
+  {
+    p: 'Consigo mudar textos e fotos sozinho?',
+    r: `Pelo plano de manutenção, a gente faz as alterações por você. Sem plano, cada alteração avulsa custa ${preco.avulsa}. Se preferir editar sozinho, dá para incluir um painel de edição, orçado à parte.`,
+  },
+  {
+    p: 'Preciso ter domínio e hospedagem?',
+    r: `Não. Cuidamos da hospedagem e, se você quiser um endereço próprio, registramos o domínio .com.br no seu nome por ${site.dominioAno} por ano.`,
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Criação de sites',
+    serviceType: 'Criação de sites institucionais',
+    areaServed: 'Brasil',
+    provider: { '@type': 'ProfessionalService', name: site.nome, url: site.url },
+    offers: { '@type': 'Offer', priceCurrency: 'BRL', price: '1500', description: 'Site institucional, a partir de' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: duvidas.map((d) => ({ '@type': 'Question', name: d.p, acceptedAnswer: { '@type': 'Answer', text: d.r } })),
+  },
+];
+---
+
+<Base
+  titulo="Criação de sites para pequenos negócios"
+  descricao={`Criação de sites para pequenos negócios em São Paulo e todo o Brasil. Pronto em até ${site.prazoSiteDiasUteis} dias úteis, preço publicado a partir de ${preco.site}, à vista ou com mensalidade.`}
+  jsonLd={jsonLd}
+>
+  <!-- Topo -->
+  <section class="relative overflow-hidden">
+    <div class="grid-bg pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(45%_55%_at_70%_30%,rgb(124_58_237/0.18),transparent_70%)]" aria-hidden="true"></div>
+
+    <div class="container-site relative grid items-center gap-12 py-16 sm:py-24 lg:grid-cols-[1.2fr_1fr]">
+      <div>
+        <p class="eyebrow">Criação de sites</p>
+        <h1 class="mt-5 text-[2.5rem] font-bold leading-[1.05] sm:text-[3.4rem]">
+          Um site que mostra o seu negócio <span class="text-gradient">e traz o cliente até você.</span>
+        </h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+          Sites para pequenos negócios e profissionais, feitos por quem vai te atender do começo ao fim.
+        </p>
+        <ul class="mt-7 flex flex-col gap-2.5 text-sm text-slate-200 sm:flex-row sm:flex-wrap sm:gap-x-6">
+          {provas.map((p) => (
+            <li class="flex items-center gap-2.5">
+              <svg viewBox="0 0 20 20" class="h-5 w-5 shrink-0 text-cyan-300" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z" clip-rule="evenodd" /></svg>
+              {p}
+            </li>
+          ))}
+        </ul>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a href={linkWhatsApp(mensagem)} target="_blank" rel="noopener" class="btn-primary !px-7 !py-4 text-base">Quero um site</a>
+          <a href="#projetos" class="btn-ghost !px-7 !py-4 text-base">Ver sites que fizemos</a>
+        </div>
+      </div>
+
+      <!-- Prints de projetos reais (só no computador; abaixo de 1024px não baixa as imagens) -->
+      <a href="#projetos" class="relative hidden h-[400px] lg:block" aria-label="Ver os sites que fizemos">
+        {mosaico.map((m) => (
+          <picture>
+            <source media="(min-width: 1024px)" srcset={m.src} type="image/webp" />
+            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" width="640" height="360" decoding="async" class={`absolute w-[78%] rounded-xl border border-line shadow-2xl shadow-black/60 transition duration-300 hover:z-10 hover:scale-[1.03] ${m.pos}`} />
+          </picture>
+        ))}
+      </a>
+    </div>
+  </section>
+
+  <!-- Diferenciais -->
+  <section class="secao-clara border-t py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">Por que com a gente</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Um estúdio pequeno, <span class="text-gradient">do jeito que o seu negócio precisa</span></h2>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {diferenciais.map((d) => (
+          <article class="card card-vivo p-6">
+            <h3 class="text-lg font-semibold">{d.titulo}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">{d.texto}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Receios -->
+  <section class="secao-clara border-t py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">Antes de fechar</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">O que você deve estar pensando, <span class="text-gradient">e a nossa resposta</span></h2>
+      <div class="mt-12 grid gap-5 md:grid-cols-2">
+        {receios.map((r) => (
+          <article class="card p-6">
+            <h3 class="text-lg font-semibold">{r.medo}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">{r.resposta}</p>
+          </article>
+        ))}
+        <a href={linkWhatsApp(mensagem)} target="_blank" rel="noopener" class="escuro card-vivo flex flex-col justify-between rounded-2xl border border-violet-400/40 bg-gradient-to-br from-blue-600 to-violet-700 p-6">
+          <h3 class="text-lg font-semibold text-white">Ficou alguma dúvida?</h3>
+          <p class="mt-2 text-sm text-blue-50">Pergunte no WhatsApp. Quem responde é quem vai fazer o seu site.</p>
+          <span class="mt-5 inline-flex w-fit items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-ink-950">Chamar no WhatsApp →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dois caminhos -->
+  <section class="secao-clara border-t py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">Dois caminhos</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Modelo pronto <span class="text-gradient">ou sob medida</span></h2>
+      <div class="mt-12 grid gap-5 md:grid-cols-2">
+        {caminhos.map((c) => (
+          <article class="card card-vivo flex flex-col p-6 sm:p-8">
+            <h3 class="text-xl font-semibold">{c.titulo}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-400">{c.texto}</p>
+            {c.links.length > 0 && (
+              <div class="mt-6 flex flex-wrap gap-2">
+                {c.links.map((l) => <a href={l.href} class="btn-ghost !px-4 !py-2 text-sm">{l.rotulo} <span aria-hidden="true">→</span></a>)}
+              </div>
+            )}
+            {c.links.length === 0 && (
+              <a href={linkWhatsApp('Olá! Quero um site sob medida, desenhado do zero para o meu negócio.')} target="_blank" rel="noopener" class="btn-primary mt-6 w-fit !px-4 !py-2.5">Quero um site sob medida</a>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Incluso e opcional -->
+  <section class="secao-clara border-t py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">O que vem no site</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Incluso em todo site, <span class="text-gradient">e o que é opcional</span></h2>
+      <div class="mt-12 grid gap-5 lg:grid-cols-[1.6fr_1fr]">
+        <article class="card p-6 sm:p-8">
+          <h3 class="text-lg font-semibold">Incluso</h3>
+          <ul class="mt-5 grid gap-x-6 gap-y-3 text-sm text-slate-300 sm:grid-cols-2">
+            {inclusos.map((i) => (
+              <li class="flex gap-2.5"><svg viewBox="0 0 20 20" class="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z" clip-rule="evenodd" /></svg>{i}</li>
+            ))}
+          </ul>
+        </article>
+        <article class="card p-6 sm:p-8">
+          <h3 class="text-lg font-semibold">Opcional</h3>
+          <ul class="mt-5 space-y-3 text-sm text-slate-300">
+            {opcionais.map((o) => <li class="flex gap-2.5"><span class="text-cyan-400" aria-hidden="true">+</span>{o}</li>)}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como fazemos -->
+  <section class="secao-clara border-t py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">Como fazemos</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Você aprova antes de <span class="text-gradient">cada passo importante</span></h2>
+      <ol class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {etapas.map((e, i) => (
+          <li class="card card-vivo p-6">
+            <span class="font-display text-sm font-semibold text-gradient">0{i + 1}</span>
+            <h3 class="mt-3 text-base font-semibold">{e.titulo}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">{e.texto}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Projetos -->
+  <section id="projetos" class="secao-clara border-t py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">Sites que fizemos</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Abra no celular e <span class="text-gradient">veja funcionando</span></h2>
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {sites.map((p) => (
+          <article class="card card-vivo flex flex-col overflow-hidden">
+            <div class="escuro relative aspect-[16/9] overflow-hidden border-b border-line bg-ink-800">
+              <img src={p.imagem} alt={`Site ${p.nome}`} loading="lazy" decoding="async" class="h-full w-full object-cover object-top" />
+              {rotuloTipo[p.tipo] && <span class="absolute bottom-3 left-3 rounded-full border border-white/10 bg-ink-950/80 px-3 py-1 text-xs text-slate-200 backdrop-blur">{rotuloTipo[p.tipo]}</span>}
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <p class="text-xs font-medium text-violet-300">{p.segmento}</p>
+              <h3 class="mt-1 text-xl font-semibold">{p.nome}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-400">{p.resultado}</p>
+              {p.demo && (
+                <a href={p.url} target="_blank" rel="noopener" class="btn-ghost mt-auto w-fit !px-4 !py-2.5">
+                  Ver o site <span aria-hidden="true">↗</span><span class="sr-only">(abre em nova aba)</span>
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Preço -->
+  <section class="secao-clara border-t py-20 sm:py-24">
+    <div class="container-site">
+      <p class="eyebrow">Investimento</p>
+      <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">Quanto <span class="text-gradient">custa</span></h2>
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        <article class="escuro card relative flex flex-col !border-violet-400/70 !from-[#2a1d5c] !to-ink-900 p-6 shadow-[0_30px_70px_-30px_rgb(124_58_237/0.7)]">
+          <h3 class="text-lg font-semibold">Site institucional</h3>
+          <p class="mt-1 text-sm text-slate-400">Início, serviços, sobre e contato, com a sua marca.</p>
+          <p class="mt-5"><span class="block text-xs text-slate-400">a partir de</span><span class="font-display text-4xl font-bold text-gradient">{preco.site}</span></p>
+          <a href={linkWhatsApp(mensagem)} target="_blank" rel="noopener" class="btn-primary mt-auto w-full">Quero um site</a>
+        </article>
+        <article class="card flex flex-col p-6">
+          <h3 class="text-lg font-semibold">Landing page</h3>
+          <p class="mt-1 text-sm text-slate-400">Uma página focada em um objetivo: campanha, lançamento ou serviço.</p>
+          <p class="mt-5"><span class="block text-xs text-slate-400">a partir de</span><span class="font-display text-4xl font-bold text-white">{preco.landing}</span></p>
+          <a href={linkWhatsApp('Olá! Quero uma landing page para o meu negócio.')} target="_blank" rel="noopener" class="btn-ghost mt-6 w-full">Quero uma landing page</a>
+        </article>
+        <article class="card flex flex-col p-6">
+          <h3 class="text-lg font-semibold">Modelo pronto do seu segmento</h3>
+          <p class="mt-1 text-sm text-slate-400">Entrada menor com mensalidade, para corretores, oficinas e estética.</p>
+          <ul class="mt-5 space-y-2 text-sm">
+            <li><a href="/corretores#preco" class="font-semibold text-white hover:text-violet-300">Corretores →</a></li>
+            <li><a href="/oficinas#preco" class="font-semibold text-white hover:text-violet-300">Oficinas →</a></li>
+            <li><a href="/estetica#preco" class="font-semibold text-white hover:text-violet-300">Clínicas de estética →</a></li>
+          </ul>
+        </article>
+      </div>
+      <p class="mt-6 text-xs text-slate-400">O valor final depende do que o seu site precisa e fica fechado na proposta. Domínio .com.br: {site.dominioAno} por ano, no seu nome.</p>
+    </div>
+  </section>
+
+  <!-- Dúvidas -->
+  <section class="secao-clara border-t py-20 sm:py-24">
+    <div class="container-site max-w-3xl">
+      <p class="eyebrow">Dúvidas</p>
+      <h2 class="mt-3 text-3xl font-bold sm:text-4xl">Perguntas <span class="text-gradient">comuns</span></h2>
+      <div class="mt-10 divide-y divide-line border-y border-line">
+        {duvidas.map((d) => (
+          <details class="group py-5">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-white">
+              {d.p}
+              <span class="text-violet-300 transition group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-400">{d.r}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Chamada final -->
+  <section class="relative overflow-hidden border-t border-line/60 py-20 sm:py-24">
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_60%_at_50%_100%,rgb(124_58_237/0.25),transparent_70%)]" aria-hidden="true"></div>
+    <div class="container-site relative text-center">
+      <h2 class="mx-auto max-w-2xl text-3xl font-bold sm:text-4xl">Vamos tirar o seu site <span class="text-gradient">do papel?</span></h2>
+      <p class="mx-auto mt-4 max-w-xl text-slate-400">Conte no WhatsApp o que você faz e o que precisa. Respondemos em até {site.respostaEm} em horário comercial.</p>
+      <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+        <a href={linkWhatsApp(mensagem)} target="_blank" rel="noopener" class="btn-primary !px-8 !py-4 text-base">Fale com a VN Bueno Digital</a>
+        <a href="/#orcamento" class="btn-ghost !px-8 !py-4 text-base">Montar meu pedido de orçamento</a>
+      </div>
+    </div>
+  </section>
+</Base>

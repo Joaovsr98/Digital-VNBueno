@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Orcamento from '../components/Orcamento.astro';
 import Galeria, { type ItemGaleria } from '../components/Galeria.astro';
 import fs from 'node:fs';
+import { inclusos } from '../data/inclusos';
 import { site, linkWhatsApp } from '../data/site';
 import { projetos, rotuloTipo, categorias, mensagemInteresse, type Categoria } from '../data/projetos';
 
@@ -12,6 +13,7 @@ const coresServico = ["from-blue-500 to-cyan-400", "from-violet-500 to-fuchsia-5
 const servicos = [
   {
     titulo: 'Sites institucionais',
+    link: '/sites',
     texto: 'Um site profissional que apresenta o seu negócio, funciona bem no celular e ajuda clientes a encontrarem você no Google.',
     itens: ['Visual alinhado à sua marca', 'Botão de WhatsApp e formulário', 'Configuração de domínio e hospedagem'],
     icone: 'M3 5h18v12H3zM8 21h8M12 17v4',
@@ -109,20 +111,8 @@ const depois = [
   { titulo: 'Proposta por escrito', texto: 'Escopo, prazo, valor e tudo o que está incluído, sem letra miúda.' },
 ];
 
-const inclusos = [
-  'Visual personalizado com a sua marca (logo, cores, textos e fotos)',
-  'Feito primeiro para o celular',
-  'Botões de WhatsApp com a mensagem já pronta',
-  'Preparado para o Google (conteúdo legível e dados estruturados)',
-  'Imagem de compartilhamento para o WhatsApp',
-  'Cadeado (HTTPS) e cabeçalhos de segurança nota A',
-  'Política de privacidade e cuidado com a LGPD',
-  'Pronto em até 10 dias úteis depois do material',
-  '30 dias de ajustes depois da entrega',
-  'Garantia contra defeitos: 30 dias no pagamento à vista e o tempo todo nos planos com mensalidade',
-];
 
-// IA como apoio e pesquisa (posicionamento igual ao da Freshlab): quem faz é a equipe.
+// IA como apoio e pesquisa: quem faz é a equipe.
 const usosIA = ['Pesquisa de referências', 'Organização de ideias e requisitos', 'Apoio na revisão de textos e código'];
 
 const duvidas = [
@@ -338,6 +328,7 @@ const jsonLd = [
             <ul class="mt-4 space-y-1.5 text-sm text-slate-300">
               {s.itens.map((i) => <li class="flex gap-2"><span class="text-cyan-400" aria-hidden="true">›</span>{i}</li>)}
             </ul>
+            {s.link && <a href={s.link} class="mt-5 inline-block text-sm font-semibold text-white hover:text-violet-300">Ver como fazemos sites <span aria-hidden="true">→</span></a>}
           </article>
         ))}
         <a href="#orcamento" class="escuro card-vivo flex flex-col justify-between rounded-2xl border border-violet-400/40 bg-gradient-to-br from-blue-600 to-violet-700 p-6 shadow-[0_24px_60px_-28px_rgb(124_58_237/0.6)]">
@@ -642,11 +633,11 @@ const jsonLd = [
           e a gente responde com as próximas etapas. Sem compromisso.
         </p>
 
-        <!-- O que acontece depois do contato (inspirado na Freshlab; ver comercial/base-aprofundamento-vn-digital.md) -->
+        <!-- O que acontece depois do contato -->
         <ol class="mt-8 space-y-4">
           {depois.map((d, i) => (
             <li class="flex gap-4">
-              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-violet-500/50 font-display text-sm font-semibold text-violet-200">{i + 1}</span>
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-violet-500 font-display text-sm font-semibold text-white shadow-md shadow-violet-900/30">{i + 1}</span>
               <div>
                 <p class="text-sm font-semibold text-white">{d.titulo}</p>
                 <p class="mt-0.5 text-sm text-slate-400">{d.texto}</p>
