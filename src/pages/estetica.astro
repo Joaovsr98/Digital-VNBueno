@@ -19,10 +19,10 @@ const recursos = [
 
 const caso = {
   nome: 'Dra. Natairis Marques',
-  segmento: 'Farmacêutica esteta · Vila Santa Lúcia, São Paulo',
+  segmento: 'Farmacêutica esteta na Vila Santa Lúcia, São Paulo',
   imagem: '/portfolio/dra-natairis.webp',
   url: exemplo,
-  rotulo: 'Cliente · plano mensal',
+  rotulo: 'Cliente com plano mensal',
   destaques: ['8 páginas de tratamento', 'Avaliação pelo WhatsApp', 'E-book para captar contatos', 'Mapa e horários'],
 };
 
@@ -141,7 +141,6 @@ const jsonLd = [
         <a href="#preco" class="group mt-7 inline-flex flex-wrap items-baseline gap-x-2 gap-y-1 rounded-2xl border border-line bg-ink-900/70 px-5 py-3.5 text-sm text-slate-400 backdrop-blur transition hover:border-violet-500/60">
           <span class="font-display text-2xl font-bold text-white">{oferta.mensalidade}<span class="text-sm font-semibold text-slate-400">/mês</span></span>
           <span>+ implantação a partir de <strong class="text-white">{oferta.implantacao}</strong></span>
-          <span class="hidden text-slate-500 sm:inline" aria-hidden="true">·</span>
           <span>ou à vista <strong class="text-white">{oferta.aVista}</strong></span>
           <span class="text-violet-300 transition group-hover:translate-x-0.5" aria-hidden="true">→</span>
         </a>
@@ -228,7 +227,7 @@ const jsonLd = [
             <div>
               <p class="text-sm text-slate-400">Implantação, a partir de</p>
               <p class="mt-1 font-display text-4xl font-bold text-white">{oferta.implantacao}</p>
-              <p class="mt-2 text-sm text-slate-300">pagamento único · até {oferta.procedimentosInclusos} procedimentos, página sobre você, mapa e horários</p>
+              <p class="mt-2 text-sm text-slate-300">Pagamento único, com até {oferta.procedimentosInclusos} procedimentos, página sobre você, mapa e horários.</p>
             </div>
             <div>
               <p class="text-sm text-slate-400">Mensalidade</p>
@@ -302,7 +301,6 @@ const jsonLd = [
 <style>
   /* Acento da estética (champanhe → rosé) que termina no roxo da VN Bueno: o visual muda, a marca continua. */
   .tema-estetica .eyebrow { color: #f1d3ab; border-color: rgb(227 191 150 / 0.35); background-color: rgb(227 191 150 / 0.08); }
-  .tema-estetica .eyebrow::before { background-image: linear-gradient(90deg, #f1d3ab, #e8b4bf); }
   .tema-estetica .secao-alt {
     background:
       radial-gradient(60% 50% at 85% 0%, rgb(232 180 191 / 0.08), transparent 70%),

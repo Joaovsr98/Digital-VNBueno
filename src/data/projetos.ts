@@ -77,7 +77,7 @@ export const projetos: Projeto[] = [
     // Pedido de um amigo, dono da oficina; ainda em ajustes e sem fechamento (05/11/2026). Repo: Joaovsr98/garagemnotredame
     nome: 'Garagem NotreDame',
     categoria: 'servicos',
-    segmento: 'Oficina mecânica · Taboão da Serra',
+    segmento: 'Oficina mecânica em Taboão da Serra',
     resultado: 'Site para oficina que transforma quem pesquisa no Google em agendamento pelo WhatsApp.',
     descricao:
       'Fotos e vídeo reais da equipe, selo de "aberto agora" pelo horário da oficina e orçamento de cada serviço com a mensagem pronta no WhatsApp.',
@@ -92,7 +92,7 @@ export const projetos: Projeto[] = [
   {
     nome: 'Bueno Imóveis',
     categoria: 'imobiliario',
-    segmento: 'Corretor de imóveis · São Paulo',
+    segmento: 'Corretor de imóveis em São Paulo',
     resultado: 'Site para corretor que recebe contatos de compradores direto no WhatsApp.',
     descricao:
       'Vitrine de apartamentos e lançamentos, páginas de bairro e um diagnóstico que entende o perfil de quem quer comprar.',

@@ -29,7 +29,7 @@ const recursos = [
 const exemplos = [
   {
     nome: 'Bueno Imóveis',
-    estilo: 'Azul-marinho e dourado · lançamentos e Minha Casa Minha Vida',
+    estilo: 'Azul-marinho e dourado, para lançamentos e Minha Casa Minha Vida',
     imagem: '/portfolio/bueno-imoveis.webp',
     url: 'https://corretorbr.vercel.app',
     rotulo: 'Projeto acadêmico',
@@ -37,7 +37,7 @@ const exemplos = [
   },
   {
     nome: 'Britto',
-    estilo: 'Alto padrão · fonte serifada, azul e grafite',
+    estilo: 'Alto padrão, com fonte serifada, azul e grafite',
     imagem: '/portfolio/britto.webp',
     url: 'https://consultoriabritto.vercel.app',
     rotulo: 'Projeto em andamento', // corretor amigo, ainda sem fechamento (05/11/2026)
@@ -45,7 +45,7 @@ const exemplos = [
   },
   {
     nome: 'Shelby House',
-    estilo: 'Claro e acolhedor · bege e dourado, zona oeste',
+    estilo: 'Claro e acolhedor, em bege e dourado, zona oeste',
     imagem: '/portfolio/shelby-house.webp',
     url: 'https://corretor-shelby.vercel.app',
     rotulo: 'Projeto acadêmico',
@@ -161,7 +161,6 @@ const jsonLd = [
         <a href="#preco" class="group mt-7 inline-flex flex-wrap items-baseline gap-x-2 gap-y-1 rounded-2xl border border-line bg-ink-900/70 px-5 py-3.5 text-sm text-slate-400 backdrop-blur transition hover:border-violet-500/60">
           <span class="font-display text-2xl font-bold text-white">{oferta.mensalidade}<span class="text-sm font-semibold text-slate-400">/mês</span></span>
           <span>+ implantação <strong class="text-white">{oferta.implantacao}</strong></span>
-          <span class="hidden text-slate-500 sm:inline" aria-hidden="true">·</span>
           <span>ou à vista a partir de <strong class="text-white">{aVistaOrdenado[0].aVista}</strong></span>
           <span class="text-violet-300 transition group-hover:translate-x-0.5" aria-hidden="true">→</span>
         </a>
@@ -187,7 +186,7 @@ const jsonLd = [
             "Olá! Vi este imóvel no seu site e quero saber mais."
           </div>
         </div>
-        <p class="mt-2 text-center text-xs text-slate-500">Mesma base, a cara de cada corretor. Britto: em andamento · Bueno Imóveis e Shelby House: projetos acadêmicos.</p>
+        <p class="mt-2 text-center text-xs text-slate-500">Mesma base, a cara de cada corretor. O Britto está em andamento; Bueno Imóveis e Shelby House são projetos acadêmicos.</p>
       </div>
     </div>
   </section>
@@ -247,7 +246,7 @@ const jsonLd = [
             <div>
               <p class="text-sm text-slate-400">Implantação</p>
               <p class="mt-1 font-display text-4xl font-bold text-white">{oferta.implantacao}</p>
-              <p class="mt-2 text-sm text-slate-300">pagamento único · modelo pronto com a sua marca · inclui até {oferta.imoveisInclusos} imóveis</p>
+              <p class="mt-2 text-sm text-slate-300">Pagamento único. Modelo pronto com a sua marca e até {oferta.imoveisInclusos} imóveis.</p>
             </div>
             <div>
               <p class="text-sm text-slate-400">Mensalidade</p>

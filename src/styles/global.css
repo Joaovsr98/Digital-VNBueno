@@ -98,13 +98,9 @@
   @apply rounded-full border border-line px-4 py-2 text-sm text-slate-300 transition hover:border-slate-500 hover:text-white aria-pressed:border-violet-400 aria-pressed:bg-violet-500/15 aria-pressed:text-white;
 }
 
-/* Rótulo das seções em forma de selo, com ponto em degradê */
+/* Rótulo das seções em forma de selo */
 @utility eyebrow {
-  @apply inline-flex items-center gap-2 rounded-full border border-violet-400/30 bg-violet-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-violet-200;
-  &::before {
-    content: "";
-    @apply h-1.5 w-1.5 rounded-full bg-gradient-to-r from-cyan-400 to-violet-400;
-  }
+  @apply inline-flex items-center rounded-full border border-violet-400/30 bg-violet-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-violet-200;
 }
 
 /* Grade sutil usada no fundo do hero */
@@ -162,3 +158,9 @@
 }
 .secao-clara .btn-ghost:not(.escuro *):hover { border-color: #7c3aed; color: #5b21b6; }
 .secao-clara :is(.border-line, .divide-line > *) { border-color: #b9cbdd; }
+.secao-clara .bg-ink-800:not(.escuro):not(.escuro *) { background-color: #e4edf6; }
+.secao-clara .filtro { color: #334155; border-color: #b9cbdd; background: #fff; }
+.secao-clara .filtro:hover { color: #0b1226; border-color: #7c3aed; }
+.secao-clara .filtro[aria-pressed="true"] { color: #fff; border-color: transparent; background-image: linear-gradient(110deg, var(--color-brand-blue), var(--color-brand-violet)); }
+.secao-clara .etapa-ativa { border-color: rgb(124 58 237 / 0.6); background: #f4f0ff; box-shadow: 0 18px 40px -20px rgb(91 33 182 / 0.45); }
+.secao-clara #metodo-cena { box-shadow: 0 30px 70px -35px rgb(20 50 64 / 0.6); }

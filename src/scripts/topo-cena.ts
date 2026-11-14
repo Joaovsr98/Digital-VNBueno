@@ -26,7 +26,7 @@ async function iniciar() {
 
   const { createMorph } = await import('./morph/morph');
   // no computador a forma fica à direita do texto; no celular, centralizada atrás dele
-  const api = await createMorph(canvas, { mobile, reduced: reduzido, initial: CICLO[0].forma, offsetX: largo ? 5 : 0 });
+  const api = await createMorph(canvas, { mobile, reduced: reduzido, initial: CICLO[0].forma, offsetX: largo ? 6.2 : 0 });
   canvas.classList.remove('opacity-0');
   cena.querySelector('.topo-fallback')?.classList.add('opacity-0');
 
@@ -36,7 +36,7 @@ async function iniciar() {
     if (document.hidden) return;
     passo = (passo + 1) % CICLO.length;
     api.setShape(CICLO[passo].forma);
-    if (legenda) legenda.textContent = `${String(passo + 1).padStart(2, '0')} / 0${CICLO.length} · ${CICLO[passo].rotulo}`;
+    if (legenda) legenda.textContent = CICLO[passo].rotulo;
   }, INTERVALO);
 }
 

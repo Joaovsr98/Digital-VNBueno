@@ -17,7 +17,7 @@ if (cena && canvas && legenda && cards.length === FORMAS.length) {
   const mobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
 
   const marcar = (i: number) => {
-    legenda.textContent = `${String(i + 1).padStart(2, '0')} / 0${FORMAS.length} · ${titulos[i]}`;
+    legenda.textContent = titulos[i];
     cards.forEach((c, j) => c.classList.toggle('etapa-ativa', j === i));
   };
 
