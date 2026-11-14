@@ -34,6 +34,8 @@ export interface Projeto {
   publicar: boolean;
   demo: boolean;
   imagem?: string;
+  /** Notas reais medidas (Lighthouse do Google, computador, e securityheaders.com). Só preencher com medição feita. */
+  notas?: { desempenho?: number; seguranca: string; medidoEm: string };
   /** Só para produtos (categoria 'sistemas'): situação atual, mostrada no lugar do tipo. */
   status?: string;
 }
@@ -70,6 +72,7 @@ export const projetos: Projeto[] = [
     url: 'https://invdevs-kart.vercel.app',
     imagem: '/portfolio/inv-racing.webp',
     tipo: 'modelo',
+    notas: { seguranca: 'A', medidoEm: 'novembro de 2026' },
     publicar: true,
     demo: true,
   },
@@ -86,6 +89,7 @@ export const projetos: Projeto[] = [
     url: 'https://garagemnotredame.vercel.app',
     imagem: '/portfolio/garagem-notredame.webp',
     tipo: 'em-andamento',
+    notas: { seguranca: 'A', medidoEm: 'novembro de 2026' },
     publicar: true,
     demo: true,
   },
@@ -101,6 +105,7 @@ export const projetos: Projeto[] = [
     url: 'https://corretorbr.vercel.app',
     imagem: '/portfolio/bueno-imoveis.webp',
     tipo: 'academico', // o próprio site declara: "projeto de caráter acadêmico e curricular"
+    notas: { seguranca: 'A', medidoEm: 'novembro de 2026' },
     publicar: true,
     demo: true,
   },
@@ -116,6 +121,7 @@ export const projetos: Projeto[] = [
     url: 'https://mondel-group.vercel.app',
     imagem: '/portfolio/mondel-group.webp',
     tipo: 'demonstracao',
+    notas: { seguranca: 'A', medidoEm: 'novembro de 2026' },
     publicar: true,
     demo: true,
   },

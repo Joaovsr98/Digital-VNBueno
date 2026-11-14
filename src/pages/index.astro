@@ -1,46 +1,38 @@
 ---
 import Base from '../layouts/Base.astro';
 import Orcamento from '../components/Orcamento.astro';
+import PresencaIA from '../components/PresencaIA.astro';
 import Galeria, { type ItemGaleria } from '../components/Galeria.astro';
 import fs from 'node:fs';
 import { inclusos } from '../data/inclusos';
 import { site, linkWhatsApp } from '../data/site';
 import { projetos, rotuloTipo, categorias, mensagemInteresse, type Categoria } from '../data/projetos';
 
-// Cor de destaque de cada serviço (ícone e filete do topo do card)
-const coresServico = ["from-blue-500 to-cyan-400", "from-violet-500 to-fuchsia-500", "from-cyan-500 to-blue-600", "from-indigo-500 to-violet-500", "from-sky-500 to-indigo-500"];
-
-const servicos = [
+// Serviços agrupados pelo objetivo do cliente (14/11/2026). Cada card leva à página ou seção do serviço.
+const gruposServico = [
   {
-    titulo: 'Sites institucionais',
-    link: '/sites',
-    texto: 'Um site profissional que apresenta o seu negócio, funciona bem no celular e ajuda clientes a encontrarem você no Google.',
-    itens: ['Visual alinhado à sua marca', 'Botão de WhatsApp e formulário', 'Configuração de domínio e hospedagem'],
-    icone: 'M3 5h18v12H3zM8 21h8M12 17v4',
+    titulo: 'Presença digital',
+    texto: 'Para ser encontrado e passar confiança.',
+    itens: [
+      { titulo: 'Sites institucionais', texto: 'Apresenta o seu negócio, funciona bem no celular e leva o cliente direto para o seu WhatsApp.', icone: 'M3 5h18v12H3zM8 21h8M12 17v4', cor: 'from-blue-500 to-cyan-400', link: '/sites' },
+      { titulo: 'Landing pages', texto: 'Uma página focada em um objetivo: lançamento, campanha ou serviço, pronta para receber contatos de anúncios.', icone: 'M4 4h16v16H4zM4 9h16M9 9v11', cor: 'from-violet-500 to-fuchsia-500', link: '#precos' },
+    ],
   },
   {
-    titulo: 'Landing pages',
-    texto: 'Páginas focadas em um objetivo: divulgar um lançamento, apresentar um serviço ou receber contatos de anúncios.',
-    itens: ['Ideal para campanhas pagas', 'Captação de contatos', 'Carregamento rápido'],
-    icone: 'M4 4h16v16H4zM4 9h16M9 9v11',
+    titulo: 'Gestão do negócio',
+    texto: 'Para organizar a rotina e parar de depender de planilha.',
+    itens: [
+      { titulo: 'Sistemas web', texto: 'Pedidos, agendamentos, clientes, estoque ou finanças, do jeito que a sua empresa trabalha.', icone: 'M4 6h16M4 12h10M4 18h7M17 15l3 3-3 3', cor: 'from-cyan-500 to-blue-600', link: '#produtos' },
+      { titulo: 'Aplicativos', texto: 'Para celular e computador, no formato que fizer sentido: web, instalável no celular ou nas lojas.', icone: 'M7 2h10v20H7zM11 18h2', cor: 'from-indigo-500 to-violet-500', link: '#orcamento' },
+    ],
   },
   {
-    titulo: 'Sistemas web',
-    texto: 'Ferramentas sob medida para organizar a rotina: pedidos, agendamentos, clientes, estoque ou finanças.',
-    itens: ['Painéis administrativos', 'Cadastro e controle de clientes', 'Acesso pelo navegador'],
-    icone: 'M4 6h16M4 12h10M4 18h7M17 15l3 3-3 3',
-  },
-  {
-    titulo: 'Aplicativos',
-    texto: 'Aplicações para celular e computador, no formato que fizer mais sentido para o seu caso e o seu orçamento.',
-    itens: ['Web responsivo ou PWA', 'Aplicativo mobile quando necessário', 'Integração com sistemas'],
-    icone: 'M7 2h10v20H7zM11 18h2',
-  },
-  {
-    titulo: 'Manutenção e suporte',
-    texto: 'Depois da entrega, cuidamos do seu site ou sistema para ele continuar no ar, atualizado e seguro.',
-    itens: ['Pequenas alterações', 'Correções e atualizações', 'Acompanhamento da hospedagem'],
-    icone: 'M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z',
+    titulo: 'Cuidado contínuo',
+    texto: 'Para o site seguir no ar, atualizado e sendo encontrado.',
+    itens: [
+      { titulo: 'Manutenção e suporte', texto: 'Alterações todo mês, correções, atualizações e hospedagem acompanhada, com resposta pelo WhatsApp.', icone: 'M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z', cor: 'from-sky-500 to-indigo-500', link: '#precos' },
+      { titulo: 'Presença no Google e nas IAs', texto: 'Perfil no Google, conteúdo que responde ao seu cliente e medição mensal nas principais IAs.', icone: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20', cor: 'from-emerald-500 to-cyan-500', link: '#presenca' },
+    ],
   },
 ];
 
@@ -318,31 +310,43 @@ const jsonLd = [
       <h2 class="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">O que a VN Bueno Digital pode fazer pelo <span class="text-gradient">seu negócio</span></h2>
       <p class="mt-4 max-w-2xl text-slate-400">Da primeira página na internet a um sistema completo para a sua operação.</p>
 
-      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {servicos.map((s, i) => (
-          <article class="card card-vivo group relative overflow-hidden p-6">
-            <span class={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r ${coresServico[i % coresServico.length]} opacity-70`} aria-hidden="true"></span>
-            <div class={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${coresServico[i % coresServico.length]} text-white shadow-lg shadow-violet-900/40 transition group-hover:scale-110`}>
-              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={s.icone} /></svg>
+      <div class="mt-12 divide-y divide-[#c5d4e4] border-t border-[#c5d4e4]">
+        {gruposServico.map((g, gi) => (
+          <div class="grid gap-6 py-10 lg:grid-cols-[0.8fr_2fr] lg:gap-10">
+            <div>
+              <p class="font-display text-sm font-semibold text-gradient">0{gi + 1}</p>
+              <h3 class="mt-2 text-2xl font-bold">{g.titulo}</h3>
+              <p class="mt-2 max-w-xs text-sm text-slate-400">{g.texto}</p>
             </div>
-            <h3 class="mt-5 text-lg font-semibold">{s.titulo}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-400">{s.texto}</p>
-            <ul class="mt-4 space-y-1.5 text-sm text-slate-300">
-              {s.itens.map((i) => <li class="flex gap-2"><span class="text-cyan-400" aria-hidden="true">›</span>{i}</li>)}
-            </ul>
-            {s.link && <a href={s.link} class="mt-5 inline-block text-sm font-semibold text-white hover:text-violet-300">Ver como fazemos sites <span aria-hidden="true">→</span></a>}
-          </article>
-        ))}
-        <a href="#orcamento" class="escuro card-vivo flex flex-col justify-between rounded-2xl border border-violet-400/40 bg-gradient-to-br from-blue-600 to-violet-700 p-6 shadow-[0_24px_60px_-28px_rgb(124_58_237/0.6)]">
-          <div>
-            <h3 class="text-lg font-semibold">Tem outra ideia?</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-300">Conte o que você precisa. Se for possível resolver com software, a gente conversa.</p>
+            <div class="grid gap-5 sm:grid-cols-2">
+              {g.itens.map((it) => (
+                <a href={it.link} class="card card-vivo group relative flex gap-4 p-6">
+                  <div class={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${it.cor} text-white shadow-lg shadow-violet-900/30 transition group-hover:scale-110`}>
+                    <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={it.icone} /></svg>
+                  </div>
+                  <div class="pr-6">
+                    <h4 class="text-lg font-semibold">{it.titulo}</h4>
+                    <p class="mt-1.5 text-sm leading-relaxed text-slate-400">{it.texto}</p>
+                  </div>
+                  <span class="absolute right-5 top-5 flex h-7 w-7 items-center justify-center rounded-full border border-[#c5d4e4] text-violet-500 transition group-hover:border-violet-500 group-hover:bg-violet-500 group-hover:text-white" aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
           </div>
-          <span class="mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-ink-950">Tire sua ideia do papel →</span>
-        </a>
+        ))}
       </div>
+
+      <a href="#orcamento" class="escuro card-vivo mt-4 flex flex-col items-start justify-between gap-4 rounded-2xl bg-gradient-to-br from-blue-600 to-violet-700 p-6 shadow-[0_24px_60px_-28px_rgb(124_58_237/0.6)] sm:flex-row sm:items-center">
+        <div>
+          <h3 class="text-lg font-semibold text-white">Tem outra ideia?</h3>
+          <p class="mt-1 text-sm text-blue-50">Conte o que você precisa. Se for possível resolver com software, a gente conversa.</p>
+        </div>
+        <span class="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-ink-950">Tire sua ideia do papel →</span>
+      </a>
     </div>
   </section>
+
+  <PresencaIA />
 
   <!-- Segmentos -->
   <section id="segmentos" class="secao-clara border-t py-20 sm:py-24">
@@ -381,7 +385,40 @@ const jsonLd = [
         ))}
       </div>
 
-      <div class="mt-8 grid gap-6 md:grid-cols-2">
+      <!-- Computador: vitrine em painéis (um aberto, os outros com o nome na vertical). -->
+      <div id="vitrine" class="vitrine mt-8 hidden h-[600px] gap-3 lg:flex">
+        {sites.map((p, i) => {
+          const rotulo = rotuloTipo[p.tipo];
+          return (
+            <article class="painel escuro relative overflow-hidden rounded-3xl bg-ink-950" data-categoria={p.categoria} data-painel data-aberto={i === 0 ? '' : undefined} tabindex="0" aria-label={`Projeto ${p.nome}`}>
+              {p.imagem && <img src={p.imagem} alt="" loading="lazy" decoding="async" class="painel-img absolute inset-0 h-full w-full object-cover object-top" />}
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/75 to-ink-950/10" aria-hidden="true"></div>
+              <div class="painel-barra absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500" aria-hidden="true"></div>
+              <span class="painel-nome absolute bottom-7 left-1/2 -translate-x-1/2 rotate-180 whitespace-nowrap font-display text-lg font-bold text-white [writing-mode:vertical-rl]" aria-hidden="true">{p.nome}</span>
+              <div class="painel-conteudo absolute inset-x-0 bottom-0 p-8">
+                {rotulo && <span class={`inline-block rounded-full border px-3 py-1 text-xs font-semibold ${p.tipo === 'modelo' ? 'border-emerald-400/50 bg-emerald-950/85 text-emerald-200' : 'border-white/20 bg-white/10 text-slate-100'}`}>{rotulo}</span>}
+                <p class="mt-4 text-sm font-medium text-cyan-300">{p.segmento}</p>
+                <h3 class="mt-1 font-display text-3xl font-bold text-white">{p.nome}</h3>
+                <p class="mt-3 max-w-xl text-base leading-snug text-slate-200">{p.resultado}</p>
+                <ul class="mt-5 flex flex-wrap gap-2">
+                  {p.notas?.desempenho && <li class="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-300">Desempenho {p.notas.desempenho}/100</li>}
+                  {p.notas && <li class="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-300">Segurança nota {p.notas.seguranca}</li>}
+                  {p.destaques.slice(0, 3).map((d) => <li class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-200">{d}</li>)}
+                </ul>
+                <div class="mt-6 flex flex-wrap items-center gap-3 border-t border-white/10 pt-6">
+                  <a href={linkWhatsApp(mensagemInteresse(p))} target="_blank" rel="noopener" class="btn-primary !px-4 !py-2.5">{p.tipo === 'modelo' ? 'Quero esse modelo' : 'Quero um site assim'}</a>
+                  {p.demo && <a href={p.url} target="_blank" rel="noopener" class="btn-ghost !border-white/20 !bg-white/5 !px-4 !py-2.5 !text-white">Ver projeto <span aria-hidden="true">↗</span><span class="sr-only">(abre em nova aba)</span></a>}
+                  {p.imagem && <button type="button" data-abrir-galeria={indiceGaleria.get(p.nome)} class="ml-auto text-sm font-semibold text-slate-200 hover:text-white">Ver telas <span aria-hidden="true">⤢</span></button>}
+                </div>
+                {p.notas && <p class="mt-3 text-[0.7rem] text-slate-400">{p.notas.desempenho ? `Notas medidas em ${p.notas.medidoEm}, no Lighthouse do Google e no securityheaders.com.` : `Nota de segurança medida em ${p.notas.medidoEm}, no securityheaders.com.`}</p>}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <!-- Celular e tablet: cartões. -->
+      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:hidden">
         {sites.map((p) => {
           const rotulo = rotuloTipo[p.tipo];
           return (
@@ -723,7 +760,68 @@ const jsonLd = [
         cards.forEach((card) => {
           card.hidden = filtro !== 'todos' && card.dataset.categoria !== filtro;
         });
+        window.dispatchEvent(new Event('vitrine:filtro'));
       }),
     );
+  }
+
+  // Vitrine em painéis (computador): passar o mouse, clicar ou focar abre o painel.
+  // Troca sozinha a cada 7 s, parando com o mouse em cima, fora da tela ou com "reduzir movimento".
+  const vitrine = document.getElementById('vitrine');
+  if (vitrine) {
+    const paineis = Array.from(vitrine.querySelectorAll<HTMLElement>('[data-painel]'));
+    const reduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const TEMPO = 7000;
+    let pausado = false;
+    let visivel = false;
+    let timer = 0;
+
+    const visiveis = () => paineis.filter((p) => !p.hidden);
+    const abrir = (alvo: HTMLElement) => {
+      paineis.forEach((p) => {
+        p.toggleAttribute('data-aberto', p === alvo);
+        p.classList.remove('contando');
+      });
+      void alvo.offsetWidth; // reinicia a barra
+      if (!reduzido && !pausado && visivel) alvo.classList.add('contando');
+    };
+    const proximo = () => {
+      const lista = visiveis();
+      if (lista.length < 2) return;
+      const atual = lista.findIndex((p) => p.hasAttribute('data-aberto'));
+      abrir(lista[(atual + 1) % lista.length]);
+    };
+    const agendar = () => {
+      window.clearInterval(timer);
+      if (reduzido || pausado || !visivel) return;
+      timer = window.setInterval(proximo, TEMPO);
+    };
+
+    paineis.forEach((p) => {
+      p.addEventListener('mouseenter', () => abrir(p));
+      p.addEventListener('click', () => abrir(p));
+      p.addEventListener('focus', () => abrir(p));
+      p.addEventListener('keydown', (e) => {
+        if (e.target !== p) return;
+        const lista = visiveis();
+        const i = lista.indexOf(p);
+        if (e.key === 'ArrowRight' && lista[i + 1]) { e.preventDefault(); lista[i + 1].focus(); }
+        if (e.key === 'ArrowLeft' && lista[i - 1]) { e.preventDefault(); lista[i - 1].focus(); }
+      });
+    });
+    vitrine.addEventListener('mouseenter', () => { pausado = true; agendar(); paineis.forEach((p) => p.classList.remove('contando')); });
+    vitrine.addEventListener('mouseleave', () => { pausado = false; agendar(); const a = paineis.find((p) => p.hasAttribute('data-aberto')); if (a) abrir(a); });
+    new IntersectionObserver(([e]) => {
+      visivel = e.isIntersecting;
+      agendar();
+      const a = paineis.find((p) => p.hasAttribute('data-aberto'));
+      if (a) abrir(a);
+    }, { threshold: 0.3 }).observe(vitrine);
+    document.addEventListener('visibilitychange', () => { visivel = !document.hidden; agendar(); });
+    window.addEventListener('vitrine:filtro', () => {
+      const lista = visiveis();
+      if (lista.length && !lista.some((p) => p.hasAttribute('data-aberto'))) abrir(lista[0]);
+      agendar();
+    });
   }
 </script>

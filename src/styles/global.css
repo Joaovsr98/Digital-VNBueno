@@ -166,3 +166,24 @@
 .secao-clara #metodo-cena { box-shadow: 0 30px 70px -35px rgb(20 50 64 / 0.6); }
 /* Card escuro dentro da seção clara: fundo sólido (o degradê do card é translúcido e ficaria cinza sobre o azul) */
 .secao-clara .card.escuro { background-color: #0b1226; }
+.secao-clara h4:not(.escuro *, .proprio *, [class*="bg-[#"] *, [class*="bg-ink-9"] *) { color: #0b1226; }
+
+/* ── Vitrine de projetos em painéis (computador) ───────────────────────── */
+.vitrine .painel {
+  flex: 1 1 0;
+  min-width: 0;
+  cursor: pointer;
+  transition: flex-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.vitrine .painel[data-aberto] { flex-grow: 7; cursor: default; }
+.vitrine .painel-img { opacity: 0.35; filter: grayscale(0.6); transition: opacity 0.6s, filter 0.6s, transform 0.8s; }
+.vitrine .painel[data-aberto] .painel-img { opacity: 0.85; filter: none; }
+.vitrine .painel:not([data-aberto]):hover .painel-img { opacity: 0.55; }
+.vitrine .painel-nome { transition: opacity 0.3s; }
+.vitrine .painel[data-aberto] .painel-nome { opacity: 0; }
+.vitrine .painel-conteudo { opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity 0.3s, transform 0.4s, visibility 0s 0.3s; }
+.vitrine .painel[data-aberto] .painel-conteudo { opacity: 1; visibility: visible; transform: none; transition: opacity 0.5s 0.35s, transform 0.5s 0.35s, visibility 0s 0.35s; }
+.vitrine .painel-barra { transform-origin: left; transform: scaleX(0); opacity: 0; }
+.vitrine .painel[data-aberto] .painel-barra { opacity: 1; }
+.vitrine .painel[data-aberto].contando .painel-barra { animation: barra-vitrine var(--tempo-vitrine, 7s) linear forwards; }
+@keyframes barra-vitrine { to { transform: scaleX(1); } }

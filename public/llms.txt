@@ -1,0 +1,34 @@
+# VN Bueno Digital
+
+> Estúdio de desenvolvimento de software em São Paulo, SP. Cria sites, landing pages, sistemas web e aplicativos sob medida para pequenos negócios e profissionais de todo o Brasil. Atendimento direto com quem desenvolve (João Victor e Nariely Marques), resposta em até 1 hora em horário comercial e sites prontos em até 10 dias úteis depois do material.
+
+Slogan: "Seu presente do futuro."
+
+## Serviços
+
+- [Criação de sites](https://digital.vnbueno.com.br/sites): sites institucionais a partir de R$ 1.500, feitos primeiro para o celular, com WhatsApp, preparados para o Google, à vista ou com mensalidade.
+- [Landing pages](https://digital.vnbueno.com.br/#precos): páginas focadas em um objetivo (campanha, lançamento ou serviço), a partir de R$ 800.
+- [Sistemas web e aplicativos](https://digital.vnbueno.com.br/#servicos): pedidos, agendamentos, clientes, estoque e finanças, sob orçamento.
+- [Manutenção e suporte](https://digital.vnbueno.com.br/#precos): R$ 179,99 por mês, com 2 alterações básicas, correções e hospedagem acompanhada.
+- [Presença no Google e nas IAs](https://digital.vnbueno.com.br/#presenca): base técnica, Perfil da Empresa no Google, conteúdo que responde ao cliente e medição mensal nas principais IAs.
+
+## Sites por segmento (modelos prontos)
+
+- [Site para corretores de imóveis](https://digital.vnbueno.com.br/corretores): vitrine de imóveis e contato pelo WhatsApp. Implantação R$ 400 e mensalidade R$ 150, ou à vista a partir de R$ 2.500.
+- [Site para oficinas mecânicas](https://digital.vnbueno.com.br/oficinas): orçamento de cada serviço no WhatsApp, fotos reais da equipe, horários e mapa. Implantação R$ 500 e mensalidade R$ 150, ou R$ 2.200 à vista.
+- [Site para clínicas de estética](https://digital.vnbueno.com.br/estetica): uma página por procedimento e avaliação pelo WhatsApp. Implantação a partir de R$ 3.500 e mensalidade R$ 150, ou R$ 5.500 à vista.
+
+## Como trabalhamos
+
+- Valor fechado na proposta; extras só com aprovação por escrito.
+- 30 dias de ajustes depois da entrega.
+- No pagamento à vista, o site é do cliente. No plano com mensalidade, as regras ficam no contrato.
+- Domínio .com.br por R$ 120 ao ano, sempre registrado no nome do cliente.
+- O planejamento, o design e a programação são feitos pela equipe; inteligência artificial é usada apenas como apoio e pesquisa.
+
+## Contato
+
+- [Pedido de orçamento](https://digital.vnbueno.com.br/#orcamento)
+- WhatsApp: +55 11 92527-2694
+- Instagram: [@vnbuenodigital](https://www.instagram.com/vnbuenodigital/)
+- E-mail: contato.invdevs@gmail.com
