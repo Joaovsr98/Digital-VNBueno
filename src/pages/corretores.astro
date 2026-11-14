@@ -95,6 +95,10 @@ const duvidas = [
     r: `Sim. O valor depende do modelo: ${aVistaTexto()}. Inclui 30 dias de ajustes depois da entrega.`,
   },
   {
+    p: 'Posso ter um site exclusivo, só meu?',
+    r: 'Pode. A implantação de entrada usa um dos nossos modelos, personalizado com a sua marca. Um layout exclusivo, desenhado do zero e não usado por outros corretores, é um site sob medida, com valor próprio definido na proposta.',
+  },
+  {
     p: 'Em quanto tempo o site fica pronto?',
     r: `Em até ${site.prazoSiteDiasUteis} dias úteis, contados a partir do recebimento das fotos e informações.`,
   },
@@ -243,7 +247,7 @@ const jsonLd = [
             <div>
               <p class="text-sm text-slate-400">Implantação</p>
               <p class="mt-1 font-display text-4xl font-bold text-white">{oferta.implantacao}</p>
-              <p class="mt-2 text-sm text-slate-300">pagamento único · inclui até {oferta.imoveisInclusos} imóveis</p>
+              <p class="mt-2 text-sm text-slate-300">pagamento único · modelo pronto com a sua marca · inclui até {oferta.imoveisInclusos} imóveis</p>
             </div>
             <div>
               <p class="text-sm text-slate-400">Mensalidade</p>
@@ -270,6 +274,7 @@ const jsonLd = [
           <p class="mt-6 text-xs text-slate-400">Valores por imóvel. Domínio próprio (.com.br), se quiser, é pago à parte.</p>
         </article>
       </div>
+      <p class="mt-5 rounded-xl border border-violet-500/30 bg-violet-600/10 p-4 text-sm leading-relaxed text-slate-300"><strong class="text-white">Modelo pronto ou sob medida?</strong> A implantação de {oferta.implantacao} usa um dos três modelos acima (Britto, Shelby House ou Bueno Imóveis), personalizado com o seu logo, cores, fotos, imóveis e contatos. A estrutura das páginas segue o modelo escolhido. Quer um layout exclusivo, desenhado do zero só para você? É um site <strong class="text-white">sob medida</strong>, com orçamento à parte.</p>
 
       <article class="card mt-5 p-6 sm:p-8">
         <h3 class="text-lg font-semibold">Prefere pagar à vista, sem mensalidade?</h3>

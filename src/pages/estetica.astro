@@ -72,6 +72,10 @@ const duvidas = [
     r: `Sim: ${oferta.aVista} em pagamento único. Você tem 30 dias de ajustes depois da entrega e, depois disso, cada alteração custa ${oferta.avulsa}.`,
   },
   {
+    p: 'Posso ter um site exclusivo, só meu?',
+    r: 'Pode. O valor a partir de R$ 3.500 parte de um modelo pronto, personalizado com a sua marca. Um layout exclusivo, desenhado do zero, é um site sob medida, com valor próprio definido na proposta.',
+  },
+  {
     p: 'Em quanto tempo o site fica pronto?',
     r: `Em até ${site.prazoSiteDiasUteis} dias úteis, contados a partir do recebimento das fotos e informações.`,
   },
@@ -243,6 +247,7 @@ const jsonLd = [
           <p class="mt-6 border-t border-line pt-4 text-xs text-slate-400">Depois dos 30 dias de ajustes, cada alteração custa {oferta.avulsa}. Domínio próprio (.com.br), se quiser, é pago à parte.</p>
         </article>
       </div>
+<p class="mt-5 rounded-xl border border-violet-500/30 bg-violet-600/10 p-4 text-sm leading-relaxed text-slate-300"><strong class="text-white">Modelo pronto ou sob medida?</strong> O valor a partir de {oferta.implantacao} parte de um modelo pronto, personalizado com a sua marca, fotos e procedimentos. Quer um layout exclusivo, desenhado do zero só para a sua clínica? É um site <strong class="text-white">sob medida</strong>, com orçamento à parte.</p>
       <p class="mt-6 text-xs text-slate-400">Alteração: trocar fotos, textos, horários, telefone ou incluir um procedimento. Página ou seção nova é orçada à parte.</p>
     </div>
   </section>
