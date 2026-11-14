@@ -3,7 +3,7 @@
 // ver CLAUDE.md §5; não chamar de cliente).
 // Oferta para oficinas aprovada pelo fundador em 11/11/2026 — ver CLAUDE.md §8. Mudou? Atualizar `oferta` abaixo.
 import Base from '../layouts/Base.astro';
-import { linkWhatsApp } from '../data/site';
+import { site, linkWhatsApp } from '../data/site';
 
 const mensagem = 'Olá! Vi a página para oficinas da VN Bueno Digital e quero um site para a minha oficina.';
 const exemplo = 'https://garagemnotredame.vercel.app';
@@ -70,6 +70,14 @@ const duvidas = [
   {
     p: `E se eu tiver mais de ${oferta.servicosInclusos} serviços?`,
     r: 'A gente conversa: dá para agrupar serviços parecidos ou incluir mais itens no orçamento da implantação.',
+  },
+  {
+    p: 'Em quanto tempo o site fica pronto?',
+    r: `Em até ${site.prazoSiteDiasUteis} dias úteis, contados a partir do recebimento das fotos e informações.`,
+  },
+  {
+    p: 'E se eu cancelar a mensalidade?',
+    r: 'O plano com mensalidade é um contrato: se ele for cancelado, o site sai do ar. O domínio (.com.br), quando houver, continua no seu nome. Tudo isso fica por escrito no contrato antes de começar.',
   },
   {
     p: 'Preciso ter domínio próprio (.com.br)?',

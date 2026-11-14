@@ -3,7 +3,7 @@
 // Valores definidos pelo fundador em 05/11/2026; à vista por modelo em 11/11/2026 — ver CLAUDE.md §8.
 // Mudou? Atualizar `oferta` e o campo `aVista` de cada exemplo abaixo.
 import Base from '../layouts/Base.astro';
-import { linkWhatsApp } from '../data/site';
+import { site, linkWhatsApp } from '../data/site';
 
 const oferta = {
   implantacao: 'R$ 400',
@@ -93,6 +93,14 @@ const duvidas = [
   {
     p: 'Posso pagar à vista, sem mensalidade?',
     r: `Sim. O valor depende do modelo: ${aVistaTexto()}. Inclui 30 dias de ajustes depois da entrega.`,
+  },
+  {
+    p: 'Em quanto tempo o site fica pronto?',
+    r: `Em até ${site.prazoSiteDiasUteis} dias úteis, contados a partir do recebimento das fotos e informações.`,
+  },
+  {
+    p: 'E se eu cancelar a mensalidade?',
+    r: 'O plano com mensalidade é um contrato: se ele for cancelado, o site sai do ar. O domínio (.com.br), quando houver, continua no seu nome. Tudo isso fica por escrito no contrato antes de começar.',
   },
   {
     p: 'Preciso ter domínio próprio (.com.br)?',

@@ -3,7 +3,7 @@
 // Caso real: Dra. Natairis Marques — cliente com plano mensal (implantação foi cortesia; ver CLAUDE.md §5).
 // Oferta definida pelo fundador em 13/11/2026 (CLAUDE.md §8): implantação R$ 3.500 + mensalidade, ou R$ 5.500 à vista.
 import Base from '../layouts/Base.astro';
-import { linkWhatsApp } from '../data/site';
+import { site, linkWhatsApp } from '../data/site';
 
 const mensagem = 'Olá! Vi a página para clínicas de estética da VN Bueno Digital e quero um site para o meu atendimento.';
 const exemplo = 'https://dranatairismarques.com.br';
@@ -70,6 +70,14 @@ const duvidas = [
   {
     p: 'Posso pagar à vista, sem mensalidade?',
     r: `Sim: ${oferta.aVista} em pagamento único. Você tem 30 dias de ajustes depois da entrega e, depois disso, cada alteração custa ${oferta.avulsa}.`,
+  },
+  {
+    p: 'Em quanto tempo o site fica pronto?',
+    r: `Em até ${site.prazoSiteDiasUteis} dias úteis, contados a partir do recebimento das fotos e informações.`,
+  },
+  {
+    p: 'E se eu cancelar a mensalidade?',
+    r: 'O plano com mensalidade é um contrato: se ele for cancelado, o site sai do ar. O domínio (.com.br), quando houver, continua no seu nome. Tudo isso fica por escrito no contrato antes de começar.',
   },
   {
     p: 'Preciso ter domínio próprio (.com.br)?',

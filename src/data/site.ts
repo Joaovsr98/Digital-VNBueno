@@ -20,7 +20,11 @@ export const site = {
   // Trocar por contato@invdevs.com.br quando o domínio e o e-mail profissional existirem.
   email: 'contato.invdevs@gmail.com',
   // Responsável pelos dados (LGPD). Pessoa física por enquanto; trocar pelo CNPJ quando houver.
-  responsavel: 'João Victor dos Santos Rodrigues',
+  // Responsáveis pelos dados pessoais (LGPD), decisão de 13/11/2026.
+  responsavel: 'João Victor dos Santos Rodrigues e Nariely Marques Santos',
+  // Compromissos de atendimento (decisão de 13/11/2026). Mudou? Muda aqui e vale no site todo.
+  respostaEm: '1 hora',
+  prazoSiteDiasUteis: 10,
 
   // Vercel Web Analytics: ligar aqui SÓ depois de ativar na aba Analytics do projeto na Vercel.
   // Liga o script no <head> e o parágrafo correspondente na política de privacidade.

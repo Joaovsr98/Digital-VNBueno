@@ -99,6 +99,25 @@ const pessoas = [
   },
 ];
 
+// O que entra em todo site (só o que de fato entregamos hoje).
+const depois = [
+  { titulo: `Resposta em até ${site.respostaEm}`, texto: 'Em horário comercial, pelo WhatsApp, com as próximas etapas.' },
+  { titulo: 'Estudamos o seu caso antes da conversa', texto: 'Olhamos o seu Instagram ou site atual e a concorrência da sua região.' },
+  { titulo: 'Proposta por escrito', texto: 'Escopo, prazo, valor e tudo o que está incluído, sem letra miúda.' },
+];
+
+const inclusos = [
+  'Design próprio para a sua marca, sem modelo pronto',
+  'Feito primeiro para o celular',
+  'Botões de WhatsApp com a mensagem já pronta',
+  'Preparado para o Google (conteúdo legível e dados estruturados)',
+  'Imagem de compartilhamento para o WhatsApp',
+  'Cadeado (HTTPS) e cabeçalhos de segurança nota A',
+  'Política de privacidade e cuidado com a LGPD',
+  'Pronto em até 10 dias úteis depois do material',
+  '30 dias de ajustes e garantia contra defeitos depois da entrega',
+];
+
 const usosIA = ['Pesquisa e organização de requisitos', 'Prototipação', 'Programação assistida', 'Revisão de código', 'Documentação'];
 
 const duvidas = [
@@ -123,8 +142,24 @@ const duvidas = [
     r: 'Trocar textos, fotos, telefone, endereço ou horários, ou incluir um item numa lista que já existe (como um novo serviço). Página nova, seção nova ou mudança de layout são orçadas à parte. As alterações do plano não acumulam para o mês seguinte.',
   },
   {
+    p: 'Em quanto tempo o site fica pronto?',
+    r: `Em até ${site.prazoSiteDiasUteis} dias úteis, contados a partir do recebimento dos textos, fotos e informações. Sistemas e aplicativos têm o prazo definido na proposta, etapa por etapa.`,
+  },
+  {
+    p: 'O site é meu?',
+    r: 'No pagamento à vista, sim: o site é seu e o domínio fica no seu nome. Nos planos com implantação e mensalidade (como os de corretores, oficinas e clínicas), o site fica no ar enquanto o plano estiver ativo. Se o contrato for cancelado, o site sai do ar e o domínio continua seu. Tudo isso fica por escrito no contrato.',
+  },
+  {
+    p: 'Vocês garantem primeiro lugar no Google?',
+    r: 'Não, e desconfie de quem garante. Entregamos o site preparado para o Google (conteúdo legível, dados estruturados, velocidade e segurança). A posição depende da concorrência e de trabalho contínuo.',
+  },
+  {
+    p: 'Quem vai fazer o meu site?',
+    r: 'O João e a Nariely, sem terceirizar. Usamos inteligência artificial como ferramenta, sempre com revisão humana.',
+  },
+  {
     p: 'Como começa um projeto?',
-    r: 'Basta preencher o pedido de orçamento ou chamar no WhatsApp. Marcamos uma conversa rápida para entender o que você precisa, sem compromisso.',
+    r: `Basta preencher o pedido de orçamento ou chamar no WhatsApp. Respondemos em até ${site.respostaEm} em horário comercial e marcamos uma conversa rápida para entender o que você precisa, sem compromisso.`,
   },
 ];
 
@@ -522,6 +557,14 @@ const jsonLd = [
           </article>
         ))}
       </div>
+      <div class="card mt-6 p-6 sm:p-8">
+        <h3 class="text-lg font-semibold">Incluso em todo site</h3>
+        <ul class="mt-5 grid gap-x-6 gap-y-3 text-sm text-slate-300 sm:grid-cols-2 lg:grid-cols-3">
+          {inclusos.map((i) => (
+            <li class="flex gap-2.5"><svg viewBox="0 0 20 20" class="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z" clip-rule="evenodd" /></svg>{i}</li>
+          ))}
+        </ul>
+      </div>
       <p class="mt-6 text-xs text-slate-400">Domínio e serviços de terceiros, quando houver, são informados à parte na proposta.</p>
     </div>
   </section>
@@ -592,6 +635,19 @@ const jsonLd = [
           Leva menos de um minuto. Você escolhe o que precisa, a mensagem vai pronta para o nosso WhatsApp
           e a gente responde com as próximas etapas. Sem compromisso.
         </p>
+
+        <!-- O que acontece depois do contato (inspirado na Freshlab; ver comercial/base-aprofundamento-vn-digital.md) -->
+        <ol class="mt-8 space-y-4">
+          {depois.map((d, i) => (
+            <li class="flex gap-4">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-violet-500/50 font-display text-sm font-semibold text-violet-200">{i + 1}</span>
+              <div>
+                <p class="text-sm font-semibold text-white">{d.titulo}</p>
+                <p class="mt-0.5 text-sm text-slate-400">{d.texto}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
 
         <!-- Prévia ao vivo da mensagem (atualiza enquanto a pessoa preenche) -->
         <div class="mt-8 hidden rounded-2xl border border-line bg-[#0b141a] p-4 shadow-xl shadow-black/40 lg:block" aria-hidden="true">
