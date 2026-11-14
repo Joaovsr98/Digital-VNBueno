@@ -142,7 +142,7 @@ export async function createMorph(canvas: HTMLCanvasElement, opts: MorphOptions)
     uMix: { value: 1 }, uTime: { value: 0 }, uBurst: { value: 0 },
     uMouse: { value: [0, 0] }, uMouseForce: { value: 0 }, uAspect: { value: 1 },
     uTintA: { value: new Color(SHOTS[opts.initial].colors[0]) }, uTintB: { value: new Color(SHOTS[opts.initial].colors[1]) },
-    uGroup: { value: GROUP }, uPixel: { value: renderer.getPixelRatio() }, uSize: { value: opts.mobile ? 30 : 26 },
+    uGroup: { value: GROUP }, uPixel: { value: renderer.getPixelRatio() }, uSize: { value: opts.mobile ? 32 : 30 },
   };
 
   const pg = new BufferGeometry();

@@ -121,7 +121,7 @@ async function type(n: number, text: string) {
       continue;
     }
     const j = Math.floor(r() * count);
-    out.set([(pts[j * 2] / W - 0.5) * 22, -(pts[j * 2 + 1] / H - 0.5) * 11 + 0.4, (r() - 0.5) * 1.4 - 2], k * 3);
+    out.set([(pts[j * 2] / W - 0.5) * 15, -(pts[j * 2 + 1] / H - 0.5) * 7.5 + 0.4, (r() - 0.5) * 1.4 - 2], k * 3);
   }
   return out;
 }
