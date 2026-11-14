@@ -10,7 +10,7 @@
   --color-ink-900: #0a0f1f;
   --color-ink-800: #111832;
   --color-ink-700: #1b2447;
-  --color-line: #232c52;
+  --color-line: #2c3870;
 
   --color-brand-blue: #3b82f6;
   --color-brand-violet: #8b5cf6;
@@ -58,8 +58,24 @@
   background-image: linear-gradient(110deg, var(--color-brand-blue), var(--color-brand-violet));
 }
 
+/* Card com relevo: degradê mais claro que o fundo, borda visível e brilho no topo,
+   para os blocos não se camuflarem no fundo escuro. */
 @utility card {
-  @apply rounded-2xl border border-line bg-ink-900/70;
+  @apply rounded-2xl border border-white/10 bg-gradient-to-b from-ink-700/60 to-ink-900/90;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.07), 0 24px 48px -28px rgb(0 0 0 / 0.9);
+}
+
+/* Card que reage ao mouse (sobe um pouco e acende a borda) */
+@utility card-vivo {
+  @apply transition duration-300 hover:-translate-y-1 hover:border-violet-400/50 hover:shadow-[0_24px_60px_-24px_rgb(124_58_237/0.45)];
+}
+
+/* Seções alternadas: fundo azulado com brilho, para separar bem uma da outra */
+@utility secao-alt {
+  background:
+    radial-gradient(60% 50% at 85% 0%, rgb(59 130 246 / 0.10), transparent 70%),
+    radial-gradient(50% 45% at 10% 100%, rgb(139 92 246 / 0.10), transparent 70%),
+    #0b1226;
 }
 
 @utility container-site {
@@ -75,15 +91,20 @@
 }
 
 @utility btn-ghost {
-  @apply btn border border-line text-slate-200 hover:border-slate-500 hover:text-white;
+  @apply btn border border-white/15 bg-white/[0.03] text-slate-100 hover:border-violet-400/60 hover:bg-violet-500/10 hover:text-white;
 }
 
 @utility filtro {
   @apply rounded-full border border-line px-4 py-2 text-sm text-slate-300 transition hover:border-slate-500 hover:text-white aria-pressed:border-violet-400 aria-pressed:bg-violet-500/15 aria-pressed:text-white;
 }
 
+/* Rótulo das seções em forma de selo, com ponto em degradê */
 @utility eyebrow {
-  @apply text-xs font-semibold uppercase tracking-[0.2em] text-violet-300;
+  @apply inline-flex items-center gap-2 rounded-full border border-violet-400/30 bg-violet-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-violet-200;
+  &::before {
+    content: "";
+    @apply h-1.5 w-1.5 rounded-full bg-gradient-to-r from-cyan-400 to-violet-400;
+  }
 }
 
 /* Grade sutil usada no fundo do hero */
